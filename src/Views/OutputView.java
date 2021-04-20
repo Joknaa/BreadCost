@@ -1,7 +1,7 @@
 package Views;
 
-import static Presenters.OutputPresenter.*;
 import static javax.swing.GroupLayout.DEFAULT_SIZE;
+import static javax.swing.GroupLayout.PREFERRED_SIZE;
 import static javax.swing.JOptionPane.*;
 import static Presenters.InputPresenter.*;
 import Presenters.OutputPresenter;
@@ -13,16 +13,16 @@ import java.awt.event.*;
 
 public class OutputView {
     private static final AppFrame appFrame = new AppFrame();
-    public static final Color PICKLED_BLUEWOOD = new Color(52, 66, 91);
-    public static final Color BLUE_BAYOUX = new Color(76, 96, 133);
-    public static final Color BLUE_HAZE = new Color(190, 200, 218);
+    public static final Color INDEPENDENCE = new Color(74, 78, 105);
+    public static final Color HELIOTROPE_GRAY = new Color(154, 140, 152);
+    public static final Color ISABELLINE = new Color(242, 233, 228);
     public static final IPanel mainPanel = new MainPanel();
     public static final IPanel loginPanel = new LoginPanel();
     public static final IPanel signUpPanel = new SignupPanel();
 
     public static void SetUpGUI() {
         appFrame.SetupOnTimeConfiguration();
-        appFrame.SetCurrentPanel(new MainPanel());
+        appFrame.SetCurrentPanel(new LoginPanel());
     }
 
     //<editor-fold desc="On-Events Actions">
@@ -51,12 +51,9 @@ public class OutputView {
     //<editor-fold desc="Setup Comment Components">
     public static void SetupSubmitButton(JButton submitButton, ActionListener actionListener, boolean isEnabled, String toolTip) {
         //todo: add some feed back on clicking the buttons
-        submitButton.setBorder(BorderFactory.createLineBorder(BLUE_HAZE));
-        submitButton.setPreferredSize(new Dimension(100, 38));
-        submitButton.setMaximumSize(new Dimension(100, 38));
-        submitButton.setMinimumSize(new Dimension(100, 38));
-        submitButton.setBackground(BLUE_BAYOUX);
-        submitButton.setForeground(BLUE_HAZE);
+        submitButton.setBackground(HELIOTROPE_GRAY);
+        submitButton.setForeground(ISABELLINE);
+        submitButton.setBorderPainted(false);
         submitButton.setToolTipText(toolTip);
         submitButton.setEnabled(isEnabled);
         submitButton.setContentAreaFilled(false);
@@ -67,39 +64,58 @@ public class OutputView {
     }
     public static void SetupSeparators(JSeparator... separators) {
         for (JSeparator separator : separators) {
-            separator.setBackground(BLUE_HAZE);
+            separator.setBackground(ISABELLINE);
         }
     }
     public static void SetupInputFields(JTextField... inputFields) {
         for (JTextField inputField : inputFields) {
-            inputField.setBackground(BLUE_BAYOUX);
-            inputField.setForeground(BLUE_HAZE);
+            inputField.setBackground(HELIOTROPE_GRAY);
+            inputField.setForeground(ISABELLINE);
             inputField.setBorder(null);
         }
     }
-    public static void SetupLogoPanelLayout(JPanel logoPanel, JLabel LogoIconPanel, JLabel LogoTextPanel) {
+    public static void SetupLogoPanelLayout(JPanel logoPanel, JLabel appLogo, JLabel appName) {
         var logoPanelLayout = new GroupLayout(logoPanel);
 
         logoPanel.setLayout(logoPanelLayout);
         logoPanelLayout.setHorizontalGroup(
                 logoPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(logoPanelLayout.createSequentialGroup()
-                                .addGap(165, 165, 165)
-                                .addComponent(LogoIconPanel)
-                                .addContainerGap(DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(GroupLayout.Alignment.TRAILING, logoPanelLayout.createSequentialGroup()
-                                .addContainerGap(105, Short.MAX_VALUE)
-                                .addComponent(LogoTextPanel)
-                                .addGap(93, 93, 93))
+                                .addGroup(logoPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                        .addGroup(logoPanelLayout.createSequentialGroup()
+                                                .addGap(165, 165, 165)
+                                                .addComponent(appLogo))
+                                        .addGroup(logoPanelLayout.createSequentialGroup()
+                                                .addGap(107, 107, 107)
+                                                .addComponent(appName)))
+                                .addContainerGap(111, Short.MAX_VALUE))
         );
         logoPanelLayout.setVerticalGroup(
                 logoPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(logoPanelLayout.createSequentialGroup()
-                                .addContainerGap(138, Short.MAX_VALUE)
-                                .addComponent(LogoIconPanel)
-                                .addGap(18, 18, 18)
-                                .addComponent(LogoTextPanel)
-                                .addGap(193, 193, 193))
+                                .addContainerGap(131, Short.MAX_VALUE)
+                                .addComponent(appLogo)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(appName, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
+                                .addGap(160, 160, 160))
+        );
+    }
+    public static void SetupMainPanelLayout(JPanel logoPanel, JPanel inputPanel, JPanel hostPanel) {
+        var mainPanelLayout = new GroupLayout(hostPanel);
+
+        hostPanel.setLayout(mainPanelLayout);
+        mainPanelLayout.setHorizontalGroup(
+                mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(mainPanelLayout.createSequentialGroup()
+                                .addComponent(logoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(inputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        mainPanelLayout.setVerticalGroup(
+                mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(logoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(inputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }
     //</editor-fold>

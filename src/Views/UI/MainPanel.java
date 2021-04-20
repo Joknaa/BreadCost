@@ -1,324 +1,285 @@
 package Views.UI;
 
-import javax.swing.plaf.basic.BasicScrollBarUI;
-import javax.swing.event.*;
-import javax.swing.table.*;
 import javax.swing.*;
 import static Views.OutputView.*;
 import static javax.swing.GroupLayout.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MainPanel extends JPanel implements IPanel, ActionListener {
     //<editor-fold desc="Variables Declarations">">
-    private final JPanel logoPanel = new JPanel();
+    private final JPanel usersListPanel = new JPanel();
     private final JPanel headerPanel = new JPanel();
-    private final JPanel descriptionPanel = new JPanel();
-    private final JPanel listPanel = new JPanel();
-    private final JPanel buttonsPanel = new JPanel();
-    private final JList<String> list = new JList<>();
-    private final JLabel logoLabel = new JLabel(new ImageIcon("Resources/library_100px.png"));
-    private final JLabel greetingLabel = new JLabel("Greeting !");
-    private final JScrollPane scrollPanList = new JScrollPane();
-    private final JTable descriptionTable = new JTable();
-    private final JTextArea logoTextArea = new JTextArea();
-    private final JButton addButton = new JButton("Add");
-    private final JButton editButton = new JButton("Edit");
-    private final JButton deleteButton = new JButton("Delete");
-    private final JButton runButton = new JButton("Run");
-    private final JButton logOutButton = new JButton("Logout");
+    private final JPanel profilePanel = new JPanel();
+    private final JPanel chatPanel = new JPanel();
+
+    private final JList<String> usersOnlineList = new JList<>();
+    private final JList<String> usersOfflineList = new JList<>();
+
+    private final JLabel appLogo = new JLabel(new ImageIcon("resources/Images/chat_bubble_100px.png"));
+    private final JLabel appName = new JLabel("Chat Lab");
+    private final JLabel currentUserLabel = new JLabel("Greeting !");
+    private final JLabel userName = new JLabel("Oknaa");
+    private final JLabel userIcon = new JLabel(new ImageIcon("resources/Images/male_user_100px.png"));
+
+    private final JScrollPane usersOnlineListScroller = new JScrollPane();
+    private final JScrollPane usersOfflineListScroller = new JScrollPane();
+    private final JScrollPane chatScroller = new JScrollPane();
+    private final JScrollPane inputScroller = new JScrollPane();
+
+    private final JTextArea chatArea = new JTextArea();
+    private final JTextArea inputArea = new JTextArea();
+
+    private final JButton logoutButton = new JButton(new ImageIcon("resources/Images/sign_out_70px.png"));
+    private final JButton sendButton = new JButton(new ImageIcon("resources/Images/paper_plane_45px.png"));
+    private final JButton attachButton = new JButton(new ImageIcon("resources/Images/attach_45px.png"));
+
     private final DefaultListModel<String> defaultListModel = new DefaultListModel<>();
+
     //</editor-fold>
 
     public MainPanel(){
-        SetupLogoPanel();
+        setPreferredSize(new Dimension(900, 500));
         SetupHeaderPanel();
-        SetupDescriptionPanel();
-        SetupListPanel();
-        SetupButtonsPanel();
-        SetupMainPanel();
-    }
-
-    private void SetupLogoPanel() {
-        SetupLogoTextArea();
-        SetupLogoPanelLayout();
-        logoPanel.setBackground(PICKLED_BLUEWOOD);
-        logoPanel.setPreferredSize(new Dimension(450, 500));
-    }
-    private void SetupLogoTextArea() {
-        logoTextArea.setEditable(false);
-        logoTextArea.setBackground(PICKLED_BLUEWOOD);
-        logoTextArea.setColumns(5);
-        logoTextArea.setFont(new Font("Source Code Pro", Font.PLAIN, 30));
-        logoTextArea.setForeground(BLUE_BAYOUX);
-        logoTextArea.setRows(1);
-        logoTextArea.setTabSize(1);
-        logoTextArea.setText("Multimedia Library");
-        logoTextArea.setAutoscrolls(false);
-        logoTextArea.setFocusable(false);
-    }
-    private void SetupLogoPanelLayout() {
-        GroupLayout LogoPanelLayout = new GroupLayout(logoPanel);
-        logoPanel.setLayout(LogoPanelLayout);
-        LogoPanelLayout.setHorizontalGroup(
-                LogoPanelLayout.createParallelGroup(Alignment.LEADING)
-                        .addGroup(LogoPanelLayout.createSequentialGroup()
-                                .addComponent(logoLabel)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(logoTextArea, DEFAULT_SIZE, 344, Short.MAX_VALUE)
-                        )
-        );
-        LogoPanelLayout.setVerticalGroup(
-                LogoPanelLayout.createParallelGroup(Alignment.LEADING)
-                        .addGroup(LogoPanelLayout.createSequentialGroup()
-                                .addGroup(LogoPanelLayout.createParallelGroup(Alignment.TRAILING)
-                                        .addGroup(LogoPanelLayout.createSequentialGroup()
-                                                .addContainerGap()
-                                                .addComponent(logoTextArea, PREFERRED_SIZE, DEFAULT_SIZE, PREFERRED_SIZE)
-                                                .addGap(41, 41, 41))
-                                        .addComponent(logoLabel))
-                                .addGap(0, 0, Short.MAX_VALUE)
-                        )
-        );
+        SetupProfilePanel();
+        SetupUsersPanel();
+        SetupChatPanel();
+        SetupMainPanelLayout();
     }
 
     private void SetupHeaderPanel() {
-        headerPanel.setBackground(BLUE_BAYOUX);
-        SetupGreetingLabel();
-        SetupSubmitButton(logOutButton, this, true, "LogOut");
+        headerPanel.setBackground(INDEPENDENCE);
+        headerPanel.setPreferredSize(new Dimension(450, 500));
+        appName.setFont(new Font("Source Code Pro", Font.PLAIN, 48));
+        appName.setForeground(ISABELLINE);
         SetupHeaderPanelLayout();
-    }
-    private void SetupGreetingLabel() {
-        greetingLabel.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
-        greetingLabel.setForeground(BLUE_HAZE);
-        greetingLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        greetingLabel.setText("Greeting " + GetCurrentUser() + "!");
     }
     private void SetupHeaderPanelLayout() {
         GroupLayout headerPanelLayout = new GroupLayout(headerPanel);
         headerPanel.setLayout(headerPanelLayout);
-        headerPanelLayout.setHorizontalGroup(
-                headerPanelLayout.createParallelGroup(Alignment.LEADING)
-                        .addComponent(greetingLabel, Alignment.TRAILING, DEFAULT_SIZE, DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(Alignment.TRAILING, headerPanelLayout.createSequentialGroup()
-                                .addContainerGap(151, Short.MAX_VALUE)
-                                .addComponent(logOutButton, PREFERRED_SIZE, DEFAULT_SIZE, PREFERRED_SIZE)
-                                .addGap(147, 147, 147))
+        headerPanelLayout.setHorizontalGroup(headerPanelLayout.createParallelGroup(Alignment.LEADING)
+                .addGroup(headerPanelLayout.createSequentialGroup()
+                        .addComponent(appLogo)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(appName)
+                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                )
         );
-        headerPanelLayout.setVerticalGroup(
-                headerPanelLayout.createParallelGroup(Alignment.LEADING)
-                        .addGroup(headerPanelLayout.createSequentialGroup()
-                                .addComponent(greetingLabel)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(logOutButton, PREFERRED_SIZE, 23, PREFERRED_SIZE)
-                                .addContainerGap(DEFAULT_SIZE, Short.MAX_VALUE))
+        headerPanelLayout.setVerticalGroup(headerPanelLayout.createParallelGroup(Alignment.LEADING)
+                .addGroup(headerPanelLayout.createSequentialGroup()
+                        .addComponent(appLogo)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(headerPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(appName, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                )
         );
     }
 
-    private void SetupDescriptionPanel() {
-        SetupDescriptionTable();
-        SetupDescriptionPanelLayout();
-        descriptionPanel.setBackground(BLUE_BAYOUX);
-        descriptionPanel.setPreferredSize(new Dimension(450, 500));
+    private void SetupProfilePanel() {
+        profilePanel.setBackground(INDEPENDENCE);
+        profilePanel.setPreferredSize(new Dimension(450, 500));
+        SetupUserName();
+        SetupSubmitButton(logoutButton, this, true, "Logout");
+        SetupProfilePanelLayout();
     }
-    private void SetupDescriptionTable() {
-        CreateDescriptionTable();
-        descriptionTable.setFont(new Font("Source Code Pro", Font.PLAIN, 15));
-        descriptionTable.setForeground(BLUE_HAZE);
-        descriptionTable.setBackground(BLUE_BAYOUX);
-        descriptionTable.getColumnModel().getColumn(1).setPreferredWidth(300);
-        descriptionTable.getTableHeader().setReorderingAllowed(false);
-        descriptionTable.getTableHeader().setResizingAllowed(false);
-        descriptionTable.setRowSelectionAllowed(false);
-        descriptionTable.setShowVerticalLines(false);
-        descriptionTable.setFocusable(false);
-        descriptionTable.setEnabled(false);
-        descriptionTable.setRowHeight(35);
+    private void SetupUserName() {
+        currentUserLabel.setFont(new Font("Source Code Pro", Font.PLAIN, 16)); // NOI18N
+        currentUserLabel.setForeground(ISABELLINE);
+        userName.setPreferredSize(new Dimension(200, 46));
+        userName.setFont(new Font("Source Code Pro", Font.PLAIN, 36));
+        userName.setForeground(ISABELLINE);
     }
-    private void CreateDescriptionTable() {
-        String[][] data = {{"Name", null}, {"Added by", null}, {"Date", null}, {"Location", null}};
-        String[] columnNames = {"", ""};
-        descriptionTable.setModel(new DefaultTableModel(data,columnNames) {
-            final boolean[] canEdit = new boolean [] { false, false };
-            public boolean isCellEditable(int rowIndex, int columnIndex) { return canEdit [columnIndex]; }
-        });
-    }
-    private void SetupDescriptionPanelLayout() {
-        GroupLayout descriptionPanelLayout = new GroupLayout(descriptionPanel);
-        descriptionPanel.setLayout(descriptionPanelLayout);
-        descriptionPanelLayout.setHorizontalGroup(
-                descriptionPanelLayout.createParallelGroup(Alignment.LEADING)
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(descriptionPanelLayout.createParallelGroup(Alignment.LEADING)
-                                .addGroup(descriptionPanelLayout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addComponent(descriptionTable, DEFAULT_SIZE, DEFAULT_SIZE, Short.MAX_VALUE)
+    private void SetupProfilePanelLayout() {
+        GroupLayout profilePanelLayout = new GroupLayout(profilePanel);
+        profilePanel.setLayout(profilePanelLayout);
+        profilePanelLayout.setHorizontalGroup(
+                profilePanelLayout.createParallelGroup(Alignment.LEADING)
+                        .addGroup(profilePanelLayout.createSequentialGroup()
+                                .addComponent(userIcon)
+                                .addGap(22, 22, 22)
+                                .addGroup(profilePanelLayout.createParallelGroup(Alignment.LEADING)
+                                        .addComponent(currentUserLabel)
+                                        .addGroup(profilePanelLayout.createSequentialGroup()
+                                                .addGap(10, 10, 10)
+                                                .addComponent(userName)))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
+                                .addComponent(logoutButton, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
-                        )
         );
-        descriptionPanelLayout.setVerticalGroup(
-                descriptionPanelLayout.createParallelGroup(Alignment.LEADING)
-                        .addGap(0, 196, Short.MAX_VALUE)
-                        .addGroup(descriptionPanelLayout.createParallelGroup(Alignment.LEADING)
-                                .addGroup(descriptionPanelLayout.createSequentialGroup()
-                                        .addGap(28, 28, 28)
-                                        .addComponent(descriptionTable, PREFERRED_SIZE, DEFAULT_SIZE, PREFERRED_SIZE)
-                                        .addContainerGap(28, Short.MAX_VALUE)
-                                )
-                        )
+        profilePanelLayout.setVerticalGroup(
+                profilePanelLayout.createParallelGroup(Alignment.LEADING)
+                        .addGroup(Alignment.TRAILING, profilePanelLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(userIcon))
+                        .addGroup(profilePanelLayout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(currentUserLabel)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(userName)
+                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(Alignment.TRAILING, profilePanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(logoutButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())
         );
     }
 
-    private void SetupListPanel() {
-        SetupScrollPanList();
-        SetupListPanelLayout();
-        listPanel.setBackground(PICKLED_BLUEWOOD);
-    }
-    private void SetupScrollPanList() {
-        SetupMediaList();
-        scrollPanList.setBackground(PICKLED_BLUEWOOD);
-        scrollPanList.setBorder(null);
-        scrollPanList.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPanList.setEnabled(false);
-        scrollPanList.setFocusable(false);
-        scrollPanList.setRequestFocusEnabled(false);
-        scrollPanList.getVerticalScrollBar().setBackground(BLUE_BAYOUX);
-        scrollPanList.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
-            @Override
-            protected void configureScrollBarColors() {
-                this.thumbColor = BLUE_HAZE;
+    private void SetupUsersPanel() {
+        usersListPanel.setBackground(INDEPENDENCE);
+        usersListPanel.setPreferredSize(new Dimension(450, 500));
+        usersListPanel.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
             }
         });
-        scrollPanList.setViewportView(list);
+        SetupUsersOnlineList();
+        SetupUsersOfflineList();
+        SetupUsersPanelLayout();
     }
-    private void SetupMediaList() {
-        CreateMediaList();
-        list.setFont(new Font("Source Code Pro", Font.PLAIN, 18));
-        list.setSelectionBackground(BLUE_HAZE);
-        list.setSelectionForeground(PICKLED_BLUEWOOD);
-        list.setBackground(PICKLED_BLUEWOOD);
-        list.setForeground(BLUE_HAZE);
-        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        list.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        list.setFixedCellHeight(40);
-        list.setFixedCellWidth(40);
-        list.setAutoscrolls(false);
-        list.addListSelectionListener(this::ListSelectionChanged);
+    private void SetupUsersOnlineList() {
+        usersOnlineList.setBackground(HELIOTROPE_GRAY);
+        usersOnlineList.setForeground(ISABELLINE);
+        usersOnlineList.setModel(new AbstractListModel<>() {
+            String[] strings = { "User 1", "User 2", "User 3", "User 4", "User 5", "User 6" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        usersOnlineListScroller.setViewportView(usersOnlineList);
     }
-    public void CreateMediaList() {
-
+    private void SetupUsersOfflineList() {
+        usersOfflineList.setBackground(HELIOTROPE_GRAY);
+        usersOfflineList.setForeground(ISABELLINE);
+        usersOfflineList.setModel(new AbstractListModel<String>() {
+            String[] strings = { "User 7", "User 8", "User 9" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        usersOfflineListScroller.setViewportView(usersOfflineList);
     }
-    private void SetupListPanelLayout() {
-        GroupLayout ListPanelLayout = new GroupLayout(listPanel);
-        listPanel.setLayout(ListPanelLayout);
-        ListPanelLayout.setHorizontalGroup(
-                ListPanelLayout.createParallelGroup(Alignment.LEADING)
-                        .addGroup(Alignment.TRAILING, ListPanelLayout.createSequentialGroup()
-                                .addContainerGap(DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(scrollPanList, PREFERRED_SIZE, 340, PREFERRED_SIZE)
-                                .addGap(60, 60, 60))
+    private void SetupUsersPanelLayout() {
+        GroupLayout usersListPanelLayout = new GroupLayout(usersListPanel);
+        usersListPanel.setLayout(usersListPanelLayout);
+        usersListPanelLayout.setHorizontalGroup( usersListPanelLayout.createParallelGroup(Alignment.LEADING)
+                .addGroup(usersListPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(usersOnlineListScroller, GroupLayout.PREFERRED_SIZE, 187, GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                )
+                .addGroup(usersListPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(usersOfflineListScroller, GroupLayout.PREFERRED_SIZE, 187, GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                )
         );
-        ListPanelLayout.setVerticalGroup(
-                ListPanelLayout.createParallelGroup(Alignment.LEADING)
-                        .addGroup(Alignment.TRAILING, ListPanelLayout.createSequentialGroup()
-                                .addContainerGap(49, Short.MAX_VALUE)
-                                .addComponent(scrollPanList, PREFERRED_SIZE, 297, PREFERRED_SIZE)
-                                .addGap(54, 54, 54))
+        usersListPanelLayout.setVerticalGroup(usersListPanelLayout.createParallelGroup(Alignment.LEADING)
+                .addGroup(usersListPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(usersOnlineListScroller, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                        .addComponent(usersOfflineListScroller, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                )
         );
     }
 
-    private void SetupButtonsPanel() {
-        buttonsPanel.setBackground(BLUE_BAYOUX);
-        SetupSubmitButton(addButton, this, true, "Add an item to the list");
-        SetupSubmitButton(editButton, this, false, "Edit selected item");
-        SetupSubmitButton(deleteButton, this, false, "Delete selected item");
-        SetupSubmitButton(runButton, this, false, "Run selected item");
-        SetupButtonsPanelLayout();
+    private void SetupChatPanel() {
+        chatPanel.setBackground(INDEPENDENCE);
+        chatPanel.setPreferredSize(new Dimension(450, 500));
+        SetupChatArea();
+        SetupInputArea();
+        SetupSubmitButton(attachButton, this, true, "Add file");
+        SetupSubmitButton(sendButton, this, true, "Send");
+        SetupChatPanelLayout();
     }
-    private void SetupButtonsPanelLayout() {
-        GroupLayout buttonsPanelLayout = new GroupLayout(buttonsPanel);
-        buttonsPanel.setLayout(buttonsPanelLayout);
-        buttonsPanelLayout.setHorizontalGroup(
-                buttonsPanelLayout.createParallelGroup(Alignment.LEADING)
-                        .addGroup(Alignment.CENTER, buttonsPanelLayout.createSequentialGroup()
-                                .addContainerGap(36, Short.MAX_VALUE)
-                                .addComponent(addButton, PREFERRED_SIZE, DEFAULT_SIZE, PREFERRED_SIZE)
+    private void SetupChatArea() {
+        chatArea.setBackground(HELIOTROPE_GRAY);
+        chatArea.setColumns(20);
+        chatArea.setFont(new Font("Source Code Pro", Font.PLAIN, 18));
+        chatArea.setForeground(ISABELLINE);
+        chatArea.setRows(5);
+        chatArea.setText("User 1: Yoo, i am back !!\nUser 2: Welcome\nUser 4: Finally !!\nUser 1: hehe, sorry i took so long :smirk:\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\n");
+        chatArea.setFocusable(false);
+        chatScroller.setViewportView(chatArea);
+    }
+    private void SetupInputArea() {
+        inputArea.setBackground(INDEPENDENCE);
+        inputArea.setColumns(20);
+        inputArea.setFont(new Font("Source Code Pro", Font.PLAIN, 18)); // NOI18N
+        inputArea.setForeground(ISABELLINE);
+        inputArea.setRows(1);
+        inputArea.setTabSize(1);
+        inputArea.setText("Hahaa true !!");
+        inputArea.setBorder(BorderFactory.createLineBorder(new Color(154, 140, 152), 3));
+        inputArea.setFocusable(false);
+        inputArea.setMargin(new Insets(12, 12, 2, 2));
+        inputScroller.setViewportView(inputArea);
+    }
+    private void SetupChatPanelLayout() {
+        GroupLayout chatPanelLayout = new GroupLayout(chatPanel);
+        chatPanel.setLayout(chatPanelLayout);
+        chatPanelLayout.setHorizontalGroup(
+                chatPanelLayout.createParallelGroup(Alignment.LEADING)
+                        .addGroup(chatPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(chatPanelLayout.createParallelGroup(Alignment.LEADING)
+                                        .addComponent(chatScroller, GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE)
+                                        .addGroup(chatPanelLayout.createSequentialGroup()
+                                                .addComponent(inputScroller)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(attachButton, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(sendButton, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap())
+        );
+        chatPanelLayout.setVerticalGroup(
+                chatPanelLayout.createParallelGroup(Alignment.LEADING)
+                        .addGroup(chatPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(chatScroller, GroupLayout.PREFERRED_SIZE, 304, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(editButton, PREFERRED_SIZE, DEFAULT_SIZE, PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(deleteButton, PREFERRED_SIZE, DEFAULT_SIZE, PREFERRED_SIZE)
-                                .addGap(36, 36, 36))
-                        .addGroup(Alignment.CENTER, buttonsPanelLayout.createSequentialGroup()
-                                .addComponent(runButton, PREFERRED_SIZE, DEFAULT_SIZE, PREFERRED_SIZE))
-        );
-        buttonsPanelLayout.setVerticalGroup(
-                buttonsPanelLayout.createParallelGroup(Alignment.LEADING)
-                        .addGroup(Alignment.TRAILING, buttonsPanelLayout.createSequentialGroup()
-                                .addGroup(buttonsPanelLayout.createParallelGroup(Alignment.CENTER)
-                                        .addComponent(runButton, PREFERRED_SIZE, 23, PREFERRED_SIZE)
-                                        .addGap(10, 10, 10))
-                                .addGap(10, 10, 10)
-                                .addGroup(buttonsPanelLayout.createParallelGroup(Alignment.BASELINE)
-                                        .addComponent(editButton, PREFERRED_SIZE, 23, PREFERRED_SIZE)
-                                        .addComponent(addButton, PREFERRED_SIZE, 23, PREFERRED_SIZE)
-                                        .addComponent(deleteButton, PREFERRED_SIZE, 23, PREFERRED_SIZE))
-                                .addGap(33, 33, 33))
+                                .addGroup(chatPanelLayout.createParallelGroup(Alignment.LEADING, false)
+                                        .addComponent(inputScroller, GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                                        .addComponent(sendButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(attachButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }
 
-    private void SetupMainPanel() {
-        SetupMainPanelLayout();
-        setBackground(BLUE_BAYOUX);
-        setPreferredSize(new Dimension(900, 500));
-    }
     private void SetupMainPanelLayout() {
-        GroupLayout MainPanelLayout = new GroupLayout(this);
-        this.setLayout(MainPanelLayout);
-        MainPanelLayout.setHorizontalGroup(
-                MainPanelLayout.createParallelGroup(Alignment.LEADING)
-                        .addGroup(MainPanelLayout.createSequentialGroup()
-                                .addGroup(MainPanelLayout.createParallelGroup(Alignment.LEADING, false)
-                                        .addComponent(logoPanel, DEFAULT_SIZE, DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(listPanel, DEFAULT_SIZE, DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(MainPanelLayout.createParallelGroup(Alignment.LEADING)
-                                        .addGroup(MainPanelLayout.createSequentialGroup()
-                                                .addGroup(MainPanelLayout.createParallelGroup(Alignment.LEADING)
-                                                        .addComponent(descriptionPanel, DEFAULT_SIZE, 433, Short.MAX_VALUE)
-                                                        .addGroup(MainPanelLayout.createSequentialGroup()
-                                                                .addGap(0, 0, Short.MAX_VALUE)
-                                                                .addComponent(buttonsPanel, PREFERRED_SIZE, DEFAULT_SIZE, PREFERRED_SIZE)))
-                                                .addGap(8, 8, 8))
-                                        .addGroup(MainPanelLayout.createSequentialGroup()
-                                                .addComponent(headerPanel, PREFERRED_SIZE, DEFAULT_SIZE, PREFERRED_SIZE)
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGap(0, 7, Short.MAX_VALUE))))
+        GroupLayout layout = new GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(layout.createParallelGroup(Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, 0)
+                        .addGroup(layout.createParallelGroup(Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                        .addComponent(headerPanel, GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
+                                        .addGap(0, 0, 0)
+                                        .addComponent(profilePanel, GroupLayout.PREFERRED_SIZE, 491, GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                        .addComponent(chatPanel, GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)
+                                        .addGap(0, 0, 0)
+                                        .addComponent(usersListPanel, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, 0)
+                )
         );
-        MainPanelLayout.setVerticalGroup(
-                MainPanelLayout.createParallelGroup(Alignment.LEADING)
-                        .addGroup(MainPanelLayout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addGroup(MainPanelLayout.createParallelGroup(Alignment.LEADING)
-                                        .addComponent(headerPanel, PREFERRED_SIZE, DEFAULT_SIZE, PREFERRED_SIZE))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(descriptionPanel, PREFERRED_SIZE, 196, PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(buttonsPanel, PREFERRED_SIZE, 57, PREFERRED_SIZE)
-                                .addGap(84, 84, 84))
-                        .addGroup(Alignment.TRAILING, MainPanelLayout.createSequentialGroup()
-                                .addComponent(logoPanel, PREFERRED_SIZE, 100, PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(listPanel, PREFERRED_SIZE, DEFAULT_SIZE, PREFERRED_SIZE)
-                        )
+        layout.setVerticalGroup(layout.createParallelGroup(Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, 0)
+                        .addGroup(layout.createParallelGroup(Alignment.LEADING, false)
+                                .addComponent(profilePanel, GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                .addComponent(headerPanel, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, 0)
+                        .addGroup(layout.createParallelGroup(Alignment.LEADING)
+                                .addComponent(usersListPanel, GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                                .addComponent(chatPanel, GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE))
+                        .addGap(0, 0, 0)
+                )
         );
-    }
-
-    private void ListSelectionChanged(ListSelectionEvent evt) {
-        String selectedValue = list.getSelectedValue();
-        if (!evt.getValueIsAdjusting()) {
-            EnableButtons(runButton, editButton, deleteButton);
-        }
     }
 
     private void EnableButtons(JButton... buttons){
@@ -333,8 +294,7 @@ public class MainPanel extends JPanel implements IPanel, ActionListener {
     public void Deactivate(){ this.setVisible(false);}
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (event.getSource().equals(logOutButton))
-            OnClick_Logout();
+        if (event.getSource().equals(logoutButton)) OnClick_SwapPanels(loginPanel);
 
     }
 }
