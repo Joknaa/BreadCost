@@ -48,7 +48,7 @@ public class OutputView {
     public static void OnClick_SendMessage(JLabel userName, JTextArea inputArea, JTextArea chatArea){
         if (inputArea.getText().trim().isEmpty()) return;
 
-        String message = inputArea.getText();
+        String message = inputArea.getText().trim();
         String userNameIndentation = String.format("%s: ", userName.getText().trim());
         int indentationLength = userNameIndentation.length();
         String indentation = "\n".concat(" ".repeat(indentationLength));

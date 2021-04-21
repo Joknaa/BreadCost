@@ -1,6 +1,8 @@
 package Views.UI;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicScrollBarUI;
+
 import static Views.OutputView.*;
 import static javax.swing.GroupLayout.*;
 import java.awt.*;
@@ -135,27 +137,31 @@ public class MainPanel extends JPanel implements IPanel, ActionListener {
         });
         SetupUsersOnlineList();
         SetupUsersOfflineList();
+        SetupChatScroller(usersOnlineListScroller, usersOnlineList);
+        SetupChatScroller(usersOfflineListScroller, usersOfflineList);
         SetupUsersPanelLayout();
     }
     private void SetupUsersOnlineList() {
         usersOnlineList.setBackground(HELIOTROPE_GRAY);
         usersOnlineList.setForeground(ISABELLINE);
+        usersOnlineList.setSelectionBackground(INDEPENDENCE);
+        usersOnlineList.setSelectionForeground(ISABELLINE);
         usersOnlineList.setModel(new AbstractListModel<>() {
             String[] strings = { "User 1", "User 2", "User 3", "User 4", "User 5", "User 6" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        usersOnlineListScroller.setViewportView(usersOnlineList);
     }
     private void SetupUsersOfflineList() {
         usersOfflineList.setBackground(HELIOTROPE_GRAY);
         usersOfflineList.setForeground(ISABELLINE);
-        usersOfflineList.setModel(new AbstractListModel<String>() {
+        usersOfflineList.setSelectionBackground(ISABELLINE);
+        usersOfflineList.setSelectionForeground(HELIOTROPE_GRAY);
+        usersOfflineList.setModel(new AbstractListModel<>() {
             String[] strings = { "User 7", "User 8", "User 9" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        usersOfflineListScroller.setViewportView(usersOfflineList);
     }
     private void SetupUsersPanelLayout() {
         GroupLayout usersListPanelLayout = new GroupLayout(usersListPanel);
@@ -188,6 +194,8 @@ public class MainPanel extends JPanel implements IPanel, ActionListener {
         chatPanel.setPreferredSize(new Dimension(450, 500));
         SetupChatArea();
         SetupInputArea();
+        SetupChatScroller(chatScroller, chatArea);
+        SetupChatScroller(inputScroller, inputArea);
         SetupSubmitButton(attachButton, this, true, "Add file");
         SetupSubmitButton(sendButton, this, true, "Send");
         SetupChatPanelLayout();
@@ -200,7 +208,6 @@ public class MainPanel extends JPanel implements IPanel, ActionListener {
         chatArea.setRows(5);
         chatArea.setText("User 1: Yoo, i am back !!\nUser 2: Welcome\nUser 4: Finally !!\nUser 1: hehe, sorry i took so long :smirk:\n");
         chatArea.setFocusable(false);
-        chatScroller.setViewportView(chatArea);
         chatArea.setLineWrap(true);
     }
     private void SetupInputArea() {
@@ -214,6 +221,22 @@ public class MainPanel extends JPanel implements IPanel, ActionListener {
         inputArea.setText("Hahaa true !!");
         SwapSubmit_AndInsertBreak();
         inputScroller.setViewportView(inputArea);
+    }
+    private void SetupChatScroller(JScrollPane Scroller, JComponent viewPort) {
+        Scroller.setBackground(INDEPENDENCE);
+        Scroller.setBorder(null);
+        Scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        Scroller.setEnabled(false);
+        Scroller.setFocusable(false);
+        Scroller.setRequestFocusEnabled(false);
+        Scroller.getVerticalScrollBar().setBackground(HELIOTROPE_GRAY);
+        Scroller.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+            @Override
+            protected void configureScrollBarColors() {
+                this.thumbColor = ISABELLINE;
+            }
+        });
+        Scroller.setViewportView(viewPort);
     }
     private void SwapSubmit_AndInsertBreak() {
         final String TEXT_SUBMIT = "text-submit";
