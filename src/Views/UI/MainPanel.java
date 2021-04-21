@@ -4,10 +4,7 @@ import javax.swing.*;
 import static Views.OutputView.*;
 import static javax.swing.GroupLayout.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 public class MainPanel extends JPanel implements IPanel, ActionListener {
     //<editor-fold desc="Variables Declarations">">
@@ -201,22 +198,38 @@ public class MainPanel extends JPanel implements IPanel, ActionListener {
         chatArea.setFont(new Font("Source Code Pro", Font.PLAIN, 18));
         chatArea.setForeground(ISABELLINE);
         chatArea.setRows(5);
-        chatArea.setText("User 1: Yoo, i am back !!\nUser 2: Welcome\nUser 4: Finally !!\nUser 1: hehe, sorry i took so long :smirk:\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\nUser 2: Sample text\n");
+        chatArea.setText("User 1: Yoo, i am back !!\nUser 2: Welcome\nUser 4: Finally !!\nUser 1: hehe, sorry i took so long :smirk:\n");
         chatArea.setFocusable(false);
         chatScroller.setViewportView(chatArea);
+        chatArea.setLineWrap(true);
     }
     private void SetupInputArea() {
+        inputArea.setFont(new Font("Source Code Pro", Font.PLAIN, 18));
+        inputArea.setBorder(BorderFactory.createLineBorder(HELIOTROPE_GRAY, 3));
         inputArea.setBackground(INDEPENDENCE);
-        inputArea.setColumns(20);
-        inputArea.setFont(new Font("Source Code Pro", Font.PLAIN, 18)); // NOI18N
         inputArea.setForeground(ISABELLINE);
+        inputArea.setColumns(20);
         inputArea.setRows(1);
         inputArea.setTabSize(1);
         inputArea.setText("Hahaa true !!");
-        inputArea.setBorder(BorderFactory.createLineBorder(new Color(154, 140, 152), 3));
-        inputArea.setFocusable(false);
-        inputArea.setMargin(new Insets(12, 12, 2, 2));
+        SwapSubmit_AndInsertBreak();
         inputScroller.setViewportView(inputArea);
+    }
+    private void SwapSubmit_AndInsertBreak() {
+        final String TEXT_SUBMIT = "text-submit";
+        final String INSERT_BREAK = "insert-break";
+        InputMap inputMap = inputArea.getInputMap();
+        KeyStroke enter = KeyStroke.getKeyStroke("ENTER");
+        KeyStroke shiftEnter = KeyStroke.getKeyStroke("shift ENTER");
+        inputMap.put(shiftEnter, INSERT_BREAK);
+        inputMap.put(enter, TEXT_SUBMIT);
+        ActionMap actionMap = inputArea.getActionMap();
+        actionMap.put(TEXT_SUBMIT, new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                OnClick_SendMessage(userName, inputArea, chatArea);
+            }
+        });
     }
     private void SetupChatPanelLayout() {
         GroupLayout chatPanelLayout = new GroupLayout(chatPanel);
@@ -282,9 +295,6 @@ public class MainPanel extends JPanel implements IPanel, ActionListener {
         );
     }
 
-    private void EnableButtons(JButton... buttons){
-        for (JButton button : buttons) { button.setEnabled(true);}
-    }
 
     @Override
     public JPanel GetPanel() { return this; }
@@ -295,6 +305,7 @@ public class MainPanel extends JPanel implements IPanel, ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {
         if (event.getSource().equals(logoutButton)) OnClick_SwapPanels(loginPanel);
+        else if (event.getSource().equals(sendButton)) OnClick_SendMessage(userName, inputArea, chatArea);
 
     }
 }

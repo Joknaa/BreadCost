@@ -45,6 +45,18 @@ public class OutputView {
         appFrame.GetCurrentPanel().setVisible(false);
         appFrame.SetCurrentPanel(gotoPanel);
     }
+    public static void OnClick_SendMessage(JLabel userName, JTextArea inputArea, JTextArea chatArea){
+        if (inputArea.getText().trim().isEmpty()) return;
+
+        String message = inputArea.getText();
+        String userNameIndentation = String.format("%s: ", userName.getText().trim());
+        int indentationLength = userNameIndentation.length();
+        String indentation = "\n".concat(" ".repeat(indentationLength));
+        message = message.replace("\n", indentation);
+        String formattedMessage = String.format("%s%s\n", userNameIndentation, message);
+        chatArea.append(formattedMessage);
+        inputArea.setText("");
+    }
     //</editor-fold>
     public static String GetCurrentUser(){ return OutputPresenter.GetCurrentUser(); }
 
