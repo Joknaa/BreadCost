@@ -79,11 +79,12 @@ public class OutputView {
             separator.setBackground(ISABELLINE);
         }
     }
-    public static void SetupInputFields(JTextField... inputFields) {
+    public static void SetupInputFields(KeyListener parentPanel, JTextField... inputFields) {
         for (JTextField inputField : inputFields) {
             inputField.setBackground(HELIOTROPE_GRAY);
             inputField.setForeground(ISABELLINE);
             inputField.setBorder(null);
+            inputField.addKeyListener(parentPanel);
         }
     }
     public static void SetupLogoPanelLayout(JPanel logoPanel, JLabel appLogo, JLabel appName) {

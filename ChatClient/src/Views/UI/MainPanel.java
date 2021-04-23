@@ -92,6 +92,7 @@ public class MainPanel extends JPanel implements IPanel, ActionListener {
         userName.setPreferredSize(new Dimension(200, 46));
         userName.setFont(new Font("Source Code Pro", Font.PLAIN, 36));
         userName.setForeground(ISABELLINE);
+        userName.setText(GetCurrentUser());
     }
     private void SetupProfilePanelLayout() {
         GroupLayout profilePanelLayout = new GroupLayout(profilePanel);
@@ -327,7 +328,7 @@ public class MainPanel extends JPanel implements IPanel, ActionListener {
     public void Deactivate(){ this.setVisible(false);}
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (event.getSource().equals(logoutButton)) OnClick_SwapPanels(loginPanel);
+        if (event.getSource().equals(logoutButton)) OnClick_Logout();
         else if (event.getSource().equals(sendButton)) OnClick_SendMessage(userName, inputArea, chatArea);
 
     }

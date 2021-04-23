@@ -6,8 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class SignupPanel extends JPanel implements IPanel, ActionListener {
+public class SignupPanel extends JPanel implements IPanel, ActionListener, KeyListener {
     //<editor-fold desc="Variables Declarations">">
     private final JPanel logoPanel = new JPanel();
     private final JPanel inputPanel = new JPanel();
@@ -47,7 +49,7 @@ public class SignupPanel extends JPanel implements IPanel, ActionListener {
 
     private void SetupInputPanel() {
         inputPanel.setBackground(HELIOTROPE_GRAY);
-        SetupInputFields(loginField, passwordField, passwordRepeatField);
+        SetupInputFields(this, loginField, passwordField, passwordRepeatField);
         SetupSeparators(loginSeparator, passwordSeparator, passwordRepeatSeparator);
         SetupSubmitButton(signUpButton, this, true,"Click to creat an account");
         SetupSubmitButton(backButton, this, true,"Back");
@@ -133,7 +135,23 @@ public class SignupPanel extends JPanel implements IPanel, ActionListener {
     public void Deactivate(){ this.setVisible(false);}
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(signUpButton)) OnClick_SwapPanels(mainPanel);
+        if (e.getSource().equals(signUpButton)) OnClick_SignUp(loginField, passwordField, passwordRepeatField);
         else if (e.getSource().equals(backButton)) OnClick_SwapPanels(loginPanel);
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) { //todo; action onpressing ENTER
+        if (e.getKeyCode() == KeyEvent.VK_ENTER){
+            OnClick_SignUp(loginField, passwordField, passwordRepeatField);
+        }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 }

@@ -1,9 +1,10 @@
 package Models;
 
 public class DataBaseModel {
-    private static String url = "jdbc:mysql://localhost:3306/myDatabase?autoReconnect=true&useSSL=false";
+    private static final String dbName = "chatapp";
     private static String login = "root";
     private static String password = "";
+    private static String url = "jdbc:mysql://localhost:3306/"+ dbName +"?autoReconnect=true&useSSL=false";
 
     public static void SetUrl(String URL){ url = URL;}
     public static void SetLogin(String LOGIN){ login = LOGIN;}

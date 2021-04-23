@@ -122,7 +122,7 @@ public class LoginPanel extends JPanel implements IPanel, ActionListener {
     public void Deactivate(){ setVisible(false);}
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (event.getSource().equals(signInButton)) OnClick_SwapPanels(mainPanel);
+        if (event.getSource().equals(signInButton)) OnClick_SignIn(loginField, passwordField);
         else if (event.getSource().equals(signUpButton)) OnClick_SwapPanels(signUpPanel);
     }
 }

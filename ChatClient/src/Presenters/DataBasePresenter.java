@@ -21,6 +21,8 @@ public class DataBasePresenter {
             Disconnect();
         } catch (SQLException | ClassNotFoundException e) {
             DisplayError("Ops !! You can't connect to the DataBase\n");
+            e.printStackTrace();
+
             System.exit(1);
         }
     }
