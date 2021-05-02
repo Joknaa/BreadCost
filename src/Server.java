@@ -12,9 +12,9 @@ public class Server {
     public Server(int port){
         try {
             serverSocket = new ServerSocket(port);
-            System.out.println("Starting Server ... \nWaiting for Client ...");
+            System.out.println("Starting Server ... \nWaiting for Presenters.Client ...");
             socket = serverSocket.accept();
-            System.out.println("Client Accepted !");
+            System.out.println("Presenters.Client Accepted !");
 
             input = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
             String line = "";

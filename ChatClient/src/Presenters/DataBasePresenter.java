@@ -1,7 +1,7 @@
 package Presenters;
 
 import Models.DataBaseModel;
-
+import Presenters.Client.ChatClient;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +74,10 @@ public class DataBasePresenter {
             throw new UserNotFoundException("Login or Password Incorrect");
         }
     }
-    private static void RegisterSignIn(String login) { UserPresenter.SignIn(login); }
+    private static void RegisterSignIn(String login) {
+        UserPresenter.SignIn(login);
+        ChatClient.StartConnection(login);
+    }
     //</editor-fold>
 
     public static void AddMedia(String[] fileData) throws SQLException, ClassNotFoundException{}

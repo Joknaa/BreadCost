@@ -45,7 +45,7 @@ public class ServerOperator extends Thread{
     }
 
     private void LoginClient(OutputStream output, String[] tokens) throws IOException {
-        String reply;
+        String reply = null;
         if (tokens.length < 3){
             Reply("You have to enter a 'login' and a 'password'");
             return;

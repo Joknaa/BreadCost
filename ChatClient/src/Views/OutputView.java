@@ -1,7 +1,6 @@
 package Views;
 
-import static javax.swing.GroupLayout.DEFAULT_SIZE;
-import static javax.swing.GroupLayout.PREFERRED_SIZE;
+import static Presenters.OutputPresenter.SendMessage;
 import static javax.swing.JOptionPane.*;
 import static Presenters.InputPresenter.*;
 import Presenters.OutputPresenter;
@@ -56,6 +55,8 @@ public class OutputView {
         String formattedMessage = String.format("%s%s\n", userNameIndentation, message);
         chatArea.append(formattedMessage);
         inputArea.setText("");
+
+        SendMessage(formattedMessage);
     }
     //</editor-fold>
     public static String GetCurrentUser(){ return OutputPresenter.GetCurrentUser(); }
