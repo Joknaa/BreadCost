@@ -4,6 +4,9 @@ import java.awt.*;
 
 import javax.swing.*;
 
+import static Presenters.Client.ChatClient.Server_Connect;
+import static Presenters.Client.ChatClient.Server_Login;
+
 
 public class ClientInterface extends JPanel implements Status {
 	private ChatClient client;
@@ -12,7 +15,6 @@ public class ClientInterface extends JPanel implements Status {
 
 	public ClientInterface(ChatClient client) {
 		this.client = client;
-		this.client.addStatus(this);
 		userListModel = new DefaultListModel<>();
 		userListUI = new JList<>(userListModel);
 		
@@ -30,8 +32,8 @@ public class ClientInterface extends JPanel implements Status {
 		frame.getContentPane().add(clientInterface, BorderLayout.CENTER);
 		frame.setVisible(true);
 		
-		if(client.Server_Connect()) {
-			client.Server_Login("oussama");
+		if(Server_Connect()) {
+			Server_Login("oussama");
 		}
 		
 		
@@ -40,12 +42,10 @@ public class ClientInterface extends JPanel implements Status {
 	@Override
 	public void online(String login) {
 		userListModel.addElement(login);
-		
 	}
 
 	@Override
 	public void offline(String logout) {
 		userListModel.removeElement(logout);
-		
 	}
 }

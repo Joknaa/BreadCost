@@ -11,41 +11,30 @@ import java.util.ArrayList;
 import org.apache.commons.lang3.StringUtils;
 
 public class ChatClient {
-    private String serverName;
-    private int serverPort;
-    private Socket serverSocket;
-    private OutputStream output;
-    private InputStream input;
-    private BufferedReader reader;
+    private static String serverName;
+    private static int serverPort;
+    private static Socket serverSocket;
+    private static OutputStream output;
+    private static InputStream input;
+    private static BufferedReader reader;
     private ArrayList<MessageListener> messageListener = new ArrayList<>();
-    private ArrayList<Status> status = new ArrayList<>();
 
     public ChatClient(String server, int port) {
-        this.serverName = server;
-        this.serverPort = port;
+        serverName = server;
+        serverPort = port;
     }
 
     public static void StartConnection(String userName) {
         ChatClient user = new ChatClient("localhost", 8818);
-        user.addStatus(new Status() {
-            @Override
-            public void online(String login) {
-                System.out.println("En ligne : " + login);
-            }
 
-            @Override
-            public void offline(String logout) {
-                System.out.println("Hors ligne : " + logout);
-            }
-        });
-        user.addMsg((fromLogin, msgText) -> System.out.println("MSG : " + fromLogin + " : " + msgText + "\n"));
+        user.addMsg(ChatClient::onMessage);
 
-        if (!user.Server_Connect()) System.out.println("Pas de connexion");
+        if (!Server_Connect()) System.out.println("Pas de connexion");
         else {
             System.out.println("Connexion avec succes");
-            if (user.Server_Login(userName)) {
+            if (Server_Login(userName)) {
                 System.out.println("welcome ");
-                user.Server_Chat("med", "Hola");
+                Server_Chat("med", "Hola");
                 System.out.println("welcome ");
             } else
                 System.err.println("Not welcome");
@@ -54,12 +43,12 @@ public class ChatClient {
         }
     }
 
-    public boolean Server_Connect() {
+    public static boolean Server_Connect() {
         try {
-            this.serverSocket = new Socket(serverName, serverPort);
-            this.output = serverSocket.getOutputStream();
-            this.input = serverSocket.getInputStream();
-            this.reader = new BufferedReader(new InputStreamReader(input));
+            serverSocket = new Socket(serverName, serverPort);
+            output = serverSocket.getOutputStream();
+            input = serverSocket.getInputStream();
+            reader = new BufferedReader(new InputStreamReader(input));
             return true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -67,7 +56,7 @@ public class ChatClient {
         return false;
     }
 
-    public boolean Server_Login(String userName) {
+    public static boolean Server_Login(String userName) {
         try {
             String commande = "login " + userName + "\n";
             output.write(commande.getBytes());
@@ -85,7 +74,11 @@ public class ChatClient {
         return false;
     }
 
-    public void Server_Chat(String receiver, String msgTexte) {
+    private static void onMessage(String fromLogin, String msgText) {
+        System.out.println("MSG : " + fromLogin + " : " + msgText + "\n");
+    }
+
+    public static void Server_Chat(String receiver, String msgTexte) {
         receiver = "#Group1";
         String commande = "msg " + receiver + " " + msgTexte + "\n";
         try {
@@ -101,7 +94,7 @@ public class ChatClient {
 
     }
 
-    public void StartMessageReader() {
+    public static void StartMessageReader() {
         Thread th = new Thread() {
             public void run() {
                 ReadMessages();
@@ -111,7 +104,7 @@ public class ChatClient {
         th.start();
     }
 
-    public void ReadMessages() {
+    public static void ReadMessages() {
         try {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -120,9 +113,9 @@ public class ChatClient {
                     String commande = tokens[0];
                     String userName = tokens[1];
                     if (commande.equalsIgnoreCase("Online")) {
-                        handleOnline(userName);
+                        System.out.println("Going Online");
                     } else if (commande.equalsIgnoreCase("Offline")) {
-                        handleOffline(userName);
+                        System.out.println("Going Offline");
                     } else if (commande.equalsIgnoreCase("Msg")) {
                         String[] tokenMsg = StringUtils.split(line, null, 3);
                         handleMessage(tokenMsg);
@@ -141,34 +134,12 @@ public class ChatClient {
 
     }
 
-    public void handleMessage(String[] tokenMsg) {
+    public static void handleMessage(String[] tokenMsg) {
         String userName = tokenMsg[1];
         String msgText = tokenMsg[2];
-        for (MessageListener listener : messageListener) {
-            listener.onMessage(userName, msgText);
-        }
-    }
-
-    public void handleOffline(String UserName) {
-        for (Status listnr : status) {
-            listnr.offline(UserName);
-        }
-
-    }
-
-    public void handleOnline(String UserName) {
-        for (Status listnr : status) {
-            listnr.online(UserName);
-        }
-    }
-
-
-    public void addStatus(Status listnr) {
-        status.add(listnr);
-    }
-
-    public void removeStatus(Status listnr) {
-        status.remove(listnr);
+        //for (MessageListener listener : messageListener) {
+        //    listener.onMessage(userName, msgText);
+        //}
     }
 
     public void addMsg(MessageListener listnr) {

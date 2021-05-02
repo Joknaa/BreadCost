@@ -2,6 +2,7 @@ package Presenters.Server;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class ClientOperator extends Thread {
                     break;
                 } else if (commande.equalsIgnoreCase("Login")) {
                     HandleLogin(outputStream, tokens);
-                } else if ("msg".equalsIgnoreCase(commande)) {
+                } else if (commande.equalsIgnoreCase("Msg")) {
                     String[] tokenMsg = StringUtils.split(line, null, 3);
                     handleMessage(tokenMsg);
                 } else if ("join".equalsIgnoreCase(commande)) {
@@ -79,6 +80,7 @@ public class ClientOperator extends Thread {
         String sendTo = tokens[1];
         String messageText = tokens[2];
 
+        System.out.println(tokens[1] + tokens[2]);
         boolean isGrp = sendTo.charAt(0) == '#';
 
         List<ClientOperator> workerList = server.getClientList();
@@ -94,9 +96,7 @@ public class ClientOperator extends Thread {
                     worker.send(message);
                 }
             }
-
         }
-
     }
 
     public boolean isMemberOfGrp(String grp) {

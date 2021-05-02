@@ -6,7 +6,7 @@ import Views.OutputView;
 public class OutputPresenter {
     public static void SetUpGUI(){ OutputView.SetUpGUI(); }
     public static void SendMessage(String message){
-        ChatClient.Server_Chat()
+        ChatClient.Server_Chat("", message);
     }
 
     public static String GetCurrentUser() { return UserPresenter.GetCurrentUser(); }
