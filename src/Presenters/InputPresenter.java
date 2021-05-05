@@ -3,9 +3,7 @@ package Presenters;
 import Views.UI.MainPanel;
 import static Views.OutputView.*;
 import static Presenters.DataBasePresenter.*;
-import static javax.swing.JOptionPane.*;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,7 +16,7 @@ public class InputPresenter {
             Check_PasswordMatch(password, passwordRepeat);
             SignUp(login, password);
             DisplayInformation("Welcome " + login + " ! You Signed Up Successfully !");
-            OnClick_SwapPanels(new MainPanel());
+            //OnClick_SwapPanels(new MainPanel(client));
         } catch (ClassNotFoundException | SQLException | EmptyInputFieldException |
                 PasswordMismatchException | UserAlreadyExistException | InputTooShortException e ) {
             DisplayError(e.getMessage());
@@ -34,18 +32,22 @@ public class InputPresenter {
         if (!password.equals(passwordRepeat))
             throw new PasswordMismatchException("Password doesnt match");
     }
-    public static void Try_SignIn(String login, String password) {
+    public static boolean Try_SignIn(String login, String password) {
         try {
             Check_NoEmptyFieldsExist(login, password);
             SignIn(login, password);
             DisplayInformation("Welcome " + login + " !");
-            OnClick_SwapPanels(new MainPanel());
         } catch (EmptyInputFieldException | SQLException | ClassNotFoundException |
                 UserNotFoundException | InputTooShortException e) {
             DisplayError(e.getMessage());
+            return false;
         }
+        return true;
     }
 
+    public static void SendMessage(String message){
+        //ChatClient.Server_Chat("", message);
+    }
     public static String[] Try_AddMedia(DefaultListModel<String> listModel) {
         String[] mediaData = new String[]{};
         try {

@@ -76,7 +76,7 @@ public class DataBasePresenter {
     }
     private static void RegisterSignIn(String login) {
         UserPresenter.SignIn(login);
-        ChatClient.StartConnection(login);
+        ServerPresenter.StartConnection(login);
     }
     //</editor-fold>
 

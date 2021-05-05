@@ -1,10 +1,16 @@
 package Views.UI;
 
+import Presenters.Client.ChatClient;
+
 import static Views.OutputView.*;
+
 import javax.swing.*;
+
 import static javax.swing.GroupLayout.*;
+
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 
 public class LoginPanel extends JPanel implements IPanel, ActionListener {
     //<editor-fold desc="Variables Declarations">">
@@ -27,8 +33,13 @@ public class LoginPanel extends JPanel implements IPanel, ActionListener {
         SetupLogoPanel();
         SetupInputPanel();
         SetupMainPanel();
+
+        // You shouldn't be here !!!
+        this.client = new ChatClient("localhost", 8818);
+        client.connect();
     }
 
+    //<editor-fold desc="FrontEnd Stuff">
     private void SetupLogoPanel() {
         logoPanel.setBackground(INDEPENDENCE);
         SetupLogoTextPanel();
@@ -38,11 +49,10 @@ public class LoginPanel extends JPanel implements IPanel, ActionListener {
         appName.setForeground(HELIOTROPE_GRAY);
         appName.setFont(new Font("Source Code Pro", Font.PLAIN, 48));
     }
-
     private void SetupInputPanel() {
         inputPanel.setBackground(HELIOTROPE_GRAY);
         SetupInputFields(loginField, passwordField);
-        SetupSeparators(loginSeparator,passwordSeparator);
+        SetupSeparators(loginSeparator, passwordSeparator);
         SetupSubmitButton(signInButton, this, true, "Click to login");
         SetupSubmitButton(signUpButton, this, true, "Click to creat an account");
         SetupInputPanelLayout();
@@ -109,20 +119,56 @@ public class LoginPanel extends JPanel implements IPanel, ActionListener {
                                 .addContainerGap(160, Short.MAX_VALUE))
         );
     }
-
     private void SetupMainPanel() {
         SetupMainPanelLayout(logoPanel, inputPanel, this);
     }
 
     @Override
-    public JPanel GetPanel() { return this; }
+    public JPanel GetPanel() {
+        return this;
+    }
+
     @Override
-    public void Activate(){ setVisible(true);}
+    public void Activate() {
+        setVisible(true);
+    }
+
     @Override
-    public void Deactivate(){ setVisible(false);}
+    public void Deactivate() {
+        setVisible(false);
+    }
+
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (event.getSource().equals(signInButton)) OnClick_SignIn(loginField, passwordField);
-        else if (event.getSource().equals(signUpButton)) OnClick_SwapPanels(signUpPanel);
+        if (event.getSource().equals(signInButton)) OnClick_SignIn(client,loginField, passwordField);
+        //else if (event.getSource().equals(signUpButton)) OnClick_SwapPanels(signUpPanel);
     }
+    //</editor-fold>
+
+    // Stuff that shoudn't be here tbh :facepalme:
+    private final ChatClient client;
+
+    public void Login(String strLogin, String strPassword) {
+        System.out.println("Login in progress ..........");
+        try {
+            if (client.login(strLogin, strPassword)) {
+                // bring up the user list window
+                UserListPane userListPane = new UserListPane(client);
+                JFrame frame = new JFrame("User List");
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setSize(400, 600);
+
+                frame.getContentPane().add(userListPane, BorderLayout.CENTER);
+                frame.setVisible(true);
+
+                setVisible(false);
+            } else {
+                // show error message
+                JOptionPane.showMessageDialog(this, "Invalid login/password.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

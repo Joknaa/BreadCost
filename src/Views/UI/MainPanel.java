@@ -1,5 +1,7 @@
 package Views.UI;
 
+import Presenters.Client.ChatClient;
+
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
@@ -10,7 +12,7 @@ import java.awt.event.*;
 
 public class MainPanel extends JPanel implements IPanel, ActionListener {
     //<editor-fold desc="Variables Declarations">">
-    private final JPanel usersListPanel = new JPanel();
+    private JPanel usersListPanel = new JPanel();
     private final JPanel headerPanel = new JPanel();
     private final JPanel profilePanel = new JPanel();
     private final JPanel chatPanel = new JPanel();
@@ -29,7 +31,7 @@ public class MainPanel extends JPanel implements IPanel, ActionListener {
     private final JScrollPane chatScroller = new JScrollPane();
     private final JScrollPane inputScroller = new JScrollPane();
 
-    private final JTextArea chatArea = new JTextArea();
+    public JTextArea chatArea = new JTextArea();
     private final JTextArea inputArea = new JTextArea();
 
     private final JButton logoutButton = new JButton(new ImageIcon("resources/Images/sign_out_70px.png"));
@@ -40,7 +42,9 @@ public class MainPanel extends JPanel implements IPanel, ActionListener {
 
     //</editor-fold>
 
-    public MainPanel(){
+    public MainPanel(ChatClient clientScript){
+        this.client = clientScript;
+
         setPreferredSize(new Dimension(900, 500));
         SetupHeaderPanel();
         SetupProfilePanel();
@@ -49,6 +53,7 @@ public class MainPanel extends JPanel implements IPanel, ActionListener {
         SetupMainPanelLayout();
     }
 
+    //<editor-fold desc="FrontEndStuff">
     private void SetupHeaderPanel() {
         headerPanel.setBackground(INDEPENDENCE);
         headerPanel.setPreferredSize(new Dimension(450, 500));
@@ -130,23 +135,25 @@ public class MainPanel extends JPanel implements IPanel, ActionListener {
     }
 
     private void SetupUsersPanel() {
+        usersListPanel = new UserListPane(client);
         usersListPanel.setBackground(INDEPENDENCE);
         usersListPanel.setPreferredSize(new Dimension(450, 500));
         usersListPanel.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
             }
         });
-        SetupUsersOnlineList();
-        SetupUsersOfflineList();
-        SetupChatScroller(usersOnlineListScroller, usersOnlineList);
-        SetupChatScroller(usersOfflineListScroller, usersOfflineList);
-        SetupUsersPanelLayout();
+        //SetupUsersOnlineList();
+        //SetupUsersOfflineList();
+        //SetupChatScroller(usersOnlineListScroller, usersOnlineList);
+        //SetupChatScroller(usersOfflineListScroller, usersOfflineList);
+        //SetupUsersPanelLayout();
     }
     private void SetupUsersOnlineList() {
         usersOnlineList.setBackground(HELIOTROPE_GRAY);
         usersOnlineList.setForeground(ISABELLINE);
         usersOnlineList.setSelectionBackground(INDEPENDENCE);
         usersOnlineList.setSelectionForeground(ISABELLINE);
+
         usersOnlineList.setModel(new AbstractListModel<>() {
             String[] strings = { "User 1", "User 2", "User 3", "User 4", "User 5", "User 6" };
             public int getSize() { return strings.length; }
@@ -193,23 +200,13 @@ public class MainPanel extends JPanel implements IPanel, ActionListener {
     private void SetupChatPanel() {
         chatPanel.setBackground(INDEPENDENCE);
         chatPanel.setPreferredSize(new Dimension(450, 500));
-        SetupChatArea();
+        chatArea = GetChatField();
         SetupInputArea();
         SetupChatScroller(chatScroller, chatArea);
         SetupChatScroller(inputScroller, inputArea);
         SetupSubmitButton(attachButton, this, true, "Add file");
         SetupSubmitButton(sendButton, this, true, "Send");
         SetupChatPanelLayout();
-    }
-    private void SetupChatArea() {
-        chatArea.setBackground(HELIOTROPE_GRAY);
-        chatArea.setColumns(20);
-        chatArea.setFont(new Font("Source Code Pro", Font.PLAIN, 18));
-        chatArea.setForeground(ISABELLINE);
-        chatArea.setRows(5);
-        chatArea.setText("User 1: Yoo, i am back !!\nUser 2: Welcome\nUser 4: Finally !!\nUser 1: hehe, sorry i took so long :smirk:\n");
-        chatArea.setFocusable(false);
-        chatArea.setLineWrap(true);
     }
     private void SetupInputArea() {
         inputArea.setFont(new Font("Source Code Pro", Font.PLAIN, 18));
@@ -330,6 +327,11 @@ public class MainPanel extends JPanel implements IPanel, ActionListener {
     public void actionPerformed(ActionEvent event) {
         if (event.getSource().equals(logoutButton)) OnClick_Logout();
         else if (event.getSource().equals(sendButton)) OnClick_SendMessage(userName, inputArea, chatArea);
-
     }
+    //</editor-fold>
+
+    // Stuff that shouldn't be here D:
+    private final ChatClient client;
+
+
 }

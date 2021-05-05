@@ -1,11 +1,14 @@
 package Views;
 
-import static Presenters.OutputPresenter.SendMessage;
+import static Presenters.InputPresenter.SendMessage;
 import static javax.swing.JOptionPane.*;
 import static Presenters.InputPresenter.*;
+
+import Presenters.Client.ChatClient;
 import Presenters.OutputPresenter;
 import Presenters.UserPresenter;
 import Views.UI.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -15,17 +18,20 @@ public class OutputView {
     public static final Color INDEPENDENCE = new Color(74, 78, 105);
     public static final Color HELIOTROPE_GRAY = new Color(154, 140, 152);
     public static final Color ISABELLINE = new Color(242, 233, 228);
-    public static final IPanel mainPanel = new MainPanel();
     public static final IPanel loginPanel = new LoginPanel();
     public static final IPanel signUpPanel = new SignupPanel();
+    private static JTextArea chatField = SetupChatArea();// = ((MainPanel) mainPanel).chatArea;
+    private static LoginPanel loginPanel2;
 
     public static void SetUpGUI() {
+        chatField = SetupChatArea();
         appFrame.SetupOnTimeConfiguration();
-        appFrame.SetCurrentPanel(new LoginPanel());
+        loginPanel2 = new LoginPanel();
+        appFrame.SetCurrentPanel(loginPanel2);
     }
 
     //<editor-fold desc="On-Events Actions">
-    public static void OnClick_Logout(){
+    public static void OnClick_Logout() {
         UserPresenter.LogOut();
         OnClick_SwapPanels(loginPanel);
     }
@@ -35,31 +41,42 @@ public class OutputView {
         String strPasswordRepeat = String.valueOf(passwordRepeat.getPassword()).trim();
         Try_SignUp(strLogin, strPassword, strPasswordRepeat);
     }
-    public static void OnClick_SignIn(JTextField login, JPasswordField password){
+    public static void OnClick_SignIn(ChatClient client, JTextField login, JPasswordField password) {
         String strLogin = login.getText();
         String strPassword = String.valueOf(password.getPassword());
-        Try_SignIn(strLogin, strPassword);
+        if (Try_SignIn(strLogin, strPassword)) {
+            loginPanel2.Login(strLogin, strPassword);
+            //OnClick_SwapPanels(new MainPanel(client));
+        }
+
     }
-    public static void OnClick_SwapPanels(IPanel gotoPanel){
+    public static void OnClick_SwapPanels(IPanel gotoPanel) {
         appFrame.GetCurrentPanel().setVisible(false);
         appFrame.SetCurrentPanel(gotoPanel);
     }
-    public static void OnClick_SendMessage(JLabel userName, JTextArea inputArea, JTextArea chatArea){
-        if (inputArea.getText().trim().isEmpty()) return;
+    public static void OnClick_SendMessage(JLabel userName, JTextArea inputField, JTextArea chatArea) {
+        if (inputField.getText().trim().isEmpty()) return;
 
+        String formattedMessage = FormatMessage(userName, inputField);
+        SendMessage(formattedMessage);
+
+        inputField.setText("");
+        chatField.append(formattedMessage);
+        chatArea.setText(chatField.getText());
+    }
+    //</editor-fold>
+
+    public static String GetCurrentUser() {
+        return OutputPresenter.GetCurrentUser();
+    }
+    private static String FormatMessage(JLabel userName, JTextArea inputArea) {
         String message = inputArea.getText().trim();
         String userNameIndentation = String.format("%s: ", userName.getText().trim());
         int indentationLength = userNameIndentation.length();
         String indentation = "\n".concat(" ".repeat(indentationLength));
         message = message.replace("\n", indentation);
-        String formattedMessage = String.format("%s%s\n", userNameIndentation, message);
-        chatArea.append(formattedMessage);
-        inputArea.setText("");
-
-        SendMessage(formattedMessage);
+        return String.format("%s%s\n", userNameIndentation, message);
     }
-    //</editor-fold>
-    public static String GetCurrentUser(){ return OutputPresenter.GetCurrentUser(); }
 
     //<editor-fold desc="Setup Comment Components">
     public static void SetupSubmitButton(JButton submitButton, ActionListener actionListener, boolean isEnabled, String toolTip) {
@@ -132,8 +149,25 @@ public class OutputView {
                         .addComponent(inputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }
+    public static JTextArea SetupChatArea() {
+        JTextArea textArea = new JTextArea();
+        textArea.setBackground(HELIOTROPE_GRAY);
+        textArea.setColumns(20);
+        textArea.setFont(new Font("Source Code Pro", Font.PLAIN, 18));
+        textArea.setForeground(ISABELLINE);
+        textArea.setRows(5);
+        textArea.setText("Welcome !\n");
+        textArea.setFocusable(false);
+        textArea.setLineWrap(true);
+        return textArea;
+    }
+
     //</editor-fold>
 
+    public static JTextArea GetChatField(){
+        chatField = SetupChatArea();
+        return chatField; }
+    public static void SetChatField(JTextArea chatArea){ chatField = chatArea; }
     public static void DisplayInformation(String greeting) {
         showMessageDialog(null, greeting, "Greeting", INFORMATION_MESSAGE);
     }
@@ -145,8 +179,4 @@ public class OutputView {
                 "Confirmation", YES_NO_OPTION);
     }
 
-
-    public static class OnMouseClick_CloseApp extends MouseAdapter {
-        public void mouseClicked(MouseEvent e) { System.exit(0); }
-    }
 }
