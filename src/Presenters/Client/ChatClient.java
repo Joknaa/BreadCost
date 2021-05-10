@@ -58,6 +58,8 @@ public class ChatClient {
 
             //client.logoff();
         }
+        
+        
     }
 
     public void msg(String sendTo, String msgBody) throws IOException {
@@ -74,6 +76,20 @@ public class ChatClient {
 
         if ("ok login".equalsIgnoreCase(response)) {
             startMessageReader();
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public boolean signUp(String login, String password) throws IOException {
+        String cmd = "signup " + login + " " + password + "\n";
+        serverOut.write(cmd.getBytes());
+
+        String response = bufferedIn.readLine();
+        System.out.println("Response Line:" + response);
+
+        if ("signed up".equalsIgnoreCase(response)) {
             return true;
         } else {
             return false;

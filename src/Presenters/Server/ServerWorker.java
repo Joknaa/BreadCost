@@ -4,8 +4,16 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.*;
 import java.net.Socket;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class ServerWorker extends Thread {
 
@@ -14,6 +22,7 @@ public class ServerWorker extends Thread {
     private String login = null;
     private OutputStream outputStream;
     private HashSet<String> topicSet = new HashSet<>();
+    public String sender;
 
     public ServerWorker(Server server, Socket clientSocket) {
         this.server = server;
@@ -37,7 +46,7 @@ public class ServerWorker extends Thread {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         String line;
-        while ((line = reader.readLine()) != null) {
+        while ( (line = reader.readLine()) != null) {
             String[] tokens = StringUtils.split(line);
             if (tokens != null && tokens.length > 0) {
                 String cmd = tokens[0];
@@ -45,13 +54,34 @@ public class ServerWorker extends Thread {
                     handleLogoff();
                     break;
                 } else if ("login".equalsIgnoreCase(cmd)) {
-                    handleLogin(outputStream, tokens);
+                    try {
+                    	sender = tokens[1];
+						handleLogin(outputStream, tokens);
+					} catch (ClassNotFoundException | IOException | SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
                 } else if ("msg".equalsIgnoreCase(cmd)) {
                     String[] tokensMsg = StringUtils.split(line, null, 3);
-                    handleMessage(tokensMsg);
+                    try {
+						handleMessage(tokensMsg);
+					} catch (ClassNotFoundException | IOException | SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
                 } else if ("join".equalsIgnoreCase(cmd)) {
                     handleJoin(tokens);
-                } else if ("leave".equalsIgnoreCase(cmd)) {
+                }else if ("signup".equalsIgnoreCase(cmd)){
+                	try {
+						handleSignUp(tokens);
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+            	}else if ("leave".equalsIgnoreCase(cmd)) {
                     handleLeave(tokens);
                 } else {
                     String msg = "unknown " + cmd + "\n";
@@ -63,7 +93,31 @@ public class ServerWorker extends Thread {
         clientSocket.close();
     }
 
-    private void handleLeave(String[] tokens) {
+    private void handleSignUp(String[] tokens) throws SQLException, ClassNotFoundException, IOException {
+    	if(tokens.length == 3) {
+    	String logi = tokens[1];
+        String pwd = tokens[2];
+        System.out.println("CONNEXION A LA BD\n");
+        Class.forName("com.mysql.cj.jdbc.Driver");
+		java.sql.Connection conn =  DriverManager.getConnection("jdbc:mysql://localhost:3308/chatapp","root","");
+		Statement addh =  conn.createStatement();
+		System.out.println("INSERTION\n");
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+		LocalDateTime now = LocalDateTime.now();
+ 		String stadd = "INSERT INTO `users`(`ID_USER`, `LOGIN`, `PASSWORD`, `ID_GRP`, `STATUS`, `LAST_CONN`) VALUES (NULL,'"+logi+"', '"+pwd +"', 1, 0, '"+now+"')";
+ 		addh.executeUpdate(stadd);
+ 		System.out.println("INSERED \n");
+ 		String msg = "signed up\n";
+        outputStream.write(msg.getBytes());
+    	}else {
+    		String msg = "error\n";
+            outputStream.write(msg.getBytes());
+            System.out.println("Incorrect Token number \n");
+    	}
+		
+	}
+
+	private void handleLeave(String[] tokens) {
         if (tokens.length > 1) {
             String topic = tokens[1];
             topicSet.remove(topic);
@@ -83,14 +137,13 @@ public class ServerWorker extends Thread {
 
     // format: "msg" "login" body...
     // format: "msg" "#topic" body...
-    private void handleMessage(String[] tokens) throws IOException {
+    private void handleMessage(String[] tokens) throws IOException, ClassNotFoundException, SQLException {
         String sendTo = tokens[1];
         String body = tokens[2];
-
         boolean isTopic = sendTo.charAt(0) == '#';
 
         List<ServerWorker> workerList = server.getWorkerList();
-        for (ServerWorker worker : workerList) {
+        for(ServerWorker worker : workerList) {
             if (isTopic) {
                 if (worker.isMemberOfTopic(sendTo)) {
                     String outMsg = "msg " + sendTo + ":" + login + " " + body + "\n";
@@ -98,6 +151,18 @@ public class ServerWorker extends Thread {
                 }
             } else {
                 if (sendTo.equalsIgnoreCase(worker.getLogin())) {
+                	
+                	Class.forName("com.mysql.cj.jdbc.Driver");
+            		java.sql.Connection conn =  DriverManager.getConnection("jdbc:mysql://localhost:3308/chatapp","root","");
+            		Statement addh =  conn.createStatement();
+            		System.out.println("INSERTION\n");
+            		System.out.println("SENDER :" +sender);
+            		System.out.println("\n RECIEVER : " +sendTo);
+            		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+            		LocalDateTime now = LocalDateTime.now();
+             		String stadd = "INSERT INTO `messages`(`ID_MESSAGE`, `ID_SENDER`, `ID_RECIEVER`, `ID_GRP`, `MSG_TEXT`, `DATETIME`, `NAME`, `PATH`, `DATA`) VALUES (NULL,'"+sender+"', '"+sendTo +"', 1,'"+ body+"' ,'"+now+"', '', '', '')";
+             		addh.executeUpdate(stadd);
+                	
                     String outMsg = "msg " + login + " " + body + "\n";
                     worker.send(outMsg);
                 }
@@ -111,7 +176,7 @@ public class ServerWorker extends Thread {
 
         // send other online users current user's status
         String onlineMsg = "offline " + login + "\n";
-        for (ServerWorker worker : workerList) {
+        for(ServerWorker worker : workerList) {
             if (!login.equals(worker.getLogin())) {
                 worker.send(onlineMsg);
             }
@@ -123,34 +188,51 @@ public class ServerWorker extends Thread {
         return login;
     }
 
-    private void handleLogin(OutputStream outputStream, String[] tokens) throws IOException {
+    private void handleLogin(OutputStream outputStream, String[] tokens) throws IOException, ClassNotFoundException, SQLException {
         if (tokens.length == 3) {
             String login = tokens[1];
             String password = tokens[2];
+            String pwd="";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+    		java.sql.Connection conn =  DriverManager.getConnection("jdbc:mysql://localhost:3308/chatapp","root","");
+    		Statement addh =  conn.createStatement();
+    		String fil = "select PASSWORD from users where LOGIN =  '" + login +"' ;";
+     		ResultSet rs = addh.executeQuery(fil);
+     		
+     		while(rs.next()) {
+     			pwd = rs.getString("PASSWORD");
 
-            String msg = "ok login\n";
-            outputStream.write(msg.getBytes());
-            this.login = login;
-            System.out.println("User logged in succesfully: " + login);
+     			}
 
-            List<ServerWorker> workerList = server.getWorkerList();
+            if ((password.equals(pwd))) {
+                String msg = "ok login\n";
+                outputStream.write(msg.getBytes());
+                this.login = login;
+                System.out.println("User logged in succesfully: " + login);
 
-            // send current user all other online logins
-            for (ServerWorker worker : workerList) {
-                if (worker.getLogin() != null) {
-                    if (!login.equals(worker.getLogin())) {
-                        String msg2 = "online " + worker.getLogin() + "\n";
-                        send(msg2);
+                List<ServerWorker> workerList = server.getWorkerList();
+
+                // send current user all other online logins
+                for(ServerWorker worker : workerList) {
+                    if (worker.getLogin() != null) {
+                        if (!login.equals(worker.getLogin())) {
+                            String msg2 = "online " + worker.getLogin() + "\n";
+                            send(msg2);
+                        }
                     }
                 }
-            }
 
-            // send other online users current user's status
-            String onlineMsg = "online " + login + "\n";
-            for (ServerWorker worker : workerList) {
-                if (!login.equals(worker.getLogin())) {
-                    worker.send(onlineMsg);
+                // send other online users current user's status
+                String onlineMsg = "online " + login + "\n";
+                for(ServerWorker worker : workerList) {
+                    if (!login.equals(worker.getLogin())) {
+                        worker.send(onlineMsg);
+                    }
                 }
+            } else {
+                String msg = "error login\n";
+                outputStream.write(msg.getBytes());
+                System.err.println("Login failed for " + login);
             }
         }
     }
@@ -159,7 +241,7 @@ public class ServerWorker extends Thread {
         if (login != null) {
             try {
                 outputStream.write(msg.getBytes());
-            } catch (Exception ex) {
+            } catch(Exception ex) {
                 ex.printStackTrace();
             }
         }
