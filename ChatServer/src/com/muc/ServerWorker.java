@@ -237,7 +237,7 @@ public class ServerWorker extends Thread {
             String password = tokens[2];
             String pwd="";
             Class.forName("com.mysql.cj.jdbc.Driver");
-    		java.sql.Connection conn =  DriverManager.getConnection("jdbc:mysql://localhost:3308/chatapp","root","");
+    		java.sql.Connection conn =  DriverManager.getConnection("jdbc:mysql://localhost:3306/chatapp","root","oknaa");
     		Statement addh =  conn.createStatement();
     		String fil = "select PASSWORD from users where LOGIN =  '" + login +"' ;";
      		ResultSet rs = addh.executeQuery(fil);

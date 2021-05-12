@@ -2,7 +2,6 @@ package com.muc;
 
 import javax.swing.*;
 
-import com.mysql.cj.xdevapi.Statement;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -29,78 +28,73 @@ public class UserPaneOffLine extends JPanel implements UserStatusListener {
     public UserPaneOffLine(ChatClient client) {
         this.client = client;
         this.client.addUserStatusListener(this);
-        
-        
+
+
         userListUI = new JList<>(userListModel);
         userList = new JList<>(userListTotMod);
         userListOf = new JList<>(userListOffMod);
         userListON = new JList<>(userListModel1);
-        
-        
+
+
         try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			java.sql.Connection conn =  DriverManager.getConnection("jdbc:mysql://localhost:3308/chatapp","root","");
-			java.sql.Statement st1 = conn.createStatement();
-	 		String fil = "select LOGIN from `users`;";
-	 		ResultSet rs1 = st1.executeQuery(fil);
-	 		while(rs1.next()) {
-	 			String logg = rs1.getString("LOGIN");
-	 			userListTotMod.addElement(logg);
-	 		}
-		} catch (ClassNotFoundException | SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-        
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            java.sql.Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3308/chatapp", "root", "");
+            java.sql.Statement st1 = conn.createStatement();
+            String fil = "select LOGIN from `users`;";
+            ResultSet rs1 = st1.executeQuery(fil);
+            while (rs1.next()) {
+                String logg = rs1.getString("LOGIN");
+                userListTotMod.addElement(logg);
+            }
+        } catch (ClassNotFoundException | SQLException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+
         String logg = LoginWindow.getLogg();
-        
-        
-        
-        for(int i=0; i < userListTotMod.size();i++) {
-        	if(logg.equals(userListTotMod.get(i))) {
-    			userListTotMod.removeElement(userListTotMod.get(i));
-    		}
-		}
-        
-        
-       userListModel1 = UserListPane.getUserOnList();
-       //userListTotMod.removeElement(userListModel1);
-       
-       for(int i=0; i < userListModel1.size();i++) {
-    	   System.out.println("\n IMPORTED ONLINE : "+userListModel1.get(i));
-       }
-        
+
+
+        for (int i = 0; i < userListTotMod.size(); i++) {
+            if (logg.equals(userListTotMod.get(i))) {
+                userListTotMod.removeElement(userListTotMod.get(i));
+            }
+        }
+
+
+        userListModel1 = UserListPane.getUserOnList();
+        //userListTotMod.removeElement(userListModel1);
+
+        for (int i = 0; i < userListModel1.size(); i++) {
+            System.out.println("\n IMPORTED ONLINE : " + userListModel1.get(i));
+        }
+
         System.out.println("\nOFFLINE LIST :\n");
-        if(userListTotMod.size()>0) {
-        	for(int i=0; i < userListTotMod.size();i++) {
-        		
-        		if(userListModel1.contains(userListTotMod.get(i))) {
-        			userListTotMod.removeElement(userListTotMod.get(i));
-        			//userListModel1.removeElement(userListTotMod.get(i));
-        			System.out.println("\n REMOVED2 : "+userListTotMod.get(i));	
-        		}
-        	}
+        if (userListTotMod.size() > 0) {
+            for (int i = 0; i < userListTotMod.size(); i++) {
+
+                if (userListModel1.contains(userListTotMod.get(i))) {
+                    userListTotMod.removeElement(userListTotMod.get(i));
+                    //userListModel1.removeElement(userListTotMod.get(i));
+                    System.out.println("\n REMOVED2 : " + userListTotMod.get(i));
+                }
+            }
         }
-        
+
         System.out.println("AFTER REMOVING : \n");
-        for(int i=0; i < userListModel1.size();i++) {
-     	   System.out.println("\n AFTER MODEL1  : "+userListModel1.get(i));
+        for (int i = 0; i < userListModel1.size(); i++) {
+            System.out.println("\n AFTER MODEL1  : " + userListModel1.get(i));
         }
-        
-        for(int i=0; i < userListTotMod.size();i++) {
-     	   System.out.println("\n TOTMOD : "+userListTotMod.get(i));
+
+        for (int i = 0; i < userListTotMod.size(); i++) {
+            System.out.println("\n TOTMOD : " + userListTotMod.get(i));
         }
-        
-        
+
+
         userList.remove(userListON);
-        
+
         setLayout(new BorderLayout());
-        
-        
-        
-        
-        
-        
+
+
         add(new JScrollPane(userList), BorderLayout.CENTER);
 
         userList.addMouseListener(new MouseAdapter() {
@@ -109,8 +103,7 @@ public class UserPaneOffLine extends JPanel implements UserStatusListener {
                 if (e.getClickCount() > 1) {
                     String login = userList.getSelectedValue();
                     MessagePane messagePane = new MessagePane(client, login);
-                    
-                    
+
 
                     JFrame f = new JFrame("Message: " + login);
                     f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -133,21 +126,20 @@ public class UserPaneOffLine extends JPanel implements UserStatusListener {
         frame.getContentPane().add(userListOffLine, BorderLayout.CENTER);
         frame.setVisible(true);
 
-        
-        
+
     }
 
     @Override
     public void online(String login) {
-    	userListModel.addElement(login);
-    	userListTotMod.removeElement(login);
-    	userListTotMod.removeElement(userListUI);
+        userListModel.addElement(login);
+        userListTotMod.removeElement(login);
+        userListTotMod.removeElement(userListUI);
     }
 
     @Override
     public void offline(String login) {
-    	userListModel.removeElement(login);
-    	userListTotMod.addElement(login);
+        userListModel.removeElement(login);
+        userListTotMod.addElement(login);
     }
 }
 
