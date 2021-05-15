@@ -225,6 +225,8 @@ public class ServerWorker extends Thread {
             String login = tokens[1];
             String password = tokens[2];
             String pwd = "";
+            //todo delete
+            //<editor-fold desc="TO BE DELETED">
             Class.forName("com.mysql.cj.jdbc.Driver");
             java.sql.Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/chatapp", "root", "oknaa");
             Statement addh = conn.createStatement();
@@ -233,8 +235,8 @@ public class ServerWorker extends Thread {
 
             while (rs.next()) {
                 pwd = rs.getString("PASSWORD");
-
             }
+            //</editor-fold>
 
             if ((password.equals(pwd))) {
                 String msg = "ok login\n";

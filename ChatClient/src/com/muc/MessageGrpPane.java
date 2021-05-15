@@ -1,5 +1,7 @@
 package com.muc;
 
+import com.muc.Views.OutputView;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -29,7 +31,8 @@ public class MessageGrpPane extends JPanel implements MessageListener {
         this.client = client;
         this.login = login;
         
-        rec = LoginWindow.getLogg();
+        //rec = LoginWindow.getLogg();
+        rec = OutputView.GetCurrentUser();
         
         client.addMessageListener(this);
         System.out.println("\n LOGIN : "+ login);
