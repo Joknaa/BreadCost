@@ -14,7 +14,7 @@ import java.sql.SQLException;
 
 public class UserPaneOffLine extends JPanel implements UserStatusListener {
 
-
+    private final String DBPassword = "oknaa";
     private final ChatClient client;
     private JList<String> userListUI;
     private JList<String> userListON;
@@ -38,7 +38,7 @@ public class UserPaneOffLine extends JPanel implements UserStatusListener {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            java.sql.Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3308/chatapp", "root", "");
+            java.sql.Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/chatapp", "root", DBPassword);
             java.sql.Statement st1 = conn.createStatement();
             String fil = "select LOGIN from `users`;";
             ResultSet rs1 = st1.executeQuery(fil);
@@ -60,7 +60,6 @@ public class UserPaneOffLine extends JPanel implements UserStatusListener {
             }
         }
 
-
         userListModel1 = UserListPane.getUserOnList();
         //userListTotMod.removeElement(userListModel1);
 
@@ -73,9 +72,9 @@ public class UserPaneOffLine extends JPanel implements UserStatusListener {
             for (int i = 0; i < userListTotMod.size(); i++) {
 
                 if (userListModel1.contains(userListTotMod.get(i))) {
+                    System.out.println("\n REMOVED2 : " + userListTotMod.get(i));
                     userListTotMod.removeElement(userListTotMod.get(i));
                     //userListModel1.removeElement(userListTotMod.get(i));
-                    System.out.println("\n REMOVED2 : " + userListTotMod.get(i));
                 }
             }
         }
@@ -89,21 +88,15 @@ public class UserPaneOffLine extends JPanel implements UserStatusListener {
             System.out.println("\n TOTMOD : " + userListTotMod.get(i));
         }
 
-
         userList.remove(userListON);
-
         setLayout(new BorderLayout());
-
-
         add(new JScrollPane(userList), BorderLayout.CENTER);
-
         userList.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() > 1) {
                     String login = userList.getSelectedValue();
                     MessagePane messagePane = new MessagePane(client, login);
-
 
                     JFrame f = new JFrame("Message: " + login);
                     f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
