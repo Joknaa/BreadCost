@@ -66,7 +66,6 @@ public class MessagePane extends JPanel implements MessageListener {
             String line = sender + ": " + msgBody;
             listModel.addElement(line);
         }
-        currentUser = sender;
     }
 
 }
