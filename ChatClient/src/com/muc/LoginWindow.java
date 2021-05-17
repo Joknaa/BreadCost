@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class LoginWindow extends JFrame {
-    public static String logg;
+    public static String currentUser;
     private final ChatClient client;
     JTextField loginField = new JTextField();
     JPasswordField passwordField = new JPasswordField();
@@ -48,8 +48,8 @@ public class LoginWindow extends JFrame {
         setVisible(true);
     }
 
-    public static String getLogg() {
-        return logg;
+    public static String getCurrentUser() {
+        return currentUser;
     }
 
     public static void main(String[] args) {
@@ -58,15 +58,15 @@ public class LoginWindow extends JFrame {
     }
 
     private void doLogin() {
-        logg = loginField.getText();
+        currentUser = loginField.getText();
         String password = passwordField.getText();
         try {
-            if (client.login(logg, password)) {
+            if (client.login(currentUser, password)) {
                 onlineListPanel = new UserListPane(client);
-                groupChatPanel = new MessageGrpPane(client, logg);
+                groupChatPanel = new MessageGrpPane(client, currentUser);
                 offlineListPanel = new UserPaneOffLine(client);
 
-                JFrame frame = new JFrame("BreadCost - " + logg);
+                JFrame frame = new JFrame("BreadCost - " + currentUser);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.add(mainPanel);
                 frame.setSize(new Dimension(600, 400));

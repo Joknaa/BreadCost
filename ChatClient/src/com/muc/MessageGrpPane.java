@@ -11,25 +11,17 @@ import java.sql.Statement;
 public class MessageGrpPane extends JPanel implements MessageListener {
 
     private final ChatClient client;
-    private final String login;
-    public String rec;
-    public String[] tabrec;
-    int i = 0;
-    int j = 0;
-    int nb = 0;
-    private DefaultListModel<String> listModel1 = new DefaultListModel<>();
-    private JList<String> messageList = new JList<>(listModel1);
-    private JTextField inputField = new JTextField();
+    private String currentUser;
+    private final DefaultListModel<String> listModel1 = new DefaultListModel<>();
+    private final JList<String> messageList = new JList<>(listModel1);
+    private final JTextField inputField = new JTextField();
 
-    public MessageGrpPane(ChatClient client, String login) {
+    public MessageGrpPane(ChatClient client, String currentUser) {
         this.client = client;
-        this.login = login;
-
-        //rec = LoginWindow.getLogg();
-        rec = LoginWindow.getLogg();
+        this.currentUser = currentUser;
 
         client.addMessageListener(this);
-        System.out.println("\n LOGIN : " + login);
+        System.out.println("\n LOGIN : " + currentUser);
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -60,8 +52,7 @@ public class MessageGrpPane extends JPanel implements MessageListener {
         inputField.addActionListener(e -> {
             try {
                 String text = inputField.getText();
-                client.msg("#1", text);
-                //listModel1.addElement("You: " + text);
+                client.msg(currentUser, "#1", text);
                 inputField.setText("");
             } catch (IOException e1) {
                 e1.printStackTrace();
@@ -70,13 +61,13 @@ public class MessageGrpPane extends JPanel implements MessageListener {
     }
 
     @Override
-    public void onMessage(String fromLogin, String msgBody) {
-        if (fromLogin.charAt(0) == '#') {
-            String line = "(GRP) " + fromLogin + " : " + msgBody;
+    public void onMessage(String sender, String msgBody) {
+        if (sender.charAt(0) == '#') {
+            String line = "(GRP) " + sender + " : " + msgBody;
             listModel1.addElement(line);
         }
-        rec = fromLogin;
-        System.out.println(rec);
+        currentUser = sender;
+        System.out.println(currentUser);
     }
 
 }

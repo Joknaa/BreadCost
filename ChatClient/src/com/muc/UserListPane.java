@@ -18,7 +18,7 @@ public class UserListPane extends JPanel implements UserStatusListener {
     public UserListPane(ChatClient client) {
         this.client = client;
         this.client.addUserStatusListener(this);
-        this.currentUser = LoginWindow.getLogg();
+        this.currentUser = LoginWindow.getCurrentUser();
 
         userListModel = new DefaultListModel<>();
         userListUI = new JList<>(userListModel);

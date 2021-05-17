@@ -22,48 +22,8 @@ public class ChatClient {
         this.serverPort = serverPort;
     }
 
-    public static void main(String[] args) throws IOException {
-        ChatClient client = new ChatClient("localhost", 8818);
-        client.addUserStatusListener(new UserStatusListener() {
-            @Override
-            public void online(String login) {
-                System.out.println("ONLINE: " + login);
-            }
-
-            @Override
-            public void offline(String login) {
-                System.out.println("OFFLINE: " + login);
-            }
-        });
-
-        client.addMessageListener(new MessageListener() {
-            @Override
-            public void onMessage(String fromLogin, String msgBody) {
-                System.out.println("You got a message from " + fromLogin + " ===>" + msgBody);
-            }
-        });
-
-        if (!client.connect()) {
-            System.err.println("Connect failed.");
-        } else {
-            System.out.println("Connect successful");
-
-            if (client.login("guest", "guest")) {
-                System.out.println("Login successful");
-
-                client.msg("jim", "Hello World!");
-            } else {
-                System.err.println("Login failed");
-            }
-
-            //client.logoff();
-        }
-        
-        
-    }
-
-    public void msg(String sendTo, String msgBody) throws IOException {
-        String cmd = "msg " + sendTo + " " + msgBody + "\n";
+    public void msg(String sender, String receiver, String msgBody) throws IOException {
+        String cmd = "msg " + sender + " " + receiver + " " + msgBody + "\n";
         serverOut.write(cmd.getBytes());
     }
 
@@ -143,11 +103,11 @@ public class ChatClient {
     }
 
     private void handleMessage(String[] tokensMsg) {
-        String login = tokensMsg[1];
+        String sender = tokensMsg[1];
         String msgBody = tokensMsg[2];
 
         for(MessageListener listener : messageListeners) {
-            listener.onMessage(login, msgBody);
+            listener.onMessage(sender, msgBody);
         }
     }
 

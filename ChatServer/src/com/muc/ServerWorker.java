@@ -1,6 +1,5 @@
 package com.muc;
 
-import ch.qos.logback.classic.Logger;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.*;
@@ -9,21 +8,19 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
+import java.util.List;
 
 public class ServerWorker extends Thread {
     private final String DBPassword = "oknaa";
     private final Socket clientSocket;
     private final Server server;
+    public String sender;
     private String login = null;
     private OutputStream outputStream;
     private HashSet<String> topicSet = new HashSet<>();
-    public String sender;
 
     public ServerWorker(Server server, Socket clientSocket) {
         this.server = server;
@@ -63,7 +60,7 @@ public class ServerWorker extends Thread {
                         e.printStackTrace();
                     }
                 } else if ("msg".equalsIgnoreCase(cmd)) {
-                    String[] tokensMsg = StringUtils.split(line, null, 3);
+                    String[] tokensMsg = StringUtils.split(line, null, 4);
                     try {
                         handleMessage(tokensMsg);
                     } catch (ClassNotFoundException | IOException | SQLException e) {
@@ -153,13 +150,12 @@ public class ServerWorker extends Thread {
     // format: "msg" "login" body...
     // format: "msg" "#topic" body...
     private void handleMessage(String[] tokens) throws IOException, ClassNotFoundException, SQLException {
-        String receiver = tokens[1];
-        String body = tokens[2];
+        String sender = tokens[1];
+        String receiver = tokens[2];
+        String body = tokens[3];
         boolean isTopic = receiver.charAt(0) == '#';
 
-
         if (isTopic) {
-
             Class.forName("com.mysql.cj.jdbc.Driver");
             java.sql.Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/chatapp", "root", "oknaa");
             Statement addh = conn.createStatement();
@@ -170,35 +166,31 @@ public class ServerWorker extends Thread {
             LocalDateTime now = LocalDateTime.now();
             String stadd = "INSERT INTO `messages`(`ID_MESSAGE`, `SENDER`, `RECEIVER`, `ID_GRP`, `MSG_TEXT`, `DATETIME`, `NAME`, `PATH`, `DATA`) VALUES (NULL,'" + login + "', '" + receiver + "', 1,'" + body + "' ,'" + now + "', '', '', '')";
             addh.executeUpdate(stadd);
-
         }
 
-
         List<ServerWorker> workerList = server.getWorkerList();
-        for (ServerWorker worker : workerList) {
-            if (isTopic) {
+        if (isTopic) {
+            for (ServerWorker worker : workerList) {
                 if (worker.isMemberOfTopic(receiver)) {
                     String outMsg = "msg " + receiver + " (" + sender + "):" + body + "\n";
                     worker.send(outMsg);
                 }
-            } else {
-                if (receiver.equalsIgnoreCase(worker.getLogin())) {
+            }
+        } else {
 
-                    Class.forName("com.mysql.cj.jdbc.Driver");
-                    java.sql.Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/chatapp", "root", "oknaa");
-                    Statement addh = conn.createStatement();
-                    System.out.println("INSERTION\n");
-                    System.out.println("SENDER :" + sender);
-                    System.out.println("\n RECIEVER : " + receiver);
-                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-                    LocalDateTime now = LocalDateTime.now();
-                    String stadd = "INSERT INTO `messages`(`ID_MESSAGE`, `SENDER`, `RECEIVER`, `ID_GRP`, `MSG_TEXT`, `DATETIME`, `NAME`, `PATH`, `DATA`) " +
-                            "VALUES (NULL,'" + sender + "', '" + receiver + "', 0,'" + body + "' ,'" + now + "', '', '', '')";
-                    addh.executeUpdate(stadd);
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            java.sql.Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/chatapp", "root", "oknaa");
+            Statement addh = conn.createStatement();
+            LocalDateTime now = LocalDateTime.now();
+            String stadd = "INSERT INTO `messages`(`ID_MESSAGE`, `SENDER`, `RECEIVER`, `ID_GRP`, `MSG_TEXT`, `DATETIME`, `NAME`, `PATH`, `DATA`) " +
+                    "VALUES (NULL,'" + sender + "', '" + receiver + "', 0,'" + body + "' ,'" + now + "', '', '', '')";
+            addh.executeUpdate(stadd);
 
-                    String outMsg = "msg " + login + " " + body + "\n";
-                    worker.send(outMsg);
-                }
+            String outMsg = "msg " + sender + " " + body + "\n";
+            try {
+                outputStream.write(outMsg.getBytes());
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
         }
     }
