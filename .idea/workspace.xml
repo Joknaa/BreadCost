@@ -3,11 +3,29 @@
   <component name="ChangeListManager">
     <list default="true" id="33f839d5-30c1-4962-954d-52526a4be2e4" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Controllers/DataBaseController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Controllers/InputController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Controllers/OutputController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Controllers/ServerController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Controllers/UserController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/LoginWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/LoginWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/MessageGrpPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/MessageGrpPane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatServer/src/com/muc/ServerWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatServer/src/com/muc/ServerWorker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/MessagePane.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/MessagePane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Models/DataBaseModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Models/LogStatus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Models/UserModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/UserListPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/UserListPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/UserPaneOffLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/UserPaneOffLine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Views/OutputView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Views/UI/AppFrame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Views/UI/IPanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Views/UI/LoginPanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Views/UI/MainPanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Views/UI/SignupPanel.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/LoginWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/LoginWindow.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/MessageGrpPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/MessageGrpPane.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/UserPaneOffLine$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/UserPaneOffLine$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/UserPaneOffLine.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/UserPaneOffLine.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ChatServer/com/muc/ServerWorker.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/com/muc/ServerWorker.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -186,8 +204,11 @@
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../mysql-connector-java-8.0.23.jar" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.22541967" />
@@ -306,17 +327,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -402,6 +412,7 @@
       <option name="presentableId" value="Default" />
       <updated>1492533069085</updated>
       <workItem from="1621072067211" duration="5160000" />
+      <workItem from="1621262995358" duration="2840000" />
     </task>
     <servers />
   </component>

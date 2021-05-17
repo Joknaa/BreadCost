@@ -1,38 +1,32 @@
 package com.muc;
 
-import com.muc.Views.OutputView;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Arrays;
-import java.util.Date;
 
 public class MessagePane extends JPanel implements MessageListener {
 
     private final ChatClient client;
     private final String login;
     public String rec;
-    private DefaultListModel<String> listModel = new DefaultListModel<>();
-    private JList<String> messageList = new JList<>(listModel);
-    private JTextField inputField = new JTextField();
     public String[] tabrec;
     int i = 0;
     int j = 0;
     int nb = 0;
+    private final DefaultListModel<String> listModel = new DefaultListModel<>();
+    private final JList<String> messageList = new JList<>(listModel);
+    private final JTextField inputField = new JTextField();
 
     public MessagePane(ChatClient client, String login) {
         this.client = client;
         this.login = login;
 
         //rec = LoginWindow.getLogg();
-        rec = OutputView.GetCurrentUser();
+        rec = LoginWindow.getLogg();
 
         client.addMessageListener(this);
         System.out.println("\n LOGIN : " + login);

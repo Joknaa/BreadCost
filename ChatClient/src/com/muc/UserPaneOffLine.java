@@ -1,14 +1,9 @@
 package com.muc;
 
 import javax.swing.*;
-
-import com.muc.Views.OutputView;
-import com.mysql.cj.xdevapi.Statement;
-
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -53,7 +48,7 @@ public class UserPaneOffLine extends JPanel implements UserStatusListener {
             e1.printStackTrace();
         }
 
-        String logg = OutputView.GetCurrentUser();
+        String logg = LoginWindow.getLogg();
 
 
         for (int i = 0; i < userListTotMod.size(); i++) {
@@ -75,9 +70,10 @@ public class UserPaneOffLine extends JPanel implements UserStatusListener {
             for (int i = 0; i < userListTotMod.size(); i++) {
 
                 if (userListModel1.contains(userListTotMod.get(i))) {
+                    System.out.println("\n REMOVED2 : " + userListTotMod.get(i));
+
                     userListTotMod.removeElement(userListTotMod.get(i));
                     //userListModel1.removeElement(userListTotMod.get(i));
-                    System.out.println("\n REMOVED2 : " + userListTotMod.get(i));
                 }
             }
         }
@@ -95,7 +91,7 @@ public class UserPaneOffLine extends JPanel implements UserStatusListener {
         userList.remove(userListON);
 
         setLayout(new BorderLayout());
-
+        setPreferredSize(new Dimension(200, 600));
 
         add(new JScrollPane(userList), BorderLayout.CENTER);
 

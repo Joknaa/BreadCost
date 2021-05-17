@@ -13,6 +13,13 @@ public class LoginWindow extends JFrame {
     JPasswordField passwordField = new JPasswordField();
     JButton loginButton = new JButton("Login");
 
+    private final JPanel mainPanel = new JPanel();
+    private final JPanel headerPanel = new JPanel();
+
+    private UserListPane onlineListPanel;
+    private MessageGrpPane groupChatPanel;
+    private UserPaneOffLine offlineListPanel;
+
     public LoginWindow() {
         super("Login");
 
@@ -53,23 +60,23 @@ public class LoginWindow extends JFrame {
     private void doLogin() {
         logg = loginField.getText();
         String password = passwordField.getText();
-
-
         try {
             if (client.login(logg, password)) {
-                // bring up the user list window
-                UserListPane userListPane = new UserListPane(client);
-                MessageGrpPane messageGrpPane = new MessageGrpPane(client, logg);
-                UserPaneOffLine userListOffLine = new UserPaneOffLine(client);
+                onlineListPanel = new UserListPane(client);
+                groupChatPanel = new MessageGrpPane(client, logg);
+                offlineListPanel = new UserPaneOffLine(client);
+
+                //SetupGUI();
 
                 JFrame frame = new JFrame("BreadCost - " + logg);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setSize(400, 600);
-                frame.getContentPane().add(userListPane, BorderLayout.WEST);
-                frame.getContentPane().add(messageGrpPane, BorderLayout.CENTER);
-                frame.getContentPane().add(userListOffLine, BorderLayout.EAST);
+                frame.add(mainPanel);
+                frame.setSize(new Dimension(800, 600));
                 frame.setVisible(true);
 
+                frame.add(onlineListPanel, BorderLayout.WEST);
+                frame.add(groupChatPanel, BorderLayout.CENTER);
+                frame.add(offlineListPanel, BorderLayout.EAST);
 
 
                 /*JFrame jframe = new JFrame("OFFLINE USERS List");
@@ -78,25 +85,109 @@ public class LoginWindow extends JFrame {
 
                 jframe.getContentPane().add(userListOffLine, BorderLayout.CENTER);
                 jframe.setVisible(true);
-                 */
 
-
-                /*
                 JFrame f = new JFrame("Message en Groupe");
                 f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 f.setSize(500, 500);
                 f.getContentPane().add(messageGrpPane, BorderLayout.CENTER);
                 f.setVisible(true);
                  */
-
-
                 setVisible(false);
             } else {
-                // show error message
                 JOptionPane.showMessageDialog(this, "Invalid login/password.");
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    private void SetupGUI() {
+        mainPanel.setPreferredSize(new java.awt.Dimension(800, 600));
+        SetupHeaderPanel();
+        SetupGroupChatPanel();
+        SetupOnlineListPanel();
+        SetupOfflineListPanel();
+        SetupMainPanelLayout();
+    }
+
+    //<editor-fold desc="Setup GUI">
+    private void SetupHeaderPanel() {
+        GroupLayout headerPanelLayout = new GroupLayout(headerPanel);
+        headerPanel.setLayout(headerPanelLayout);
+        headerPanelLayout.setHorizontalGroup(
+                headerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE)
+        );
+        headerPanelLayout.setVerticalGroup(
+                headerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGap(0, 100, Short.MAX_VALUE)
+        );
+    }
+    private void SetupOnlineListPanel() {
+        onlineListPanel.setPreferredSize(new Dimension(200, 600));
+
+        GroupLayout onlineUsersPanelLayout = new GroupLayout(onlineListPanel);
+        onlineListPanel.setLayout(onlineUsersPanelLayout);
+        onlineUsersPanelLayout.setHorizontalGroup(
+                onlineUsersPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGap(0, 200, Short.MAX_VALUE)
+        );
+        onlineUsersPanelLayout.setVerticalGroup(
+                onlineUsersPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGap(0, 500, Short.MAX_VALUE)
+        );
+    }
+    private void SetupOfflineListPanel() {
+        offlineListPanel.setPreferredSize(new Dimension(200, 600));
+
+        GroupLayout offlineUsersPanelLayout = new GroupLayout(offlineListPanel);
+        offlineListPanel.setLayout(offlineUsersPanelLayout);
+        offlineUsersPanelLayout.setHorizontalGroup(
+                offlineUsersPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGap(0, 200, Short.MAX_VALUE)
+        );
+        offlineUsersPanelLayout.setVerticalGroup(
+                offlineUsersPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE)
+        );
+    }
+    private void SetupGroupChatPanel() {
+        groupChatPanel.setPreferredSize(new Dimension(400, 600));
+
+        GroupLayout groupChatPanelLayout = new GroupLayout(groupChatPanel);
+        groupChatPanel.setLayout(groupChatPanelLayout);
+        groupChatPanelLayout.setHorizontalGroup(
+                groupChatPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGap(0, 400, Short.MAX_VALUE)
+        );
+        groupChatPanelLayout.setVerticalGroup(
+                groupChatPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE)
+        );
+    }
+    private void SetupMainPanelLayout() {
+        GroupLayout layout = new GroupLayout(mainPanel);
+        mainPanel.setLayout(layout);
+        layout.setHorizontalGroup(
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(onlineListPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(groupChatPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(offlineListPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addComponent(headerPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(headerPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(onlineListPanel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+                                        .addComponent(groupChatPanel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+                                        .addComponent(offlineListPanel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)))
+        );
+    }
+    //</editor-fold>
 }
