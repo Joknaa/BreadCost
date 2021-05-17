@@ -168,7 +168,7 @@ public class ServerWorker extends Thread {
             System.out.println("\n RECIEVER : " + sendTo);
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
             LocalDateTime now = LocalDateTime.now();
-            String stadd = "INSERT INTO `messages`(`ID_MESSAGE`, `ID_SENDER`, `ID_RECIEVER`, `ID_GRP`, `MSG_TEXT`, `DATETIME`, `NAME`, `PATH`, `DATA`) VALUES (NULL,'" + login + "', '" + sendTo + "', 1,'" + body + "' ,'" + now + "', '', '', '')";
+            String stadd = "INSERT INTO `messages`(`ID_MESSAGE`, `SENDER`, `RECEIVER`, `ID_GRP`, `MSG_TEXT`, `DATETIME`, `NAME`, `PATH`, `DATA`) VALUES (NULL,'" + login + "', '" + sendTo + "', 1,'" + body + "' ,'" + now + "', '', '', '')";
             addh.executeUpdate(stadd);
 
         }

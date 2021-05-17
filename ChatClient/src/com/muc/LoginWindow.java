@@ -7,11 +7,11 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class LoginWindow extends JFrame {
+    public static String logg;
     private final ChatClient client;
     JTextField loginField = new JTextField();
     JPasswordField passwordField = new JPasswordField();
     JButton loginButton = new JButton("Login");
-    public static String logg;
 
     public LoginWindow() {
         super("Login");
@@ -41,45 +41,55 @@ public class LoginWindow extends JFrame {
         setVisible(true);
     }
 
+    public static String getLogg() {
+        return logg;
+    }
+
+    public static void main(String[] args) {
+        LoginWindow loginWin = new LoginWindow();
+        loginWin.setVisible(true);
+    }
+
     private void doLogin() {
         logg = loginField.getText();
         String password = passwordField.getText();
-        
-        
+
+
         try {
             if (client.login(logg, password)) {
                 // bring up the user list window
                 UserListPane userListPane = new UserListPane(client);
-                JFrame frame = new JFrame("User List");
+                MessageGrpPane messageGrpPane = new MessageGrpPane(client, logg);
+                UserPaneOffLine userListOffLine = new UserPaneOffLine(client);
+
+                JFrame frame = new JFrame("BreadCost - " + logg);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setSize(400, 600);
-                
-                frame.getContentPane().add(userListPane, BorderLayout.CENTER);
+                frame.getContentPane().add(userListPane, BorderLayout.WEST);
+                frame.getContentPane().add(messageGrpPane, BorderLayout.CENTER);
+                frame.getContentPane().add(userListOffLine, BorderLayout.EAST);
                 frame.setVisible(true);
-                
-                
-                
-                UserPaneOffLine userListOffLine = new UserPaneOffLine(client);
-                JFrame jframe = new JFrame("OFFLINE USERS List");
+
+
+
+                /*JFrame jframe = new JFrame("OFFLINE USERS List");
                 jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 jframe.setSize(400, 600);
 
                 jframe.getContentPane().add(userListOffLine, BorderLayout.CENTER);
                 jframe.setVisible(true);
-                
-                
-                MessageGrpPane messageGrpPane = new MessageGrpPane(client, logg);
+                 */
 
+
+                /*
                 JFrame f = new JFrame("Message en Groupe");
                 f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 f.setSize(500, 500);
                 f.getContentPane().add(messageGrpPane, BorderLayout.CENTER);
                 f.setVisible(true);
-                
-                
-                
-                
-                
+                 */
+
+
                 setVisible(false);
             } else {
                 // show error message
@@ -88,14 +98,5 @@ public class LoginWindow extends JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-    
-    public static String getLogg() {
-    	return logg;
-    }
-
-    public static void main(String[] args) {
-        LoginWindow loginWin = new LoginWindow();
-        loginWin.setVisible(true);
     }
 }
