@@ -35,7 +35,7 @@ public class MessageGrpPane extends JPanel implements MessageListener {
             Class.forName("com.mysql.cj.jdbc.Driver");
             java.sql.Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/chatapp", "root", "oknaa");
             Statement st = conn.createStatement();
-            String fil = "select `MSG_TEXT`,`ID_SENDER`, `ID_RECIEVER`,`ID_MESSAGE` from `messages` where `ID_GRP`=1 ORDER BY `ID_MESSAGE` ASC";
+            String fil = "select `MSG_TEXT`,`SENDER`, `RECEIVER`,`ID_MESSAGE` from `messages` where `ID_GRP`=1 ORDER BY `ID_MESSAGE` ASC";
             ResultSet rs = st.executeQuery(fil);
 
             while (rs.next()) {
@@ -43,9 +43,6 @@ public class MessageGrpPane extends JPanel implements MessageListener {
                 String sender = rs.getString("SENDER");
                 int idmsg = rs.getInt("ID_MESSAGE");
                 String oldmsgs = "(GRP) " + sender + " : " + msgtxt + "\n";
-                if (login.equals(sender)) {
-                    oldmsgs = "(GRP) You : " + msgtxt + "\n";
-                }
                 listModel1.addElement(oldmsgs);
             }
 

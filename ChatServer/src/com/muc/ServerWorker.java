@@ -153,9 +153,9 @@ public class ServerWorker extends Thread {
     // format: "msg" "login" body...
     // format: "msg" "#topic" body...
     private void handleMessage(String[] tokens) throws IOException, ClassNotFoundException, SQLException {
-        String sendTo = tokens[1];
+        String receiver = tokens[1];
         String body = tokens[2];
-        boolean isTopic = sendTo.charAt(0) == '#';
+        boolean isTopic = receiver.charAt(0) == '#';
 
 
         if (isTopic) {
@@ -165,10 +165,10 @@ public class ServerWorker extends Thread {
             Statement addh = conn.createStatement();
             System.out.println("INSERTION\n");
             System.out.println("SENDER :" + sender);
-            System.out.println("\n RECIEVER : " + sendTo);
+            System.out.println("\n RECIEVER : " + receiver);
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
             LocalDateTime now = LocalDateTime.now();
-            String stadd = "INSERT INTO `messages`(`ID_MESSAGE`, `SENDER`, `RECEIVER`, `ID_GRP`, `MSG_TEXT`, `DATETIME`, `NAME`, `PATH`, `DATA`) VALUES (NULL,'" + login + "', '" + sendTo + "', 1,'" + body + "' ,'" + now + "', '', '', '')";
+            String stadd = "INSERT INTO `messages`(`ID_MESSAGE`, `SENDER`, `RECEIVER`, `ID_GRP`, `MSG_TEXT`, `DATETIME`, `NAME`, `PATH`, `DATA`) VALUES (NULL,'" + login + "', '" + receiver + "', 1,'" + body + "' ,'" + now + "', '', '', '')";
             addh.executeUpdate(stadd);
 
         }
@@ -177,22 +177,23 @@ public class ServerWorker extends Thread {
         List<ServerWorker> workerList = server.getWorkerList();
         for (ServerWorker worker : workerList) {
             if (isTopic) {
-                if (worker.isMemberOfTopic(sendTo)) {
-                    String outMsg = "msg " + sendTo + " (" + sender + "):" + body + "\n";
+                if (worker.isMemberOfTopic(receiver)) {
+                    String outMsg = "msg " + receiver + " (" + sender + "):" + body + "\n";
                     worker.send(outMsg);
                 }
             } else {
-                if (sendTo.equalsIgnoreCase(worker.getLogin())) {
+                if (receiver.equalsIgnoreCase(worker.getLogin())) {
 
                     Class.forName("com.mysql.cj.jdbc.Driver");
                     java.sql.Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/chatapp", "root", "oknaa");
                     Statement addh = conn.createStatement();
                     System.out.println("INSERTION\n");
                     System.out.println("SENDER :" + sender);
-                    System.out.println("\n RECIEVER : " + sendTo);
+                    System.out.println("\n RECIEVER : " + receiver);
                     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
                     LocalDateTime now = LocalDateTime.now();
-                    String stadd = "INSERT INTO `messages`(`ID_MESSAGE`, `ID_SENDER`, `ID_RECIEVER`, `ID_GRP`, `MSG_TEXT`, `DATETIME`, `NAME`, `PATH`, `DATA`) VALUES (NULL,'" + sendTo + "', '" + sender + "', 0,'" + body + "' ,'" + now + "', '', '', '')";
+                    String stadd = "INSERT INTO `messages`(`ID_MESSAGE`, `SENDER`, `RECEIVER`, `ID_GRP`, `MSG_TEXT`, `DATETIME`, `NAME`, `PATH`, `DATA`) " +
+                            "VALUES (NULL,'" + sender + "', '" + receiver + "', 0,'" + body + "' ,'" + now + "', '', '', '')";
                     addh.executeUpdate(stadd);
 
                     String outMsg = "msg " + login + " " + body + "\n";

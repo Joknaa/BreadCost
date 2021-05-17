@@ -12,45 +12,38 @@ public class MessagePane extends JPanel implements MessageListener {
 
     private final ChatClient client;
     private final String login;
-    public String rec;
-    public String[] tabrec;
-    int i = 0;
-    int j = 0;
-    int nb = 0;
+    public String currentUser;
     private final DefaultListModel<String> listModel = new DefaultListModel<>();
     private final JList<String> messageList = new JList<>(listModel);
     private final JTextField inputField = new JTextField();
 
-    public MessagePane(ChatClient client, String login) {
+    public MessagePane(ChatClient client, String receiver) {
         this.client = client;
-        this.login = login;
+        this.login = receiver;
 
         //rec = LoginWindow.getLogg();
-        rec = LoginWindow.getLogg();
+        currentUser = LoginWindow.getLogg();
 
         client.addMessageListener(this);
-        System.out.println("\n LOGIN : " + login);
+        System.out.println("\n LOGIN : " + receiver);
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             java.sql.Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/chatapp", "root", "oknaa");
             Statement st = conn.createStatement();
-            String fil = "select `MSG_TEXT`,`ID_SENDER`, `ID_RECIEVER`,`ID_MESSAGE` from `messages` where ((ID_SENDER = '" + rec + "' AND ID_RECIEVER='" + login + "') OR (ID_SENDER = '" + login + "' AND ID_RECIEVER='" + rec + "')) AND `ID_GRP`=0 ORDER BY `ID_MESSAGE` ASC";
+            String fil = "select `MSG_TEXT`,`SENDER`, `RECEIVER`,`ID_MESSAGE` from `messages` where ((SENDER = '" + currentUser + "' AND RECEIVER='" + receiver + "') OR (SENDER = '" + receiver + "' AND RECEIVER='" + currentUser + "')) AND `ID_GRP`=0 ORDER BY `ID_MESSAGE` ASC";
             ResultSet rs = st.executeQuery(fil);
 
-            //String fil1 = "select `MSG_TEXT`,`ID_SENDER`, `ID_RECIEVER`,`ID_MESSAGE` from `messages` where ID_SENDER = '" + login +"' AND ID_RECIEVER='"+rec+"' ORDER BY `ID_MESSAGE` ASC;";
+            //String fil1 = "select `MSG_TEXT`,`ID_SENDER`, `ID_RECIEVER`,`ID_MESSAGE` from `messages` where ID_SENDER = '" + receiver +"' AND ID_RECIEVER='"+rec+"' ORDER BY `ID_MESSAGE` ASC;";
             //ResultSet rs1 = st.executeQuery(fil1);
 
             while (rs.next()) {
                 String msgtxt = rs.getString("MSG_TEXT");
-                String sender = rs.getString("ID_SENDER");
+                String sender = rs.getString("SENDER");
                 int idmsg = rs.getInt("ID_MESSAGE");
-                String reciever = rs.getString("ID_RECIEVER");
+                String reciever = rs.getString("RECEIVER");
                 //String msgtxt1 = rs1.getString("MSG_TEXT");
                 String oldmsgs = reciever + " : " + msgtxt + "\n";
-                if (login.equals(sender)) {
-                    oldmsgs = "You : " + msgtxt + "\n";
-                }
                 listModel.addElement(oldmsgs);
             }
 
@@ -68,8 +61,9 @@ public class MessagePane extends JPanel implements MessageListener {
         inputField.addActionListener(e -> {
             try {
                 String text = inputField.getText();
-                client.msg(login, text);
-                listModel.addElement("You: " + text);
+                if (text == null || text.length() == 0 || text.trim().isEmpty()) return;
+                client.msg(receiver, text);
+                listModel.addElement(currentUser + ": " + text);
                 inputField.setText("");
             } catch (IOException e1) {
                 e1.printStackTrace();
@@ -83,7 +77,7 @@ public class MessagePane extends JPanel implements MessageListener {
             String line = fromLogin + ": " + msgBody;
             listModel.addElement(line);
         }
-        rec = fromLogin;
+        currentUser = fromLogin;
     }
 
 }

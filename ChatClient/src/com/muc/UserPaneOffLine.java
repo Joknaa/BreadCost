@@ -7,24 +7,28 @@ import java.awt.event.MouseEvent;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 
 public class UserPaneOffLine extends JPanel implements UserStatusListener {
 
 
     private final ChatClient client;
-    private JList<String> userListUI;
-    private JList<String> userListON;
-    private JList<String> userList;
-    private JList<String> userListOf;
-    private DefaultListModel<String> userListModel = new DefaultListModel();
+    private final JList<String> userListUI;
+    private final JList<String> userListON;
+    private final JList<String> userList;
+    private final JList<String> userListOf;
+    private final DefaultListModel<String> userListModel = new DefaultListModel();
     private DefaultListModel<String> userListModel1 = new DefaultListModel();
-    private DefaultListModel<String> userListTotMod = new DefaultListModel();
-    private DefaultListModel<String> userListOffMod = new DefaultListModel();
+    private final DefaultListModel<String> userListTotMod = new DefaultListModel();
+    private final DefaultListModel<String> userListOffMod = new DefaultListModel();
+    private final HashMap<String, JFrame> DirectMessagePan = new HashMap<>();
+    private final String currentUser;
 
     public UserPaneOffLine(ChatClient client) {
         this.client = client;
         this.client.addUserStatusListener(this);
+        currentUser = LoginWindow.getLogg();
 
 
         userListUI = new JList<>(userListModel);
@@ -91,7 +95,7 @@ public class UserPaneOffLine extends JPanel implements UserStatusListener {
         userList.remove(userListON);
 
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(200, 600));
+        setPreferredSize(new Dimension(100, 600));
 
         add(new JScrollPane(userList), BorderLayout.CENTER);
 
@@ -99,32 +103,23 @@ public class UserPaneOffLine extends JPanel implements UserStatusListener {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() > 1) {
-                    String login = userList.getSelectedValue();
-                    MessagePane messagePane = new MessagePane(client, login);
+                    String selectedUser = userList.getSelectedValue();
+                    if (DirectMessagePan.containsKey(selectedUser)) {
+                        DirectMessagePan.get(selectedUser).setVisible(true);
+                    } else {
+                        MessagePane messagePane = new MessagePane(client, selectedUser);
 
+                        JFrame frame = new JFrame(currentUser + " - Message: " + selectedUser);
+                        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+                        frame.setSize(500, 500);
+                        frame.getContentPane().add(messagePane, BorderLayout.CENTER);
+                        frame.setVisible(true);
 
-                    JFrame f = new JFrame("Message: " + login);
-                    f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                    f.setSize(500, 500);
-                    f.getContentPane().add(messagePane, BorderLayout.CENTER);
-                    f.setVisible(true);
+                        DirectMessagePan.put(selectedUser, frame);
+                    }
                 }
             }
         });
-    }
-
-    public static void main(String[] args) {
-        ChatClient client = new ChatClient("localhost", 8818);
-
-        UserPaneOffLine userListOffLine = new UserPaneOffLine(client);
-        JFrame frame = new JFrame("OFFLINE USERS List");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 600);
-
-        frame.getContentPane().add(userListOffLine, BorderLayout.CENTER);
-        frame.setVisible(true);
-
-
     }
 
     @Override

@@ -2,26 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33f839d5-30c1-4962-954d-52526a4be2e4" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/55ff8d3b-a0a9-4b33-84df-68fad3bbc9ea.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/55ff8d3b-a0a9-4b33-84df-68fad3bbc9ea.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Controllers/DataBaseController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Controllers/InputController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Controllers/OutputController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Controllers/ServerController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Controllers/UserController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/LoginWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/LoginWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/MessageGrpPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/MessageGrpPane.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/MessagePane.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/MessagePane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Models/DataBaseModel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Models/LogStatus.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Models/UserModel.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/UserListPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/UserListPane.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/UserPaneOffLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/UserPaneOffLine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Views/OutputView.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Views/UI/AppFrame.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Views/UI/IPanel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Views/UI/LoginPanel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Views/UI/MainPanel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Views/UI/SignupPanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatServer/src/com/muc/ServerWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatServer/src/com/muc/ServerWorker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/LoginWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/LoginWindow.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/MessageGrpPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/MessageGrpPane.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/UserPaneOffLine$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/UserPaneOffLine$1.class" afterDir="false" />
@@ -214,7 +203,6 @@
     <property name="project.structure.side.proportion" value="0.22541967" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
-    <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RunManager" selected="Application.LoginWindow">
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
@@ -327,6 +315,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -412,7 +413,7 @@
       <option name="presentableId" value="Default" />
       <updated>1492533069085</updated>
       <workItem from="1621072067211" duration="5160000" />
-      <workItem from="1621262995358" duration="2840000" />
+      <workItem from="1621262995358" duration="5876000" />
     </task>
     <servers />
   </component>
