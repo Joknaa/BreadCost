@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="javax.activation-1.2.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../javax.activation-1.2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../mysql-connector-java-8.0.23.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

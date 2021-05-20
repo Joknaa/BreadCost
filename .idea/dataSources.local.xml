@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MyDB" uuid="55ff8d3b-a0a9-4b33-84df-68fad3bbc9ea">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" exact-version="0" />
+      <schema-mapping>
+        <introspection-scope>
+          <node kind="schema" qname="chatapp" />
+        </introspection-scope>
+      </schema-mapping>
+    </data-source>
+  </component>
+</project>
