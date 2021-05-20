@@ -22,8 +22,6 @@ public class InputController {
     public static void Check_NoEmptyFieldsExist(String... inputFields) throws EmptyInputFieldException, InputTooShortException {
         for (String field : inputFields) {
             if (field.isEmpty()) throw new EmptyInputFieldException("Pls fill all the fields");
-            if (field.length() <= 3)
-                throw new InputTooShortException("Login and Password should be at least 3 characters");
         }
     }
 

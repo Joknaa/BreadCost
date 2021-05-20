@@ -42,7 +42,7 @@ public class ServerWorker extends Thread {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         String line;
-        while ((line = reader.readLine()) != null) {
+        while (!clientSocket.isClosed() && ((line = reader.readLine()) != null)) {
             String[] tokens = StringUtils.split(line);
             if (tokens != null && tokens.length > 0) {
                 String cmd = tokens[0];
@@ -203,6 +203,7 @@ public class ServerWorker extends Thread {
 
 
     private void handleLogoff() throws IOException {
+        this.clientSocket.close();
         server.removeWorker(this);
         List<ServerWorker> workerList = server.getWorkerList();
 

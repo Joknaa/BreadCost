@@ -23,6 +23,8 @@ public class OutputView {
     public static final Color ISABELLINE = new Color(244,252,231);
     public static final IPanel loginPanel = new LoginPanel();
     public static final IPanel signUpPanel = new SignupPanel();
+    public static String currentUser;
+    public static ChatClient client;
 
     public static void SetUpGUI() {
         appFrame.SetupOnTimeConfiguration();
@@ -32,6 +34,9 @@ public class OutputView {
     //<editor-fold desc="On-Events Actions">
     public static void OnClick_Logout(){
         UserController.LogOut();
+        if (client == null) System.exit(0);
+        client.logoff();
+
         OnClick_SwapPanels(loginPanel);
     }
     public static void OnClick_SignUp(JTextField login, JPasswordField password, JPasswordField passwordRepeat) {
@@ -51,7 +56,7 @@ public class OutputView {
     }
 
     //</editor-fold>
-    public static String GetCurrentUser(){ return OutputController.GetCurrentUser(); }
+    public static String GetCurrentUser(){ return currentUser; }
     //<editor-fold desc="Setup Comment Components">
     public static void SetupCloseButton(JButton closeButton){
         closeButton.setBackground(HELIOTROPE_GRAY);
@@ -148,9 +153,8 @@ public class OutputView {
     public static void DisplayError(String error) {
         showMessageDialog(null, error, "Error", ERROR_MESSAGE);
     }
-    public static int DisplayConfirmation() {
-        return JOptionPane.showConfirmDialog(null, "You sure you wanna delete this ?",
-                "Confirmation", YES_NO_OPTION);
+    public static int DisplayConfirmation(String title, String message) {
+        return JOptionPane.showConfirmDialog(null, message, title, YES_NO_OPTION);
     }
     public static class OnMouseClick_CloseApp extends MouseAdapter {
         public void mouseClicked(MouseEvent e) { System.exit(0); }
@@ -159,12 +163,40 @@ public class OutputView {
 
     public static void Login(String strLogin, String strPassword) {
         System.out.println("Login in progress ..........");
-        ChatClient client = new ChatClient("localhost", 8818);
+        client = new ChatClient("localhost", 8818);
         client.connect();
         try {
             if (client.login(strLogin, strPassword)) {
-                IPanel MainPanel = new MainPanel(client, strLogin);
-                OnClick_SwapPanels(MainPanel);
+                currentUser = strLogin;
+                //IPanel MainPanel = new MainPanel(client, strLogin);
+                //OnClick_SwapPanels(MainPanel);
+                UserListPane onlineListPanel = new UserListPane(client, strLogin);
+                MessageGrpPane groupChatPanel = new MessageGrpPane(client, strLogin);
+                UserPaneOffLine offlineListPanel = new UserPaneOffLine(client, strLogin);
+
+                JFrame frame = new JFrame("BreadCost - " + strLogin);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setSize(new Dimension(600, 400));
+                frame.setVisible(true);
+                frame.setResizable(false);
+
+                frame.add(onlineListPanel, BorderLayout.WEST);
+                frame.add(groupChatPanel, BorderLayout.CENTER);
+                frame.add(offlineListPanel, BorderLayout.EAST);
+
+                frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                frame.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosing(WindowEvent we) {
+                        String ObjButtons[] = {"Yes", "No"};
+                        int PromptResult = JOptionPane.showOptionDialog(null, "Are you sure you want to exit?", "Online Examination System", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[1]);
+                        if (PromptResult == JOptionPane.YES_OPTION) {
+                            OnClick_Logout();
+                            frame.dispose();
+                            System.exit(0);
+                        }
+                    }
+                });
             }
         } catch (IOException e) {
             e.printStackTrace();

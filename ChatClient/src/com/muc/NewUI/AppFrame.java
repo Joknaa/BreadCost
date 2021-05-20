@@ -1,6 +1,11 @@
 package com.muc.NewUI;
 
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import static com.muc.NewUI.OutputView.DisplayConfirmation;
+import static com.muc.NewUI.OutputView.OnClick_Logout;
 
 public class AppFrame extends JFrame{
     JPanel currentPanel;
@@ -36,6 +41,16 @@ public class AppFrame extends JFrame{
         setResizable(false);
         setUndecorated(false);
         setVisible(true);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent we) {
+                int PromptResult = DisplayConfirmation("Confirmation", "Are you sure you want to exit?");
+                if (PromptResult == JOptionPane.YES_OPTION) {
+                    OnClick_Logout();
+                    System.exit(0);
+                }
+            }
+        });
     }
 }

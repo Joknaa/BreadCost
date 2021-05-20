@@ -60,9 +60,13 @@ public class ChatClient {
         }
     }
 
-    public void logoff() throws IOException {
-        String cmd = "logoff\n";
-        serverOut.write(cmd.getBytes());
+    public void logoff() {
+        try {
+            String cmd = "logoff\n";
+            serverOut.write(cmd.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void startMessageReader() {

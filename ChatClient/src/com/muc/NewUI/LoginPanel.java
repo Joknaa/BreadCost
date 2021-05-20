@@ -1,7 +1,5 @@
 package com.muc.NewUI;
 
-import com.muc.ChatClient;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -144,7 +142,6 @@ public class LoginPanel extends JPanel implements IPanel, ActionListener {
         if (event.getSource().equals(signInButton)) OnClick_SignIn(loginField, passwordField);
         //else if (event.getSource().equals(signUpButton)) OnClick_SwapPanels(signUpPanel);
     }
-
 
 
 }

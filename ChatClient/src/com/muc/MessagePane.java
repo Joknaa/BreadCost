@@ -1,5 +1,7 @@
 package com.muc;
 
+import com.muc.NewUI.OutputView;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
@@ -22,7 +24,8 @@ public class MessagePane extends JPanel implements MessageListener {
         client.addMessageListener(this);
 
         this.receiver = receiver;
-        currentUser = LoginWindow.getCurrentUser();
+        //currentUser = LoginWindow.getCurrentUser();
+        currentUser = OutputView.GetCurrentUser();
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

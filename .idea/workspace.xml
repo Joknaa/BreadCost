@@ -2,23 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33f839d5-30c1-4962-954d-52526a4be2e4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/55ff8d3b-a0a9-4b33-84df-68fad3bbc9ea.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/55ff8d3b-a0a9-4b33-84df-68fad3bbc9ea.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/ChatClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/ChatClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Controllers/DataBaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/Controllers/DataBaseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Controllers/InputController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/Controllers/InputController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/LoginWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/LoginWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/MessageGrpPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/MessageGrpPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/MessagePane.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/MessagePane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/NewUI/AppFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/NewUI/AppFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/NewUI/LoginPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/NewUI/LoginPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/NewUI/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/NewUI/MainPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/NewUI/OutputView.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/NewUI/OutputView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/UserListPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/UserListPane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/UserPaneOffLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/UserPaneOffLine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/LoginWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/LoginWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/MessageGrpPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/MessageGrpPane.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/NewUI/MainPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/NewUI/MainPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/NewUI/OutputView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/NewUI/OutputView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/UserListPane$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/UserListPane$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/UserListPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/UserListPane.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/UserPaneOffLine$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/UserPaneOffLine$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/UserPaneOffLine.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/UserPaneOffLine.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/SignUpWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/SignUpWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatServer/src/com/muc/ServerWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatServer/src/com/muc/ServerWorker.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -226,7 +220,7 @@
       <recent name="com.muc.NewUI" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main_Client">
+  <component name="RunManager" selected="Application.SignUpWindow">
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
       <module name="" />
       <option name="TESTING_TYPE" value="0" />
@@ -302,21 +296,33 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SignUpWindow" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.muc.SignUpWindow" />
+      <module name="ChatClient" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.muc.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -397,12 +403,14 @@
       <item itemvalue="Application.ServerMain" />
       <item itemvalue="Application.LoginWindow" />
       <item itemvalue="Application.Main_Client" />
+      <item itemvalue="Application.SignUpWindow" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.SignUpWindow" />
         <item itemvalue="Application.Main_Client" />
-        <item itemvalue="Application.LoginWindow" />
         <item itemvalue="Application.ServerMain" />
+        <item itemvalue="Application.LoginWindow" />
       </list>
     </recent_temporary>
   </component>
@@ -420,6 +428,7 @@
       <workItem from="1621371140406" duration="398000" />
       <workItem from="1621511175060" duration="2127000" />
       <workItem from="1621513834990" duration="5240000" />
+      <workItem from="1621533581573" duration="4160000" />
     </task>
     <servers />
   </component>
