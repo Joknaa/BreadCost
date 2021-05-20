@@ -15,15 +15,16 @@ public class UserListPane extends JPanel implements UserStatusListener {
     private HashMap<String, JFrame> DirectMessagePan = new HashMap<>();
     private String currentUser;
 
-    public UserListPane(ChatClient client) {
+    public UserListPane(ChatClient client, String currentUser) {
         this.client = client;
         this.client.addUserStatusListener(this);
-        this.currentUser = LoginWindow.getCurrentUser();
+        //this.currentUser = LoginWindow.getCurrentUser();
+        this.currentUser = currentUser;
 
         userListModel = new DefaultListModel<>();
         userListUI = new JList<>(userListModel);
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(100, 600));
+        setPreferredSize(new Dimension(150, 400));
         add(new JScrollPane(userListUI), BorderLayout.CENTER);
 
         userListUI.addMouseListener(new MouseAdapter() {

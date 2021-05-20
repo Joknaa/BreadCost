@@ -9,42 +9,35 @@ import java.io.IOException;
 public class LoginWindow extends JFrame {
     public static String currentUser;
     private final ChatClient client;
-    JTextField loginField = new JTextField();
-    JPasswordField passwordField = new JPasswordField();
-    JButton loginButton = new JButton("Login");
-
     private final JPanel mainPanel = new JPanel();
-    private final JPanel headerPanel = new JPanel();
-
-    private UserListPane onlineListPanel;
-    private MessageGrpPane groupChatPanel;
-    private UserPaneOffLine offlineListPanel;
+    private final JTextField loginField = new JTextField();
+    private final JPasswordField passwordField = new JPasswordField();
+    private final JButton loginButton = new JButton("Login");
 
     public LoginWindow() {
         super("Login");
-
-        this.client = new ChatClient("localhost", 8818);
+        this.client = new ChatClient("127.0.0.1", 8818);
         client.connect();
 
+        JPanel logoPanel = new JPanel();
+        JLabel appName = new JLabel("BreadCost");
+        JLabel appLogo = new JLabel(new ImageIcon("../../resources/Images/chat_bubble_127px.png"));
+        logoPanel.setLayout(new BoxLayout(logoPanel, BoxLayout.Y_AXIS));
+        logoPanel.add(appLogo);
+        logoPanel.add(appName);
+
+        JPanel inputPanel = new JPanel();
+        inputPanel.setLayout(new BoxLayout(inputPanel, BoxLayout.Y_AXIS));
+        inputPanel.add(loginField);
+        inputPanel.add(passwordField);
+        inputPanel.add(loginButton);
+        inputPanel.setSize(inputPanel.getPreferredSize());
+        loginButton.addActionListener(e -> doLogin());
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        JPanel p = new JPanel();
-        p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
-        p.add(loginField);
-        p.add(passwordField);
-        p.add(loginButton);
-
-        loginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                doLogin();
-            }
-        });
-
-        getContentPane().add(p, BorderLayout.CENTER);
-
-        pack();
-
+        getContentPane().add(inputPanel, BorderLayout.EAST);
+        getContentPane().add(logoPanel, BorderLayout.WEST);
+        setSize(new Dimension(600, 400));
         setVisible(true);
     }
 
@@ -62,9 +55,9 @@ public class LoginWindow extends JFrame {
         String password = passwordField.getText();
         try {
             if (client.login(currentUser, password)) {
-                onlineListPanel = new UserListPane(client);
-                groupChatPanel = new MessageGrpPane(client, currentUser);
-                offlineListPanel = new UserPaneOffLine(client);
+                UserListPane onlineListPanel = new UserListPane(client, currentUser);
+                MessageGrpPane groupChatPanel = new MessageGrpPane(client, currentUser);
+                UserPaneOffLine offlineListPanel = new UserPaneOffLine(client, currentUser);
 
                 JFrame frame = new JFrame("BreadCost - " + currentUser);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

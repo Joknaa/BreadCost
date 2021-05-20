@@ -44,7 +44,7 @@ public class MessageGrpPane extends JPanel implements MessageListener {
         }
 
 
-        setPreferredSize(new Dimension(400, 600));
+        setPreferredSize(new Dimension(400, 400));
         setLayout(new BorderLayout());
         add(new JScrollPane(messageList), BorderLayout.CENTER);
         add(inputField, BorderLayout.SOUTH);

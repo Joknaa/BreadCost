@@ -1,5 +1,7 @@
 package com.muc;
 
+import com.muc.NewUI.OutputView;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -22,10 +24,11 @@ public class UserPaneOffLine extends JPanel implements UserStatusListener {
     private final HashMap<String, JFrame> DirectMessagePan = new HashMap<>();
     private final String currentUser;
 
-    public UserPaneOffLine(ChatClient client) {
+    public UserPaneOffLine(ChatClient client, String currentUser) {
         this.client = client;
         this.client.addUserStatusListener(this);
-        currentUser = LoginWindow.getCurrentUser();
+        //currentUser = LoginWindow.getCurrentUser();
+        this.currentUser = currentUser;
 
         userListUI = new JList<>(userListModel);
         userList = new JList<>(userListTotMod);
@@ -36,7 +39,7 @@ public class UserPaneOffLine extends JPanel implements UserStatusListener {
         RemoveOnlineUsers();
 
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(100, 600));
+        setPreferredSize(new Dimension(150, 400));
         add(new JScrollPane(userList), BorderLayout.CENTER);
 
         userList.addMouseListener(new MouseAdapter() {

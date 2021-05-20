@@ -2,10 +2,63 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33f839d5-30c1-4962-954d-52526a4be2e4" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/Controllers/DataBaseController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/Controllers/InputController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/Controllers/MainController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/Controllers/OutputController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/Controllers/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/Models/DataBaseModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/Models/LogStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/Models/UserModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/NewUI/AppFrame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/NewUI/IPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/NewUI/LoginPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/NewUI/MainPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/NewUI/OutputView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/NewUI/SignupPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hs_err_pid12932.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/replay_pid12932.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/55ff8d3b-a0a9-4b33-84df-68fad3bbc9ea.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/55ff8d3b-a0a9-4b33-84df-68fad3bbc9ea.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/MessagePane.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/MessagePane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatServer/src/com/muc/ServerWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatServer/src/com/muc/ServerWorker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/com/muc/ServerWorker.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/com/muc/ServerWorker.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/LoginWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/LoginWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Main_Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/Main_Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/MessageGrpPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/MessageGrpPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/UserListPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/UserListPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/UserPaneOffLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/UserPaneOffLine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Controllers/DataBaseController$RenamedFileException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Controllers/DataBaseController$RenamedFileException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Controllers/DataBaseController$UserAlreadyExistException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Controllers/DataBaseController$UserAlreadyExistException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Controllers/DataBaseController$UserNotFoundException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Controllers/DataBaseController$UserNotFoundException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Controllers/DataBaseController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Controllers/DataBaseController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Controllers/InputController$EmptyInputFieldException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Controllers/InputController$EmptyInputFieldException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Controllers/InputController$InputTooShortException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Controllers/InputController$InputTooShortException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Controllers/InputController$MediaNameAlreadyExistException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Controllers/InputController$PasswordMismatchException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Controllers/InputController$PasswordMismatchException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Controllers/InputController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Controllers/InputController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Controllers/OutputController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Controllers/OutputController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Controllers/ServerController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/LoginWindow$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/LoginWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/LoginWindow.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Main_Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Main_Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/MessageGrpPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/MessageGrpPane.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Models/DataBaseModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Models/DataBaseModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Server.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/ServerMain.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/ServerWorker.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/UserListPane$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/UserListPane$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/UserListPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/UserListPane.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/UserPaneOffLine$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/UserPaneOffLine$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/UserPaneOffLine.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/UserPaneOffLine.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Views/OutputView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Views/UI/AppFrame.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Views/UI/IPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Views/UI/LoginPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Views/UI/MainPanel$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Views/UI/MainPanel$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Views/UI/MainPanel$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Views/UI/MainPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Views/UI/SignupPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/protocols.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +82,14 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
@@ -181,7 +242,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../mysql-connector-java-8.0.23.jar" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/ChatClient/src/com/muc/new" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -189,13 +250,23 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.22541967" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
-  <component name="RunManager" selected="Application.LoginWindow">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="O:\MyStuff\Files\mySpace\Projects\ENSA\JAVA\BreadCost\ChatClient\src\com\muc\new" />
+      <recent name="O:\MyStuff\Files\mySpace\Projects\ENSA\JAVA\BreadCost\ChatClient\src\com\muc\NewUI" />
+      <recent name="O:\MyStuff\Files\mySpace\Projects\ENSA\JAVA\BreadCost\ChatClient\src\com\muc" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.muc.NewUI" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Main_Client">
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
       <module name="" />
       <option name="TESTING_TYPE" value="0" />
@@ -231,13 +302,12 @@
       <module />
       <method />
     </configuration>
-    <configuration name="ChatClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.muc.ChatClient" />
+    <configuration name="LoginWindow" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.muc.LoginWindow" />
       <module name="ChatClient" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.muc.*" />
+          <option name="PATTERN" value="com.muc.NewUI.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -245,8 +315,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LoginWindow" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.muc.LoginWindow" />
+    <configuration name="Main_Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.muc.Main_Client" />
       <module name="ChatClient" />
       <extension name="coverage">
         <pattern>
@@ -264,35 +334,7 @@
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.muc.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SignUpWindow" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.muc.SignUpWindow" />
-      <module name="ChatClient" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.muc.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UserListPane" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.muc.UserListPane" />
-      <module name="ChatClient" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.muc.*" />
+          <option name="PATTERN" value="com.muc.NewUI.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -322,6 +364,19 @@
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="ChatClient" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -380,18 +435,14 @@
     </configuration>
     <list>
       <item itemvalue="Application.ServerMain" />
-      <item itemvalue="Application.ChatClient" />
-      <item itemvalue="Application.UserListPane" />
       <item itemvalue="Application.LoginWindow" />
-      <item itemvalue="Application.SignUpWindow" />
+      <item itemvalue="Application.Main_Client" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.LoginWindow" />
+        <item itemvalue="Application.Main_Client" />
         <item itemvalue="Application.ServerMain" />
-        <item itemvalue="Application.SignUpWindow" />
-        <item itemvalue="Application.UserListPane" />
-        <item itemvalue="Application.ChatClient" />
+        <item itemvalue="Application.LoginWindow" />
       </list>
     </recent_temporary>
   </component>
@@ -405,6 +456,10 @@
       <updated>1492533069085</updated>
       <workItem from="1621072067211" duration="5160000" />
       <workItem from="1621262995358" duration="10257000" />
+      <workItem from="1621275132164" duration="521000" />
+      <workItem from="1621371140406" duration="398000" />
+      <workItem from="1621511175060" duration="2127000" />
+      <workItem from="1621513834990" duration="5240000" />
     </task>
     <servers />
   </component>
