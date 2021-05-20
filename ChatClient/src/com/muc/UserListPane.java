@@ -6,6 +6,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
 
+import static com.muc.NewUI.OutputView.HELIOTROPE_GRAY;
+import static com.muc.NewUI.OutputView.INDEPENDENCE;
+
 public class UserListPane extends JPanel implements UserStatusListener {
 
 
@@ -24,7 +27,12 @@ public class UserListPane extends JPanel implements UserStatusListener {
         userListModel = new DefaultListModel<>();
         userListUI = new JList<>(userListModel);
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(150, 400));
+
+        userListUI.setBackground(HELIOTROPE_GRAY);
+        userListUI.setForeground(Color.white);
+        userListUI.setSelectionBackground(INDEPENDENCE);
+        userListUI.setSelectionForeground(Color.white);
+        setPreferredSize(new Dimension(150, 350));
         add(new JScrollPane(userListUI), BorderLayout.CENTER);
 
         userListUI.addMouseListener(new MouseAdapter() {

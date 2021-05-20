@@ -71,7 +71,7 @@ public class OutputView {
     }
     public static void SetupSubmitButton(JButton submitButton, ActionListener actionListener, boolean isEnabled, String toolTip) {
         //todo: add some feed back on clicking the buttons
-        submitButton.setBorder(BorderFactory.createLineBorder(ISABELLINE));
+        submitButton.setBorderPainted(false);
         submitButton.setPreferredSize(new Dimension(100, 38));
         submitButton.setMaximumSize(new Dimension(100, 38));
         submitButton.setMinimumSize(new Dimension(100, 38));
@@ -163,10 +163,6 @@ public class OutputView {
         client.connect();
         try {
             if (client.login(strLogin, strPassword)) {
-                JPanel mainPanel = new JPanel();
-
-                loginPanel.Deactivate();
-
                 IPanel MainPanel = new MainPanel(client, strLogin);
                 OnClick_SwapPanels(MainPanel);
             }

@@ -11,6 +11,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+import static com.muc.NewUI.OutputView.HELIOTROPE_GRAY;
+import static com.muc.NewUI.OutputView.INDEPENDENCE;
+
 public class UserPaneOffLine extends JPanel implements UserStatusListener {
     private final ChatClient client;
     private final JList<String> userListUI;
@@ -39,7 +42,11 @@ public class UserPaneOffLine extends JPanel implements UserStatusListener {
         RemoveOnlineUsers();
 
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(150, 400));
+        userList.setBackground(HELIOTROPE_GRAY);
+        userList.setForeground(Color.white);
+        userList.setSelectionBackground(INDEPENDENCE);
+        userList.setSelectionForeground(Color.white);
+        setPreferredSize(new Dimension(150, 350));
         add(new JScrollPane(userList), BorderLayout.CENTER);
 
         userList.addMouseListener(new MouseAdapter() {

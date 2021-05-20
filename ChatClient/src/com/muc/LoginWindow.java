@@ -19,12 +19,7 @@ public class LoginWindow extends JFrame {
         this.client = new ChatClient("127.0.0.1", 8818);
         client.connect();
 
-        JPanel logoPanel = new JPanel();
-        JLabel appName = new JLabel("BreadCost");
-        JLabel appLogo = new JLabel(new ImageIcon("../../resources/Images/chat_bubble_127px.png"));
-        logoPanel.setLayout(new BoxLayout(logoPanel, BoxLayout.Y_AXIS));
-        logoPanel.add(appLogo);
-        logoPanel.add(appName);
+
 
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new BoxLayout(inputPanel, BoxLayout.Y_AXIS));
@@ -36,7 +31,6 @@ public class LoginWindow extends JFrame {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().add(inputPanel, BorderLayout.EAST);
-        getContentPane().add(logoPanel, BorderLayout.WEST);
         setSize(new Dimension(600, 400));
         setVisible(true);
     }
@@ -70,19 +64,6 @@ public class LoginWindow extends JFrame {
                 frame.add(groupChatPanel, BorderLayout.CENTER);
                 frame.add(offlineListPanel, BorderLayout.EAST);
 
-                /*JFrame jframe = new JFrame("OFFLINE USERS List");
-                jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                jframe.setSize(400, 600);
-
-                jframe.getContentPane().add(userListOffLine, BorderLayout.CENTER);
-                jframe.setVisible(true);
-
-                JFrame f = new JFrame("Message en Groupe");
-                f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                f.setSize(500, 500);
-                f.getContentPane().add(messageGrpPane, BorderLayout.CENTER);
-                f.setVisible(true);
-                 */
                 setVisible(false);
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid login/password.");

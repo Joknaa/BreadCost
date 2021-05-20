@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import static com.muc.NewUI.OutputView.*;
 
 public class MessageGrpPane extends JPanel implements MessageListener {
 
@@ -43,8 +44,12 @@ public class MessageGrpPane extends JPanel implements MessageListener {
             e2.printStackTrace();
         }
 
+        messageList.setBackground(HELIOTROPE_GRAY);
+        messageList.setForeground(Color.white);
+        messageList.setSelectionBackground(INDEPENDENCE);
+        messageList.setSelectionForeground(Color.white);
 
-        setPreferredSize(new Dimension(400, 400));
+        setPreferredSize(new Dimension(400, 350));
         setLayout(new BorderLayout());
         add(new JScrollPane(messageList), BorderLayout.CENTER);
         add(inputField, BorderLayout.SOUTH);

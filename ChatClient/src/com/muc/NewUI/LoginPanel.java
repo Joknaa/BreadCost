@@ -31,8 +31,6 @@ public class LoginPanel extends JPanel implements IPanel, ActionListener {
         SetupLogoPanel();
         SetupInputPanel();
         SetupMainPanel();
-
-
     }
 
     //<editor-fold desc="FrontEnd Stuff">
