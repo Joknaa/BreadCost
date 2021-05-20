@@ -17,7 +17,7 @@ public class LoginPanel extends JPanel implements IPanel, ActionListener {
     private final JLabel appLogo = new JLabel(new ImageIcon("resources/Images/chat_bubble_127px.png"));
     private final JLabel passwordLabel = new JLabel(new ImageIcon("resources/Images/password_45px.png"));
     private final JLabel loginLabel = new JLabel(new ImageIcon("resources/Images/login_45px.png"));
-    private final JLabel appName = new JLabel("Chat Lab");
+    private final JLabel appName = new JLabel("BreadCost");
     private final JButton signInButton = new JButton(new ImageIcon("resources/Images/login_80px.png"));
     private final JButton signUpButton = new JButton(new ImageIcon("resources/Images/add_80px.png"));
     private final JPasswordField passwordField = new JPasswordField();
@@ -140,6 +140,7 @@ public class LoginPanel extends JPanel implements IPanel, ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {
         if (event.getSource().equals(signInButton)) OnClick_SignIn(loginField, passwordField);
+        else if (event.getSource().equals(signUpButton)) OnClick_SwapPanels(signUpPanel);
         //else if (event.getSource().equals(signUpButton)) OnClick_SwapPanels(signUpPanel);
     }
 

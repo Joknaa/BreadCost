@@ -34,7 +34,7 @@ public class InputController {
         try {
             Check_NoEmptyFieldsExist(login, password);
             DisplayInformation("Welcome " + login + " !");
-            OutputView.Login(login, password);
+            OutputView.Login(null, login, password);
             //todo: OnClick_SwapPanels(new MainPanel());
 
         } catch (EmptyInputFieldException | InputTooShortException e) {

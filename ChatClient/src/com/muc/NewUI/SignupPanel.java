@@ -14,13 +14,14 @@ public class SignupPanel extends JPanel implements IPanel, ActionListener {
     private final JSeparator loginSeparator = new JSeparator();
     private final JSeparator passwordSeparator = new JSeparator();
     private final JSeparator passwordRepeatSeparator = new JSeparator();
-    private final JLabel logoIconLabel = new JLabel(new ImageIcon("Resources/library_120px.png"));
-    private final JLabel passwordLabel = new JLabel(new ImageIcon("Resources/lock_30px.png"));
-    private final JLabel passwordRepeatLabel = new JLabel(new ImageIcon("Resources/lock_30px.png"));
-    private final JLabel loginLabel = new JLabel(new ImageIcon("Resources/user_30px.png"));
-    private final JLabel logoTextLabel = new JLabel("Multimedia Library");
-    private final JButton signUpButton = new JButton("Sign Up");
-    private final JButton closeButton = new JButton("X");
+
+
+    private final JLabel logoIconLabel = new JLabel(new ImageIcon("resources/Images/chat_bubble_127px.png"));
+    private final JLabel passwordLabel = new JLabel(new ImageIcon("resources/Images/password_45px.png"));
+    private final JLabel passwordRepeatLabel = new JLabel(new ImageIcon("resources/Images/password_45px.png"));
+    private final JLabel loginLabel = new JLabel(new ImageIcon("resources/Images/login_45px.png"));
+    private final JLabel logoTextLabel = new JLabel("BreadCost");
+    private final JButton signUpButton = new JButton(new ImageIcon("resources/Images/add_80px.png"));
     private final JPasswordField passwordField = new JPasswordField();
     private final JPasswordField passwordRepeatField = new JPasswordField();
     private final JTextField loginField = new JTextField();
@@ -47,7 +48,6 @@ public class SignupPanel extends JPanel implements IPanel, ActionListener {
         SetupInputFields(loginField, passwordField, passwordRepeatField);
         SetupSeparators(loginSeparator, passwordSeparator, passwordRepeatSeparator);
         SetupSubmitButton(signUpButton, this, true,"Click to creat an account");
-        SetupCloseButton(closeButton);
         SetupInputPanelLayout();
     }
     private void SetupInputPanelLayout() {
@@ -81,14 +81,13 @@ public class SignupPanel extends JPanel implements IPanel, ActionListener {
                                                 .addComponent(signUpButton, PREFERRED_SIZE, DEFAULT_SIZE, PREFERRED_SIZE)
                                                 .addGap(173, 173, 173))
                                         .addGroup(Alignment.TRAILING, inputPanelLayout.createSequentialGroup()
-                                                .addComponent(closeButton, PREFERRED_SIZE, 21, PREFERRED_SIZE)
-                                                .addGap(8, 8, 8))))
+                                                .addGap(29, 29, 29))))
         );
         inputPanelLayout.setVerticalGroup(
                 inputPanelLayout.createParallelGroup(Alignment.LEADING)
                         .addGroup(inputPanelLayout.createSequentialGroup()
                                 .addGap(8, 8, 8)
-                                .addComponent(closeButton, PREFERRED_SIZE, 23, PREFERRED_SIZE)
+                                .addGap(23, 23, 23)
                                 .addGap(73, 73, 73)
                                 .addGroup(inputPanelLayout.createParallelGroup(Alignment.TRAILING)
                                         .addComponent(loginLabel)

@@ -4,12 +4,9 @@ import static javax.swing.GroupLayout.DEFAULT_SIZE;
 import static javax.swing.JOptionPane.*;
 import static com.muc.Controllers.InputController.*;
 
-import com.muc.ChatClient;
+import com.muc.*;
 import com.muc.Controllers.OutputController;
 import com.muc.Controllers.UserController;
-import com.muc.MessageGrpPane;
-import com.muc.UserListPane;
-import com.muc.UserPaneOffLine;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +19,7 @@ public class OutputView {
     public static final Color HELIOTROPE_GRAY = new Color(154,140,152);
     public static final Color ISABELLINE = new Color(244,252,231);
     public static final IPanel loginPanel = new LoginPanel();
-    public static final IPanel signUpPanel = new SignupPanel();
+    public static final IPanel signUpPanel = new SignupPanelold();
     public static String currentUser;
     public static ChatClient client;
 
@@ -36,14 +33,14 @@ public class OutputView {
         UserController.LogOut();
         if (client == null) System.exit(0);
         client.logoff();
-
         OnClick_SwapPanels(loginPanel);
     }
     public static void OnClick_SignUp(JTextField login, JPasswordField password, JPasswordField passwordRepeat) {
         String strLogin = login.getText().trim();
         String strPassword = String.valueOf(password.getPassword()).trim();
         String strPasswordRepeat = String.valueOf(passwordRepeat.getPassword()).trim();
-        Try_SignUp(strLogin, strPassword, strPasswordRepeat);
+        //Try_SignUp(strLogin, strPassword, strPasswordRepeat);
+        Signup(strLogin, strPassword, strPasswordRepeat);
     }
     public static void OnClick_SignIn(JTextField login, JPasswordField password){
         String strLogin = login.getText();
@@ -161,10 +158,12 @@ public class OutputView {
     }
 
 
-    public static void Login(String strLogin, String strPassword) {
+    public static void Login(ChatClient client, String strLogin, String strPassword) {
         System.out.println("Login in progress ..........");
-        client = new ChatClient("localhost", 8818);
-        client.connect();
+        if (client == null) {
+            client = new ChatClient("localhost", 8818);
+            client.connect();
+        }
         try {
             if (client.login(strLogin, strPassword)) {
                 currentUser = strLogin;
@@ -200,6 +199,31 @@ public class OutputView {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+    public static void Signup(String strLogin, String strPassword, String strPasswordRepeat){
+        client = new ChatClient("localhost", 8818);
+        client.connect();
+        try {
+            if ((strLogin.isEmpty() || strPassword.isEmpty() || strPasswordRepeat.isEmpty())) return;
+            int signUpResult = client.signUp(strLogin, strPassword, strPasswordRepeat);
+            switch (signUpResult) {
+                case 1:
+                    DisplayInformation("SignedUp Successfully ! Welcome " + strLogin);
+                    //client.signUp(strLogin, strPassword, strPasswordRepeat);
+                    break;
+                case 2:
+                    DisplayError("Username Already Exist !!");
+                    break;
+                case 3:
+                    DisplayError("Passwords Doesn't Match !!");
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "ERROR!!", "Not SignedUp !!", 0, null);
+                    break;
+            }
+        } catch (Exception s) {
+            s.printStackTrace();
         }
     }
 }

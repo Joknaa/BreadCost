@@ -57,6 +57,9 @@ public class SignUpWindow implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         try {
+            if (t1.getText().trim().isEmpty()
+                    || t2.getText().trim().isEmpty()
+                    || t3.getText().trim().isEmpty()) return;
             if (e.getSource() == next) {
                 login = t1.getText();
                 String password = t2.getText();
