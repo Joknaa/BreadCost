@@ -2,6 +2,7 @@ package com.muc.Controllers;
 
 import com.muc.NewUI.OutputView;
 import java.sql.SQLException;
+import static com.muc.Controllers.DataBaseController.*;
 import static com.muc.NewUI.OutputView.DisplayError;
 import static com.muc.NewUI.OutputView.DisplayInformation;
 

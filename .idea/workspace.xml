@@ -2,41 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33f839d5-30c1-4962-954d-52526a4be2e4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatApp.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/ChatClient.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/ChatClient.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/Models/DataBaseModel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/Models/LogStatus.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/Models/UserModel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/Presenters/DataBasePresenter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/Presenters/InputPresenter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/Presenters/MainPresenter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/Presenters/OutputPresenter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/Presenters/UserPresenter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/Views/OutputView.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/Views/UI/AppFrame.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/Views/UI/IPanel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/Views/UI/LoginPanel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/Views/UI/MainPanel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/Views/UI/SignupPanel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatServer/ChatServer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ChatServer/ChatServer.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatServer/src/ServerMain.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatServer/src/ServerOperator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mockups/ChatLab.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mockups/Mockup.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mockups/SignUp.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mockups/SingIn.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.classpath" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.project" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/Controllers/DataBaseController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/Controllers/MainController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/LoginWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/Models/DataBaseModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/SignUpWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataBase/chatapp(2).sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hs_err_pid12932.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/replay_pid12932.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Controllers/InputController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/Controllers/InputController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Controllers/OutputController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/Controllers/OutputController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/NewUI/OutputView.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChatClient/src/com/muc/NewUI/OutputView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/chatapp_groups.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/chatapp_messages.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/chatapp_users.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/NewUI/OutputView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/NewUI/OutputView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/NewUI/SignupPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatClient/com/muc/NewUI/SignupPanel.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

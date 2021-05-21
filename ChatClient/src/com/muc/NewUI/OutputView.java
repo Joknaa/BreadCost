@@ -5,6 +5,7 @@ import static javax.swing.JOptionPane.*;
 import static com.muc.Controllers.InputController.*;
 
 import com.muc.*;
+import com.muc.Controllers.OutputController;
 import com.muc.Controllers.UserController;
 
 import javax.swing.*;
@@ -157,9 +158,9 @@ public class OutputView {
     }
 
 
-    public static void Login(ChatClient client, String strLogin, String strPassword) {
+    public static void Login(ChatClient client2, String strLogin, String strPassword) {
         System.out.println("Login in progress ..........");
-        if (client == null) {
+        if (client2 == null) {
             client = new ChatClient("localhost", 8818);
             client.connect();
         }
@@ -182,6 +183,7 @@ public class OutputView {
                 frame.add(groupChatPanel, BorderLayout.CENTER);
                 frame.add(offlineListPanel, BorderLayout.EAST);
 
+                frame.setLocationRelativeTo(null);
                 frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 frame.addWindowListener(new WindowAdapter() {
                     @Override
@@ -204,7 +206,7 @@ public class OutputView {
         client = new ChatClient("localhost", 8818);
         client.connect();
         try {
-            if ((strLogin.isEmpty() || strPassword.isEmpty() || strPasswordRepeat.isEmpty())) return;
+            if ((strLogin.isEmpty() || strPassword.isEmpty() || strPasswordRepeat.isEmpty()) || !strPassword.equals(strPasswordRepeat)) return;
             int signUpResult = client.signUp(strLogin, strPassword, strPasswordRepeat);
             switch (signUpResult) {
                 case 1:
