@@ -33,7 +33,6 @@ public class OutputView {
         UserController.LogOut();
         if (client == null) System.exit(0);
         client.logoff();
-        OnClick_SwapPanels(loginPanel);
     }
     public static void OnClick_SignUp(JTextField login, JPasswordField password, JPasswordField passwordRepeat) {
         String strLogin = login.getText().trim();
@@ -166,6 +165,7 @@ public class OutputView {
         }
         try {
             if (client.login(strLogin, strPassword)) {
+                appFrame.dispose();
                 currentUser = strLogin;
                 //IPanel MainPanel = new MainPanel(client, strLogin);
                 //OnClick_SwapPanels(MainPanel);
@@ -211,6 +211,7 @@ public class OutputView {
             switch (signUpResult) {
                 case 1:
                     DisplayInformation("SignedUp Successfully ! Welcome " + strLogin);
+                    appFrame.dispose();
                     //client.signUp(strLogin, strPassword, strPasswordRepeat);
                     break;
                 case 2:
