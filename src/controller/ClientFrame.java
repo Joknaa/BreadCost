@@ -7,6 +7,7 @@ package controller;
 
 import view.*;
 import javax.swing.*;
+import javax.swing.plaf.DimensionUIResource;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -176,11 +177,9 @@ public class ClientFrame extends JFrame implements Runnable {
         menuBar.setVisible(false);
 
         setJMenuBar(menuBar);
-        pack();
-
         add(mainPanel);
         setResizable(false);
-        setSize(900, 500);
+        setSize(new Dimension(900, 540));
         setLocation(400, 100);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle(name);
@@ -226,9 +225,9 @@ public class ClientFrame extends JFrame implements Runnable {
         signUpPanel.getLbBack_signup().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                welcomePanel.setVisible(true);
+                welcomePanel.setVisible(false);
                 signUpPanel.setVisible(false);
-                loginPanel.setVisible(false);
+                loginPanel.setVisible(true);
                 clientPanel.setVisible(false);
                 roomPanel.setVisible(false);
             }
@@ -262,6 +261,17 @@ public class ClientFrame extends JFrame implements Runnable {
                 btOkEvent();
             }
         });
+        loginPanel.GetSignUpButton().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent me) {
+                welcomePanel.setVisible(false);
+                signUpPanel.setVisible(true);
+                loginPanel.setVisible(false);
+                clientPanel.setVisible(false);
+                roomPanel.setVisible(false);
+            }
+        });
+        
     }
 
     private void addEventsForClientPanel() {
@@ -537,7 +547,8 @@ public class ClientFrame extends JFrame implements Runnable {
             JOptionPane.showMessageDialog(this, "Passwords don't match", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             String nickname = signUpPanel.getTfID().getText().trim();
-            String hostName = signUpPanel.getTfHost().getText().trim();
+            //String hostName = signUpPanel.getTfHost().getText().trim();
+            String hostName = "localhost";
             if (hostName.equals("") || nickname.equals("") || pass.equals("") || pass2.equals("")) {
                 JOptionPane.showMessageDialog(this, "Please fill up all fields", "Notice!", JOptionPane.WARNING_MESSAGE);
                 return;

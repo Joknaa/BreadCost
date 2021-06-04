@@ -26,6 +26,9 @@ public class LoginPanel extends javax.swing.JPanel {
     public JButton getBtOK() {
         return btOK;
     }
+    public JButton GetSignUpButton() {
+        return signUpButton;
+    }
     public JTextField getTfNickname() {
         return loginField2;
     }

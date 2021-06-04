@@ -1,128 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f8faf640-903c-48de-ba04-1d2a61c6c08c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.classpath" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/55ff8d3b-a0a9-4b33-84df-68fad3bbc9ea.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/55ff8d3b-a0a9-4b33-84df-68fad3bbc9ea/storage_v2/_src_/schema/breadcost.xcyDjg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/55ff8d3b-a0a9-4b33-84df-68fad3bbc9ea/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/discord.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/clientlib.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/javax_activation_1_2_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BreadCost.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/ChatClient.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/lib/commons-lang3-3.4.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/lib/javax.activation-1.2.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/lib/mysql-connector-java-8.0.23.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/ChatClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Controllers/DataBaseController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Controllers/InputController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Controllers/MainController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Controllers/OutputController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Controllers/UserController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/LoginWindow.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Main_Client.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/MessageGrpPane.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/MessageListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/MessagePane.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Models/DataBaseModel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Models/LogStatus.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/Models/UserModel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/NewUI/AppFrame.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/NewUI/IPanel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/NewUI/LoginPanel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/NewUI/MainPanel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/NewUI/OutputView.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/NewUI/SignupPanel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/SignUpWindow.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/UserListPane.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/UserPaneOffLine.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatClient/src/com/muc/UserStatusListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatServer/ChatServer.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatServer/lib/commons-lang3-3.4.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatServer/lib/javax.activation-1.2.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatServer/lib/logback-classic-1.1.3.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatServer/lib/logback-core-1.1.3.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatServer/lib/mysql-connector-java-8.0.23.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatServer/src/com/muc/Server.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatServer/src/com/muc/ServerMain.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatServer/src/com/muc/ServerWorker.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatServer/src/com/muc/protocols.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataBase/chatapp(2).sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hs_err_pid12932.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/ChatClient$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/ChatClient.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Controllers/DataBaseController$RenamedFileException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Controllers/DataBaseController$UserAlreadyExistException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Controllers/DataBaseController$UserNotFoundException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Controllers/DataBaseController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Controllers/InputController$EmptyInputFieldException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Controllers/InputController$InputTooShortException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Controllers/InputController$PasswordMismatchException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Controllers/InputController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Controllers/MainController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Controllers/OutputController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Controllers/UserController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/LoginWindow$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/LoginWindow.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Main_Client.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/MessageGrpPane.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/MessageListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/MessagePane.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Models/DataBaseModel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Models/LogStatus.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/Models/UserModel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/NewUI/AppFrame$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/NewUI/AppFrame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/NewUI/IPanel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/NewUI/LoginPanel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/NewUI/MainPanel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/NewUI/OutputView$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/NewUI/OutputView$OnMouseClick_CloseApp.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/NewUI/OutputView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/NewUI/SignupPanel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/NewUI/SignupPanelold.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/SignUpWindow.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/UserListPane$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/UserListPane.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/UserPaneOffLine$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/UserPaneOffLine.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatClient/com/muc/UserStatusListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/com/muc/Server.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/com/muc/ServerMain.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/com/muc/ServerWorker.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/com/muc/protocols.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/replay_pid12932.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/Client.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/Dumpy.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/Images/add_80px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/Images/attach_45px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/Images/back_arrow_50px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/Images/chat_bubble_100px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/Images/chat_bubble_127px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/Images/login_45px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/Images/login_80px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/Images/male_user_100px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/Images/paper_plane_45px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/Images/password_45px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/Images/send_45px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/Images/sign_out_50px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/Images/sign_out_70px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/TP CLIENT UDP.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/TP SERVEUR UDP.pdf" beforeDir="false" />
-    </list>
+    <list default="true" id="f8faf640-903c-48de-ba04-1d2a61c6c08c" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -150,7 +29,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ChatSocket4" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -214,6 +93,7 @@
       <workItem from="1622457834137" duration="748000" />
       <workItem from="1622460701725" duration="954000" />
       <workItem from="1622461716452" duration="352000" />
+      <workItem from="1622464023152" duration="198000" />
     </task>
     <servers />
   </component>
@@ -230,5 +110,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
