@@ -75,18 +75,16 @@ public class SendingFileThread extends Thread {
             int leng = (int) file.length();
             
             this.sendToServer("CMD_SENDFILETOSERVER|"+sender+"|"+receiver+"|"+file.getName()+"|"+leng);
-            
             System.out.println("[SendingFileThread.java] CMD_SENDFILETOSERVER|"+sender+"|"+receiver+"|"+file.getName()+"|"+leng);
-            
+
+            //todo: if there is no file selected, handle exception
             fis = new FileInputStream(file);
             bos = new BufferedOutputStream(socketOfSender.getOutputStream());
             
             byte []buffer = new byte[BUFFER_SIZE];
             int count=0, percent=0;
             while((count = fis.read(buffer)) > 0) {
-
                 bos.write(buffer, 0, count);
-
             }
             
         } catch (IOException ex) {

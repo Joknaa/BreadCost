@@ -25,6 +25,8 @@ import java.util.logging.Logger;
 public class ChatLab extends javax.swing.JPanel {
 
     private final HashMap<String, JLabel> UsernamesJLabelsList = new HashMap<>();
+    StyledDocument doc = new DefaultStyledDocument();
+
 
     public JTextPane getTpMessage() {
         return chatTP;
@@ -414,9 +416,11 @@ public class ChatLab extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+
     public void appendMessage(String msg1, String msg2, Color c1, Color c2) {
-        int len = chatTP.getDocument().getLength();
-        StyledDocument doc = (StyledDocument) chatTP.getDocument();
+        //int len = chatTP.getDocument().getLength();
+
+        int len = doc.getLength();
 
         SimpleAttributeSet sas = new SimpleAttributeSet();
         StyleConstants.setFontFamily(sas, "Serif");
@@ -431,8 +435,7 @@ public class ChatLab extends javax.swing.JPanel {
         }
 
 
-        doc = (StyledDocument) chatTP.getDocument();
-        len = len+msg1.length();
+        len = len + msg1.length();
 
         sas = new SimpleAttributeSet();
         StyleConstants.setFontFamily(sas, "Arial");
@@ -444,12 +447,13 @@ public class ChatLab extends javax.swing.JPanel {
         } catch (BadLocationException ex) {
             Logger.getLogger(ClientPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        chatTP.setDocument(doc);
         chatTP.setCaretPosition(len+msg2.length());
     }
-    public void appendMessage(String message, Color color) {
-        int len = chatTP.getDocument().getLength();
-        StyledDocument doc = (StyledDocument) chatTP.getDocument();
+    public void appendAlertMessage(String message, Color color) {
+        //int len = chatTP.getDocument().getLength();
+        //StyledDocument doc = (StyledDocument) chatTP.getDocument();
+        int len = doc.getLength();
 
         SimpleAttributeSet sas = new SimpleAttributeSet();
         StyleConstants.setFontFamily(sas, "Comic Sans MS");
@@ -463,6 +467,7 @@ public class ChatLab extends javax.swing.JPanel {
             Logger.getLogger(ClientPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        chatTP.setDocument(doc);
         chatTP.setCaretPosition(len+message.length());
     }
 

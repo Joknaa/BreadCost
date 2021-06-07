@@ -53,7 +53,6 @@ public class SendFileFrame extends javax.swing.JFrame {
     public JTextField getTfFilePath() {
         return tfFilePath;
     }
-
     public JTextField getTfReceiver() {
         return tfReceiver;
     }
@@ -81,11 +80,7 @@ public class SendFileFrame extends javax.swing.JFrame {
 
         btBrowse.setFont(new java.awt.Font("Tahoma", 0, 12));
         btBrowse.setText("...");
-        btBrowse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btBrowseActionPerformed(evt);
-            }
-        });
+        btBrowse.addActionListener(this::btBrowseActionPerformed);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14));
         jLabel2.setText("Enter reciever:");
@@ -94,11 +89,7 @@ public class SendFileFrame extends javax.swing.JFrame {
 
         btSendFile.setFont(new java.awt.Font("Tahoma", 0, 12));
         btSendFile.setText("Send");
-        btSendFile.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btSendFileActionPerformed(evt);
-            }
-        });
+        btSendFile.addActionListener(this::btSendFileActionPerformed);
 
         lbNote.setFont(new java.awt.Font("Tahoma", 2, 11));
         lbNote.setText("Note that:");
@@ -177,8 +168,6 @@ public class SendFileFrame extends javax.swing.JFrame {
             tfFilePath.setText(chooser.getSelectedFile().getAbsolutePath());
         } else tfFilePath.setText("");
     }
-
-
 }
 /*
 send file: giả sử client A muốn gửi file cho client B

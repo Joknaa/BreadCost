@@ -8,15 +8,10 @@ package view;
 import controller.*;
 
 import javax.swing.*;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
+import javax.swing.text.*;
 import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLEditorKit;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -43,6 +38,7 @@ public class PrivateChat extends javax.swing.JFrame {
     private javax.swing.JLabel lbReceiver;
     private javax.swing.JTextField tfInput_pc;
     private javax.swing.JTextPane tpMessage_pc;
+    StyledDocument PC_Doc = new DefaultStyledDocument();
 
     public PrivateChat() {
         initComponents();
@@ -50,6 +46,8 @@ public class PrivateChat extends javax.swing.JFrame {
         htmlDoc = new HTMLDocument();
         tpMessage_pc.setEditorKit(htmlKit);
         tpMessage_pc.setDocument(htmlDoc);
+
+
     }
 
     public PrivateChat(String sender, String receiver, String serverHost, BufferedWriter bw, BufferedReader br) {
@@ -59,11 +57,12 @@ public class PrivateChat extends javax.swing.JFrame {
         this.serverHost = serverHost;
         this.bw = bw;
         this.br = br;
-
+        /*
         htmlKit = new HTMLEditorKit();
         htmlDoc = new HTMLDocument();
         tpMessage_pc.setEditorKit(htmlKit);
         tpMessage_pc.setDocument(htmlDoc);
+         */
     }
 
     /**
@@ -110,39 +109,35 @@ public class PrivateChat extends javax.swing.JFrame {
 
 
     public void appendMessage(String msg1, String msg2, Color c1, Color c2) {
-
-        int len = tpMessage_pc.getDocument().getLength();
-        StyledDocument doc = (StyledDocument) tpMessage_pc.getDocument();
+        //int len = tpMessage_pc.getDocument().getLength();
+        //StyledDocument doc = (StyledDocument) tpMessage_pc.getDocument();
+        int len = PC_Doc.getLength();
 
         SimpleAttributeSet sas = new SimpleAttributeSet();
         StyleConstants.setFontFamily(sas, "Tahoma");
         StyleConstants.setBold(sas, true);
         StyleConstants.setFontSize(sas, 14);
         StyleConstants.setForeground(sas, c1);
-
-
         try {
-            doc.insertString(len, msg1, sas);
+            PC_Doc.insertString(len, msg1, sas);
         } catch (BadLocationException ex) {
             Logger.getLogger(ClientPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-
-        doc = (StyledDocument) tpMessage_pc.getDocument();
+       //doc = (StyledDocument) tpMessage_pc.getDocument();
         len = len + msg1.length();
 
         sas = new SimpleAttributeSet();
         StyleConstants.setFontFamily(sas, "Arial");
         StyleConstants.setFontSize(sas, 14);
         StyleConstants.setForeground(sas, c2);
-
-
         try {
-            doc.insertString(len, msg2 + "\n", sas);
+            PC_Doc.insertString(len, msg2 + "\n", sas);
         } catch (BadLocationException ex) {
             Logger.getLogger(ClientPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        tpMessage_pc.setDocument(PC_Doc);
         tpMessage_pc.setCaretPosition(len + msg2.length());
     }
 
@@ -154,7 +149,6 @@ public class PrivateChat extends javax.swing.JFrame {
         }
         tpMessage_pc.setCaretPosition(tpMessage_pc.getDocument().getLength());
     }
-
     public void appendMessage_Left(String msg1, String msg2, String color1, String color2) {
         try {
             htmlKit.insertHTML(htmlDoc, htmlDoc.getLength(), "<p style=\"color:" + color1 + "; padding: 3px; margin-top: 4px; margin-right:35px; text-align:left; font:normal 12px Tahoma;\"><span><b>" + msg1 + "</b><span style=\"color:" + color2 + ";\">" + msg2 + "</span></span></p><br/>", 0, 0, null);
@@ -163,7 +157,6 @@ public class PrivateChat extends javax.swing.JFrame {
         }
         tpMessage_pc.setCaretPosition(tpMessage_pc.getDocument().getLength());
     }
-
     public void appendMessage_Right(String msg1, String msg2) {
         try {
 
@@ -173,10 +166,8 @@ public class PrivateChat extends javax.swing.JFrame {
         }
         tpMessage_pc.setCaretPosition(tpMessage_pc.getDocument().getLength());
     }
-
     public void appendMessage_Right(String msg1) {
         try {
-
             htmlKit.insertHTML(htmlDoc, htmlDoc.getLength(), "<p style=\"color:white; padding: 3px; margin-top: 4px; margin-left:35px; text-align:right; font:normal 12px Tahoma;\"><span style=\"background-color: #889eff; -webkit-border-radius: 10px;\">" + msg1 + "</span></p>", 0, 0, null);
         } catch (BadLocationException | IOException ex) {
             Logger.getLogger(PrivateChat.class.getName()).log(Level.SEVERE, null, ex);
@@ -187,13 +178,10 @@ public class PrivateChat extends javax.swing.JFrame {
     public void insertButton(String sender, String fileName) {
         JButton bt = new JButton(fileName);
         bt.setName(fileName);
-        bt.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                downloadFile(fileName);
-            }
-        });
-        appendMessage_Left(sender, " sends a file ", "#00dddd", "#00ee11");
+        bt.addActionListener(ae -> downloadFile(fileName));
+
+        //appendMessage_Left(sender, " sends a file ", "#00dddd", "#00ee11");
+        appendMessage(sender, " sends a file ", Color.BLACK, new Color(0, 102, 204));
         tpMessage_pc.setCaretPosition(tpMessage_pc.getDocument().getLength() - 1);
         tpMessage_pc.insertComponent(bt);
     }
@@ -236,7 +224,7 @@ public class PrivateChat extends javax.swing.JFrame {
         btSend_pc = new javax.swing.JButton();
         btFile_pc = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 
         lbReceiver.setFont(new java.awt.Font("Tahoma", 0, 16));
         lbReceiver.setText("Receiver");
@@ -321,11 +309,9 @@ public class PrivateChat extends javax.swing.JFrame {
     private void tfInput_pcActionPerformed(java.awt.event.ActionEvent evt) {
         sendMessage();
     }
-
     private void btSend_pcActionPerformed(java.awt.event.ActionEvent evt) {
         sendMessage();
     }
-
     private void btFile_pcActionPerformed(java.awt.event.ActionEvent evt) {
         openSendFileFrame();
     }
@@ -333,7 +319,8 @@ public class PrivateChat extends javax.swing.JFrame {
     private void sendMessage() {
         String msg = tfInput_pc.getText();
         if (msg.equals("")) return;
-        appendMessage_Right(msg);
+        //appendMessage_Right(msg);
+        appendMessage(sender + ": ", msg, Color.BLACK, new Color(0, 102, 204));
         sendToServer("CMD_PRIVATECHAT|" + this.sender + "|" + this.receiver + "|" + msg);
         tfInput_pc.setText("");
     }
@@ -347,5 +334,7 @@ public class PrivateChat extends javax.swing.JFrame {
         sendFileFrame.setLocation(450, 250);
         sendFileFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
+
+
 
 }

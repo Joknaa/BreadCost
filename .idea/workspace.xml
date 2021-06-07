@@ -2,152 +2,45 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f8faf640-903c-48de-ba04-1d2a61c6c08c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/New GUI.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/classes/AppendingTextPane$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/classes/AppendingTextPane.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/classes/AppendingTextPane2$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/classes/AppendingTextPane2.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/classes/EX/RoomPanel.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/classes/Resources/ChatApp/Offline.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/classes/Resources/ChatApp/Online.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/classes/Resources/ChatApp/happy_45px.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/classes/test.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/classes/view/ChatLab$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/classes/view/ChatLab$2.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/classes/view/ChatLab$3.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/classes/view/ChatLab$4.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/classes/view/ChatLab$5.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/classes/view/ChatLab$6.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/classes/view/ChatLab$7.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/classes/view/ChatLab.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/classes/view/ChatLab.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/ChatApp/Offline.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/ChatApp/happy_45px.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/ChatLab.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b96639ca-693c-413e-86ea-26aca0a80d11.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b96639ca-693c-413e-86ea-26aca0a80d11.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b96639ca-693c-413e-86ea-26aca0a80d11/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b96639ca-693c-413e-86ea-26aca0a80d11/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatSocket4.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ChatSocket4.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/ClientFrame$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/ClientFrame$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/ClientFrame$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/ClientFrame$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/ClientFrame$13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/ClientFrame$14.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$15.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$16.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$17.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$18.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$19.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/ClientFrame$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$20.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$21.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$22.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$23.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$24.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$25.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$26.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$27.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$28.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$29.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/ClientFrame$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$30.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$31.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/ClientFrame$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/ClientFrame$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/ClientFrame$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/ClientFrame$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/ClientFrame$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/ClientFrame$9.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/ClientFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/SendFileFrame.form" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/SendFileFrame.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/SendFileFrame$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/SendFileFrame$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/SendFileFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/SendFileFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/SendingFileThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/SendingFileThread.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/server/ServerThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/server/ServerThread.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/server/UserDatabase.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/server/UserDatabase.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/server/readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/server/readme.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/view/ClientPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/ClientPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/view/ClientPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/ClientPanel.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/view/LoginPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/LoginPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/view/LoginPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/LoginPanel.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/view/PrivateChat.form" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/PrivateChat.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/view/RoomPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/RoomPanel$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/view/RoomPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/RoomPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/view/RoomPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/RoomPanel.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/view/SignUpPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/SignUpPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/view/SignUpPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/SignUpPanel.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/view/WelcomePanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/WelcomePanel.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat_db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/chat_db.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manifest.mf" beforeDir="false" afterPath="$PROJECT_DIR$/manifest.mf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysql-connector-java-5.1.44.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/build-impl.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/build-impl.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/genfiles.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/genfiles.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/private/private.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/project.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$14.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$15.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$16.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$17.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$18.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$19.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$20.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$21.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$22.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$23.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$24.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$25.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$26.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$27.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$28.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$29.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$30.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$31.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/view/ChatLab$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/ChatLab$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/view/ChatLab$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/ChatLab$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/view/ChatLab$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/ChatLab$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/view/ChatLab$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/ChatLab$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/view/ChatLab$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/ChatLab$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/view/ChatLab$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/ChatLab$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/view/ChatLab$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/ChatLab$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/view/ChatLab.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/ChatLab.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/view/PrivateChat$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/PrivateChat$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/view/PrivateChat$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/PrivateChat$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/view/PrivateChat$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/PrivateChat$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/view/PrivateChat$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/PrivateChat$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/view/PrivateChat$5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/view/PrivateChat.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/PrivateChat.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/server/ServerThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/server/ServerThread.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/server/UserDatabase.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/server/UserDatabase.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/server/readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/server/readme.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ClientPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/ClientPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/LoginPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/LoginPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/RoomPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/RoomPanel$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/RoomPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/RoomPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/SignUpPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/SignUpPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/readme.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sendfile/Dataset.txt" beforeDir="false" afterPath="$PROJECT_DIR$/sendfile/Dataset.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/ClientFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ClientFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/ReceivingFileThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ReceivingFileThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/SendFileFrame.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/SendFileFrame.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/SendFileFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/SendFileFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/SendingFileThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/SendingFileThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/ServerFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ServerFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/ServerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ServerThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/UserDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/UserDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/readme.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/ClientPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ClientPanel.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/ClientPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ClientPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/LoginPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginPanel.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/ChatLab.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ChatLab.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/LoginPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/PrivateChat.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/PrivateChat.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/PrivateChat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/PrivateChat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/RoomPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/RoomPanel.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/RoomPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/RoomPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/SignUpPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/SignUpPanel.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/SignUpPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/SignUpPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/WelcomePanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/WelcomePanel.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/WelcomePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/WelcomePanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -315,7 +208,7 @@
       <workItem from="1622913438914" duration="9914000" />
       <workItem from="1622997160643" duration="429000" />
       <workItem from="1623059461349" duration="4888000" />
-      <workItem from="1623064658130" duration="136000" />
+      <workItem from="1623064658130" duration="8784000" />
     </task>
     <servers />
   </component>

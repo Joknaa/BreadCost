@@ -358,18 +358,13 @@ public class ServerThread extends Thread {
                             sendToClient("CMD_ONLINE_USERS|" + getOnlineUsers());
                             notifyToUsersInRoom("CMD_ONLINE_THIS_ROOM" + getUsersThisRoom());
                             break;
-
  */
 
                         case "CMD_SENDFILETOSERVER":
                             sender = tokenizer.nextToken();
                             receiver = tokenizer.nextToken();
                             fileName = tokenizer.nextToken();
-                            int len = Integer.valueOf(tokenizer.nextToken());
-
                             String path = System.getProperty("user.dir") + "\\sendfile\\" + fileName;
-
-
                             BufferedInputStream bis = new BufferedInputStream(socketOfServer.getInputStream());
                             FileOutputStream fos = new FileOutputStream(path);
 
@@ -384,12 +379,8 @@ public class ServerThread extends Thread {
                             fos.close();
                             socketOfServer.close();
 
-
                             ServerThread stSender = listUser.get(sender);
-
-
                             ServerThread stReceiver = listUser.get(receiver);
-
                             sendToSpecificClient(stSender, "CMD_FILEAVAILABLE|" + fileName + "|" + receiver + "|" + sender);
                             sendToSpecificClient(stReceiver, "CMD_FILEAVAILABLE|" + fileName + "|" + sender + "|" + sender);
 

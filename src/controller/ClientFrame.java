@@ -278,7 +278,7 @@ public class ClientFrame extends JFrame implements Runnable {
         });
 
         HashMap<String, JLabel> UsernamesJLabelsList = chatLabPanel.GetUsernamesJLabelsList();
-        for (String userName: UsernamesJLabelsList.keySet()) {
+        for (String userName : UsernamesJLabelsList.keySet()) {
             UsernamesJLabelsList.get(userName).addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent me) {
@@ -351,20 +351,20 @@ public class ClientFrame extends JFrame implements Runnable {
 
         if (timeClicked == 2) {
          */
-            String privateReceiver = roomPanel.getOnlineList_rp().getSelectedValue();
-            PrivateChat pc = listReceiver.get(privateReceiver);
-            if (pc == null) {
-                pc = new PrivateChat(name, privateReceiver, serverHost, bw, br);
+        String privateReceiver = roomPanel.getOnlineList_rp().getSelectedValue();
+        PrivateChat pc = listReceiver.get(privateReceiver);
+        if (pc == null) {
+            pc = new PrivateChat(name, privateReceiver, serverHost, bw, br);
 
-                pc.getLbReceiver().setText("Private chat with \"" + pc.receiver + "\"");
-                pc.setTitle(pc.receiver);
-                pc.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                pc.setVisible(true);
+            pc.getLbReceiver().setText("Private chat with \"" + pc.receiver + "\"");
+            pc.setTitle(pc.receiver);
+            pc.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            pc.setVisible(true);
 
-                listReceiver.put(privateReceiver, pc);
-            } else {
-                pc.setVisible(true);
-            }
+            listReceiver.put(privateReceiver, pc);
+        } else {
+            pc.setVisible(true);
+        }
         //}
     }
 
@@ -626,7 +626,8 @@ public class ClientFrame extends JFrame implements Runnable {
                         pc.setVisible(true);
                     }
 
-                    pc.appendMessage_Left(sender + ": ", msg);
+                    //pc.appendMessage_Left(sender + ": ", msg);
+                    pc.appendMessage(sender + ": ", msg, Color.MAGENTA, new Color(56, 224, 0));
                     break;
 
                 case "CMD_USERS":
@@ -679,7 +680,7 @@ public class ClientFrame extends JFrame implements Runnable {
 
                         pc.getLbReceiver().setText("Private chat with \"" + pc.receiver + "\"");
                         pc.setTitle(pc.receiver);
-                        pc.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        pc.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
                         listReceiver.put(receiver, pc);
                     }
@@ -713,15 +714,13 @@ public class ClientFrame extends JFrame implements Runnable {
                 default:
                     if (!response.startsWith("CMD_")) {
                         if (response.equals("Warnning: Server has been closed!")) {
-                            this.chatLabPanel.appendMessage(response, Color.RED);
-                        } else {
-                            this.chatLabPanel.appendMessage(response, Color.CYAN);
-                        }
+                            this.chatLabPanel.appendAlertMessage(response, Color.RED);
+                        } else if (response.contains("has just entered!")) {
+                            this.chatLabPanel.appendAlertMessage(response, Color.CYAN);
+                        } else { System.out.println(response); }
                     }
             }
         }
         System.out.println("Disconnected to server!");
     }
-
-
 }
