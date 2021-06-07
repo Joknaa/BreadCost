@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -45,28 +47,19 @@ public class UserDatabase {
         return conn;
     }
     
-    public ResultSet getData() {
+    public List<String> GetAllUsers() {
+        List<String> usersList = new ArrayList<>();
         try {
             st = conn.createStatement();
-            rs = st.executeQuery("SELECT * FROM "+USER_TABLE);
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDatabase.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        return rs;
-    }
-    
-    private void showData() {
-        rs = getData();
-        try {
+            rs = st.executeQuery("SELECT name FROM "+USER_TABLE);
             while(rs.next()) {
-                System.out.printf("%-15s %-4s", rs.getString(1), rs.getString(2));
-                System.out.println("");
+                usersList.add(rs.getString(1));
             }
-            
+            return usersList;
         } catch (SQLException ex) {
             Logger.getLogger(UserDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return usersList;
     }
     
     public int insertUser(User u) {

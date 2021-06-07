@@ -1,11 +1,165 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f8faf640-903c-48de-ba04-1d2a61c6c08c" name="Default Changelist" comment="" />
+    <list default="true" id="f8faf640-903c-48de-ba04-1d2a61c6c08c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/New GUI.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/AppendingTextPane$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/AppendingTextPane.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/AppendingTextPane2$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/AppendingTextPane2.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/EX/RoomPanel.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/Resources/ChatApp/Offline.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/Resources/ChatApp/Online.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/Resources/ChatApp/happy_45px.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/test.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/view/ChatLab$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/view/ChatLab$2.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/view/ChatLab$3.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/view/ChatLab$4.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/view/ChatLab$5.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/view/ChatLab$6.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/view/ChatLab$7.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/view/ChatLab.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/view/ChatLab.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Resources/ChatApp/Offline.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Resources/ChatApp/happy_45px.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/view/ChatLab.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b96639ca-693c-413e-86ea-26aca0a80d11.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b96639ca-693c-413e-86ea-26aca0a80d11.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b96639ca-693c-413e-86ea-26aca0a80d11/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b96639ca-693c-413e-86ea-26aca0a80d11/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatSocket4.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ChatSocket4.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/ClientFrame$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/ClientFrame$10.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/ClientFrame$11.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/ClientFrame$12.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/ClientFrame$13.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/ClientFrame$14.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$15.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$16.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$17.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$18.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$19.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/ClientFrame$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$20.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$21.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$22.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$23.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$24.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$25.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$26.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$27.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$28.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$29.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/ClientFrame$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$30.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$31.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/ClientFrame$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/ClientFrame$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/ClientFrame$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/ClientFrame$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/ClientFrame$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/ClientFrame$9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/ClientFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controller/SendFileFrame.form" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/SendFileFrame.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/server/ServerThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/server/ServerThread.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/server/UserDatabase.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/server/UserDatabase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/server/readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/server/readme.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/view/ClientPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/ClientPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/view/ClientPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/ClientPanel.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/view/LoginPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/LoginPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/view/LoginPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/LoginPanel.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/view/PrivateChat.form" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/PrivateChat.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/view/RoomPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/RoomPanel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/view/RoomPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/RoomPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/view/RoomPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/RoomPanel.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/view/SignUpPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/SignUpPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/view/SignUpPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/SignUpPanel.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/view/WelcomePanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/WelcomePanel.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat_db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/chat_db.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manifest.mf" beforeDir="false" afterPath="$PROJECT_DIR$/manifest.mf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysql-connector-java-5.1.44.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/build-impl.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/build-impl.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/genfiles.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/genfiles.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/private.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/project.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$10.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$11.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$12.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$13.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$14.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$15.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$16.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$17.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$18.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$19.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$20.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$21.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$22.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$23.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$24.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$25.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$26.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$27.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$28.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$29.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$30.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$31.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/server/ServerThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/server/ServerThread.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/server/UserDatabase.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/server/UserDatabase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/server/readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/server/readme.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ClientPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/ClientPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/LoginPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/LoginPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/RoomPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/RoomPanel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/RoomPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/RoomPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/SignUpPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/SignUpPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/readme.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/ClientFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ClientFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/ReceivingFileThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ReceivingFileThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/SendFileFrame.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/SendFileFrame.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/SendFileFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/SendFileFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/SendingFileThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/SendingFileThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/ServerFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ServerFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/ServerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ServerThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/UserDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/UserDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/readme.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/ClientPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ClientPanel.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/ClientPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ClientPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/LoginPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginPanel.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/LoginPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/PrivateChat.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/PrivateChat.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/PrivateChat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/PrivateChat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/RoomPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/RoomPanel.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/RoomPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/RoomPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/SignUpPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/SignUpPanel.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/SignUpPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/SignUpPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/WelcomePanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/WelcomePanel.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/WelcomePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/WelcomePanel.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -41,9 +195,34 @@
     <property name="project.structure.side.proportion" value="0.22541967" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="O:\MyStuff\Files\mySpace\Projects\ENSA\JAVA\ChatSocket4\src\Resources\ChatApp" />
+      <recent name="O:\MyStuff\Files\mySpace\Projects\ENSA\JAVA\ChatSocket4\src\EX" />
+      <recent name="O:\MyStuff\Files\mySpace\Projects\ENSA\JAVA\ChatSocket4" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
   </component>
   <component name="RunManager" selected="Application.ClientFrame">
-    <configuration name="ClientFrame" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
+    <configuration name="AppendingTextPane" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="AppendingTextPane" />
+      <module name="ChatSocket4" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AppendingTextPane2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="AppendingTextPane2" />
+      <module name="ChatSocket4" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ClientFrame" type="Application" factoryName="Application" singleton="false" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="controller.ClientFrame" />
       <module name="ChatSocket4" />
       <extension name="coverage">
@@ -56,7 +235,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ServerFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="ServerFrame" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="server.ServerFrame" />
       <module name="ChatSocket4" />
       <extension name="coverage">
@@ -69,14 +248,45 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="test" />
+      <module name="ChatSocket4" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ClientSide" type="Multirun" singleton="false" separateTabs="false" reuseTabsWithFailures="false" startOneByOne="true" markFailedProcess="true" hideSuccessProcess="false" delayTime="1.0">
+      <runConfiguration name="ClientFrame" type="Application" />
+      <method v="2">
+        <option name="RunConfigurationTask" enabled="true" run_configuration_name="ServerFrame" run_configuration_type="Application" />
+      </method>
+    </configuration>
     <list>
-      <item itemvalue="Application.ClientFrame" />
       <item itemvalue="Application.ServerFrame" />
+      <item itemvalue="Application.ClientFrame" />
+      <item itemvalue="Application.test" />
+      <item itemvalue="Application.AppendingTextPane" />
+      <item itemvalue="Application.AppendingTextPane2" />
+      <item itemvalue="Multirun.ClientSide" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ClientFrame" />
-        <item itemvalue="Application.ServerFrame" />
+        <item itemvalue="Application.AppendingTextPane2" />
+        <item itemvalue="Application.AppendingTextPane" />
+        <item itemvalue="Application.test" />
       </list>
     </recent_temporary>
   </component>
@@ -93,7 +303,19 @@
       <workItem from="1622457834137" duration="748000" />
       <workItem from="1622460701725" duration="954000" />
       <workItem from="1622461716452" duration="352000" />
-      <workItem from="1622464023152" duration="198000" />
+      <workItem from="1622464023152" duration="2311000" />
+      <workItem from="1622530396233" duration="8433000" />
+      <workItem from="1622549552288" duration="65000" />
+      <workItem from="1622733365444" duration="285000" />
+      <workItem from="1622746344284" duration="3143000" />
+      <workItem from="1622799961549" duration="1470000" />
+      <workItem from="1622829959220" duration="1052000" />
+      <workItem from="1622886239956" duration="6755000" />
+      <workItem from="1622893188449" duration="14228000" />
+      <workItem from="1622913438914" duration="9914000" />
+      <workItem from="1622997160643" duration="429000" />
+      <workItem from="1623059461349" duration="4888000" />
+      <workItem from="1623064658130" duration="136000" />
     </task>
     <servers />
   </component>

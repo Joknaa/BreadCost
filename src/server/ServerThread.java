@@ -9,10 +9,7 @@ import javax.swing.*;
 import java.io.*;
 import java.net.Socket;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.Hashtable;
-import java.util.StringTokenizer;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -115,8 +112,6 @@ public class ServerThread extends Thread {
     }
 
     public void notifyToAllUsers(String message) {
-
-
         Enumeration<ServerThread> clients = listUser.elements();
         ServerThread st;
         BufferedWriter writer;
@@ -188,6 +183,16 @@ public class ServerThread extends Thread {
     }
 
     public String getAllUsers() {
+        String CMD = "";
+        List<String> usersList = userDB.GetAllUsers();
+
+        for (String username : usersList) {
+            CMD = CMD.concat(username).concat("|");
+        }
+
+        return CMD;
+    }
+    public String getOnlineUsers() {
         StringBuffer kq = new StringBuffer();
         String temp = null;
 
@@ -239,12 +244,11 @@ public class ServerThread extends Thread {
 
     public void clientQuit() {
         if (clientName != null) {
-
             this.appendMessage("\n[" + sdf.format(new Date()) + "] Client \"" + clientName + "\" is disconnected!");
             listUser.remove(clientName);
             if (listUser.isEmpty())
                 this.appendMessage("\n[" + sdf.format(new Date()) + "] Now there's no one is connecting to server\n");
-            notifyToAllUsers("CMD_ONLINE_USERS|" + getAllUsers());
+            notifyToAllUsers("CMD_ONLINE_USERS|" + getOnlineUsers());
             notifyToUsersInRoom("CMD_ONLINE_THIS_ROOM" + getUsersThisRoom());
             notifyToUsersInRoom(clientName + " has quitted");
         }
@@ -301,7 +305,8 @@ public class ServerThread extends Thread {
                         case "CMD_ROOM":
                             clientRoom = tokenizer.nextToken();
                             changeUserRoom();
-                            notifyToAllUsers("CMD_ONLINE_USERS|" + getAllUsers());
+                            notifyToAllUsers("CMD_USERS|" + getAllUsers());
+                            notifyToAllUsers("CMD_ONLINE_USERS|" + getOnlineUsers());
                             notifyToUsersInRoom("CMD_ONLINE_THIS_ROOM" + getUsersThisRoom());
                             notifyToUsersInRoom(clientName + " has just entered!");
                             break;
@@ -348,11 +353,13 @@ public class ServerThread extends Thread {
                                 } else sendToClient(ACCOUNT_EXIST);
                             }
                             break;
-
+/*
                         case "CMD_ONLINE_USERS":
-                            sendToClient("CMD_ONLINE_USERS|" + getAllUsers());
+                            sendToClient("CMD_ONLINE_USERS|" + getOnlineUsers());
                             notifyToUsersInRoom("CMD_ONLINE_THIS_ROOM" + getUsersThisRoom());
                             break;
+
+ */
 
                         case "CMD_SENDFILETOSERVER":
                             sender = tokenizer.nextToken();
@@ -419,6 +426,7 @@ public class ServerThread extends Thread {
                     }
 
                 } catch (Exception e) {
+                    //todo: Dont disconnect the user when sending a private message to an offline user
                     clientQuit();
                     break;
                 }

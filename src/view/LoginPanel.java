@@ -250,29 +250,23 @@ public class LoginPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginField2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_loginField2FocusGained
-        // TODO add your handling code here:
         loginField2.setText("");
     }//GEN-LAST:event_loginField2FocusGained
 
     private void loginField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginField2ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_loginField2ActionPerformed
 
     private void tfPassFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfPassFocusGained
-        // TODO add your handling code here:
         tfPass.setText("");
     }//GEN-LAST:event_tfPassFocusGained
 
     private void signUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpButtonActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_signUpButtonActionPerformed
 
     private void inputPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputPanelMouseClicked
-        // TODO add your handling code here:
     }//GEN-LAST:event_inputPanelMouseClicked
 
     private void btOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOKActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_btOKActionPerformed
 
 

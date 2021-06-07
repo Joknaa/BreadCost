@@ -301,33 +301,26 @@ public class SignUpPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tfIDFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfIDFocusGained
-        // TODO add your handling code here:
         tfID.setText("");
     }//GEN-LAST:event_tfIDFocusGained
 
     private void tfIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfIDActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_tfIDActionPerformed
 
     private void tfPassFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfPassFocusGained
-        // TODO add your handling code here:
         tfPass.setText("");
     }//GEN-LAST:event_tfPassFocusGained
 
     private void btSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSignUpActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_btSignUpActionPerformed
 
     private void tfPass2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfPass2FocusGained
-        // TODO add your handling code here:
     }//GEN-LAST:event_tfPass2FocusGained
 
     private void lbBack_signupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lbBack_signupActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_lbBack_signupActionPerformed
 
     private void inputPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputPanelMouseClicked
-        // TODO add your handling code here:
     }//GEN-LAST:event_inputPanelMouseClicked
 
 

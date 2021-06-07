@@ -55,7 +55,6 @@ public class ClientPanel extends javax.swing.JPanel {
         return tpMessage;
     }
 
-    
     public JList<String> getOnlineList() {
         return onlineList;
     }
@@ -91,65 +90,60 @@ public class ClientPanel extends javax.swing.JPanel {
     public JLabel getLbSmile() {
         return lbSmile;
     }
-    
-    
 
-    //phương thức này ko hiệu quả lắm
-    public void appendMessage2(String msg1, String msg2, Color c1, Color c2) {  //thiết lập 2 loại text khác màu nhau trên 1 dòng
+    
+    public void appendMessage2(String msg1, String msg2, Color c1, Color c2) {  
         tpMessage.setEditable(true);
-        //chèn msg1 trước:
+        
         int len = tpMessage.getDocument().getLength();
         
         StyleContext sc = StyleContext.getDefaultStyleContext();
         
         AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, c1);
-        aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Impact"); //  FontFamily: thiết lập font, chú ý font này là kiểu đậm chứ ko phải ta thiết lập cho nó đậm nhé
-        aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);     //cái này chưa biết tác dụng làm j
-        aset = sc.addAttribute(aset, StyleConstants.FontSize, 14);      //kích thước font
+        aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Impact"); 
+        aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);     
+        aset = sc.addAttribute(aset, StyleConstants.FontSize, 14);      
         
-        tpMessage.setCaretPosition(len);    //vị trí cần chèn text
-        tpMessage.setCharacterAttributes(aset, false);  //thiết lập thuộc tính cho text cần chèn
-        tpMessage.replaceSelection(msg1);   //chèn text vào vị trí trên
+        tpMessage.setCaretPosition(len);    
+        tpMessage.setCharacterAttributes(aset, false);  
+        tpMessage.replaceSelection(msg1);   
         
-        //chèn msg2 ngay sau msg1:
+        
         len = len + msg1.length();
         
         sc = StyleContext.getDefaultStyleContext();
         
         aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, c2); 
-        aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Arial"); //  FontFamily: thiết lập font
-        aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);     //cái này chưa biết tác dụng làm j
-        aset = sc.addAttribute(aset, StyleConstants.FontSize, 14);      //kích thước font
+        aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Arial"); 
+        aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);     
+        aset = sc.addAttribute(aset, StyleConstants.FontSize, 14);      
         
         tpMessage.setCaretPosition(len);
         tpMessage.setCharacterAttributes(aset, false);
-        tpMessage.replaceSelection(msg2+"\n");   //nhớ xuống dòng
+        tpMessage.replaceSelection(msg2+"\n");   
         
         len = len + msg2.length();
         tpMessage.setCaretPosition(len);
         tpMessage.setEditable(false);
     }
-    
-    //phương thức này ko hiệu quả lắm
     public void appendMessage2(String message, Color color) {
         int len = tpMessage.getDocument().getLength();
         StyleContext sc = StyleContext.getDefaultStyleContext();
         AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, color);
         
-        aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Comic Sans MS"); //  FontFamily: thiết lập font
+        aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Comic Sans MS"); 
         
-        aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);     //cái này chưa biết tác dụng làm j
-        aset = sc.addAttribute(aset, StyleConstants.FontSize, 14);      //kích thước font
+        aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);     
+        aset = sc.addAttribute(aset, StyleConstants.FontSize, 14);      
         
-        tpMessage.setCaretPosition(len);    //vị trí cần chèn text
-        tpMessage.setCharacterAttributes(aset, false);  //thiết lập thuộc tính cho text cần chèn
-        tpMessage.replaceSelection(message+"\n");   //chèn text vào vị trí trên
+        tpMessage.setCaretPosition(len);    
+        tpMessage.setCharacterAttributes(aset, false);  
+        tpMessage.replaceSelection(message+"\n");   
         
     }   
      
-    //we should use this method
-    public void appendMessage(String msg1, String msg2, Color c1, Color c2) {  //thiết lập 2 loại text khác màu nhau trên 1 dòng
-        //chèn msg1 trước:
+    
+    public void appendMessage(String msg1, String msg2, Color c1, Color c2) {
         int len = tpMessage.getDocument().getLength();
         StyledDocument doc = (StyledDocument) tpMessage.getDocument();
         
@@ -165,7 +159,7 @@ public class ClientPanel extends javax.swing.JPanel {
             Logger.getLogger(ClientPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        //sau đó chèn msg2 ngay sau msg1:
+        
         doc = (StyledDocument) tpMessage.getDocument();
         len = len+msg1.length();
         
@@ -175,14 +169,13 @@ public class ClientPanel extends javax.swing.JPanel {
         StyleConstants.setForeground(sas, c2);
         
         try {
-            doc.insertString(len, msg2+"\n", sas);      //phai xuong dong
+            doc.insertString(len, msg2+"\n", sas);      
         } catch (BadLocationException ex) {
             Logger.getLogger(ClientPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         tpMessage.setCaretPosition(len+msg2.length());
     }
-    
     public void appendMessage(String message, Color color) {
         int len = tpMessage.getDocument().getLength();
         StyledDocument doc = (StyledDocument) tpMessage.getDocument();
@@ -234,14 +227,14 @@ public class ClientPanel extends javax.swing.JPanel {
         lbGrin = new javax.swing.JLabel();
         lbCry = new javax.swing.JLabel();
 
-        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); 
         jLabel1.setText("Online");
 
-        btExit.setFont(new java.awt.Font("Comic Sans MS", 1, 16)); // NOI18N
+        btExit.setFont(new java.awt.Font("Comic Sans MS", 1, 16)); 
         btExit.setForeground(new java.awt.Color(255, 102, 102));
         btExit.setText("Exit");
 
-        btSend.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        btSend.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); 
         btSend.setForeground(new java.awt.Color(102, 102, 255));
         btSend.setText("Send");
 
@@ -249,39 +242,39 @@ public class ClientPanel extends javax.swing.JPanel {
         taInput.setRows(5);
         jScrollPane3.setViewportView(taInput);
 
-        jLabel2.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); 
         jLabel2.setText("Messages' content");
 
-        onlineList.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        onlineList.setFont(new java.awt.Font("Tahoma", 0, 14)); 
         onlineList.setForeground(new java.awt.Color(51, 51, 255));
         jScrollPane4.setViewportView(onlineList);
 
         tpMessage.setEditable(false);
-        tpMessage.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tpMessage.setFont(new java.awt.Font("Tahoma", 0, 14)); 
         jScrollPane2.setViewportView(tpMessage);
 
-        lbRoom.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        lbRoom.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); 
         lbRoom.setForeground(new java.awt.Color(0, 0, 255));
         lbRoom.setText("Room ?");
 
-        jLabel4.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); 
         jLabel4.setText("Online in this room");
 
-        onlineListThisRoom.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        onlineListThisRoom.setFont(new java.awt.Font("Tahoma", 0, 14)); 
         onlineListThisRoom.setForeground(new java.awt.Color(51, 51, 255));
         jScrollPane5.setViewportView(onlineListThisRoom);
 
-        lbLike.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/like2.png"))); // NOI18N
+        lbLike.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/like2.png"))); 
 
-        lbDislike.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dislike.png"))); // NOI18N
+        lbDislike.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dislike.png"))); 
 
-        lbPacman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pacman.png"))); // NOI18N
+        lbPacman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pacman.png"))); 
 
-        lbSmile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/smile.png"))); // NOI18N
+        lbSmile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/smile.png"))); 
 
-        lbGrin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/grin.png"))); // NOI18N
+        lbGrin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/grin.png"))); 
 
-        lbCry.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cry.png"))); // NOI18N
+        lbCry.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cry.png"))); 
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
