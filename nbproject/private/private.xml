@@ -5,10 +5,8 @@
         <group name="NetBeansProjects"/>
         <group name="NetbeansProjects"/>
         <group>
-            <file>file:/O:/MyStuff/Files/mySpace/Projects/ENSA/JAVA/ChatSocket4/src/view/ClientPanel.java</file>
-            <file>file:/O:/MyStuff/Files/mySpace/Projects/ENSA/JAVA/ChatSocket4/src/view/RoomPanel.java</file>
-            <file>file:/O:/MyStuff/Files/mySpace/Projects/ENSA/JAVA/ChatSocket4/src/controller/ClientFrame.java</file>
-            <file>file:/O:/MyStuff/Files/mySpace/Projects/ENSA/JAVA/ChatSocket4/src/view/ChatLab.java</file>
+            <file>file:/O:/MyStuff/Files/mySpace/Projects/ENSA/JAVA/BreadCost/src/view/ChatLab.java</file>
+            <file>file:/O:/MyStuff/Files/mySpace/Projects/ENSA/JAVA/BreadCost/src/view/PrivateChat.java</file>
         </group>
     </open-files>
 </project-private>

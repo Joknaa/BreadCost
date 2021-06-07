@@ -44,19 +44,12 @@ public class ClientFrame extends JFrame implements Runnable {
 
     JPanel mainPanel;
     LoginPanel loginPanel;
-    ClientPanel clientPanel;
     SignUpPanel signUpPanel;
     ChatLab chatLabPanel;
-    RoomPanel roomPanel;
+    ClientPanel clientPanel = new ClientPanel();
 
     Thread clientThread;
     boolean isRunning;
-
-    JMenuBar menuBar;
-    JMenu menuShareFile;
-    JMenuItem itemSendFile;
-    JMenu menuAccount;
-    JMenuItem itemLeaveRoom, itemLogout, itemChangePass;
 
     SendFileFrame sendFileFrame;
 
@@ -96,81 +89,28 @@ public class ClientFrame extends JFrame implements Runnable {
 
         mainPanel = new JPanel();
         loginPanel = new LoginPanel();
-        clientPanel = new ClientPanel();
         signUpPanel = new SignUpPanel();
-        roomPanel = new RoomPanel();
         chatLabPanel = new ChatLab();
 
         chatLabPanel.setVisible(false);
         signUpPanel.setVisible(false);
         loginPanel.setVisible(true);
-        roomPanel.setVisible(false);
-        clientPanel.setVisible(false);
 
         mainPanel.add(chatLabPanel);
         mainPanel.add(signUpPanel);
         mainPanel.add(loginPanel);
-        mainPanel.add(roomPanel);
-        mainPanel.add(clientPanel);
 
         addEventsForSignUpPanel();
         addEventsForLoginPanel();
         addEventsForClientPanel();
-        addEventsForRoomPanel();
 
-        menuBar = new JMenuBar();
-        menuShareFile = new JMenu();
-        menuAccount = new JMenu();
-        itemLeaveRoom = new JMenuItem();
-        itemLogout = new JMenuItem();
-        itemChangePass = new JMenuItem();
-        itemSendFile = new JMenuItem();
-
-        menuAccount.setText("Account");
-        itemLogout.setText("Logout");
-        itemLeaveRoom.setText("Leave room");
-        itemChangePass.setText("Change password");
-        menuAccount.add(itemLeaveRoom);
-        menuAccount.add(itemChangePass);
-        menuAccount.add(itemLogout);
-
-        menuShareFile.setText("File sharing");
-        itemSendFile.setText("Send a file");
-        menuShareFile.add(itemSendFile);
-
-        menuBar.add(menuAccount);
-        menuBar.add(menuShareFile);
-
-        itemLeaveRoom.addActionListener(ae -> {
-            int kq = JOptionPane.showConfirmDialog(ClientFrame.this, "Are you sure to leave this room?", "Notice", JOptionPane.YES_NO_OPTION);
-            if (kq == JOptionPane.YES_OPTION) {
-                leaveRoom();
-            }
-        });
-        itemChangePass.addActionListener(ae -> JOptionPane.showMessageDialog(ClientFrame.this, "Chưa code phần này, hehe :v", "Lỗi", JOptionPane.ERROR_MESSAGE));
-        itemLogout.addActionListener(ae -> {
-            int kq = JOptionPane.showConfirmDialog(ClientFrame.this, "Are you sure to logout?", "Notice", JOptionPane.YES_NO_OPTION);
-            if (kq == JOptionPane.YES_OPTION) {
-                try {
-                    isConnectToServer = false;
-                    socketOfClient.close();
-                    ClientFrame.this.setVisible(false);
-                } catch (IOException ex) {
-                    Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                new ClientFrame(null).setVisible(true);
-            }
-        });
-        itemSendFile.addActionListener(ae -> JOptionPane.showMessageDialog(ClientFrame.this, "This function has changed! Go to private chat to send a file", "Info", JOptionPane.INFORMATION_MESSAGE));
-        menuBar.setVisible(false);
-
-        setJMenuBar(menuBar);
         add(mainPanel);
-        setResizable(false);
+        setResizable(true);
         setSize(new Dimension(900, 540));
+        mainPanel.setBackground(new java.awt.Color(74, 78, 105));
         setLocation(400, 100);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setTitle(name);
+        setTitle("BreadCost - " + name);
     }
 
     public static void main(String[] args) {
@@ -190,9 +130,7 @@ public class ClientFrame extends JFrame implements Runnable {
             public void mouseClicked(MouseEvent me) {
                 signUpPanel.setVisible(false);
                 loginPanel.setVisible(true);
-                clientPanel.setVisible(false);
                 chatLabPanel.setVisible(false);
-                roomPanel.setVisible(false);
             }
         });
         signUpPanel.getBtSignUp().addActionListener(ae -> btSignUpEvent());
@@ -219,9 +157,7 @@ public class ClientFrame extends JFrame implements Runnable {
             public void mouseClicked(MouseEvent me) {
                 signUpPanel.setVisible(true);
                 loginPanel.setVisible(false);
-                clientPanel.setVisible(false);
                 chatLabPanel.setVisible(false);
-                roomPanel.setVisible(false);
             }
         });
 
@@ -288,28 +224,6 @@ public class ClientFrame extends JFrame implements Runnable {
         }
     }
 
-    private void addEventsForRoomPanel() {
-        HashMap<String, JLabel> roomJLabelList = roomPanel.GetRoomJLabelList();
-
-        for (String roomName : roomJLabelList.keySet()) {
-            JLabel roomJLabel = roomJLabelList.get(roomName);
-            roomJLabel.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent me) {
-                    ClientFrame.this.room = roomJLabel.getText();
-                    labelRoomEvent();
-                }
-            });
-        }
-
-        roomPanel.getOnlineList_rp().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent me) {
-                openPrivateChatOutsideRoom();
-            }
-        });
-    }
-
 
     public void openPrivateChatInsideRoom(String clickedUserName) {
         /*timeClicked++;
@@ -342,50 +256,6 @@ public class ClientFrame extends JFrame implements Runnable {
         //}
     }
 
-    private void openPrivateChatOutsideRoom() {
-        /*timeClicked++;
-        if (timeClicked == 1) {
-            Thread countingTo500ms = new Thread(counting);
-            countingTo500ms.start();
-        }
-
-        if (timeClicked == 2) {
-         */
-        String privateReceiver = roomPanel.getOnlineList_rp().getSelectedValue();
-        PrivateChat pc = listReceiver.get(privateReceiver);
-        if (pc == null) {
-            pc = new PrivateChat(name, privateReceiver, serverHost, bw, br);
-
-            pc.getLbReceiver().setText("Private chat with \"" + pc.receiver + "\"");
-            pc.setTitle(pc.receiver);
-            pc.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            pc.setVisible(true);
-
-            listReceiver.put(privateReceiver, pc);
-        } else {
-            pc.setVisible(true);
-        }
-        //}
-    }
-
-    private void labelRoomEvent() {
-        this.clientPanel.getTpMessage().setText("");
-        this.chatLabPanel.getTpMessage().setText("");
-
-        try {
-            Thread.sleep(200);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        this.roomPanel.setVisible(false);
-        this.clientPanel.setVisible(false);
-        this.chatLabPanel.setVisible(true);
-        this.chatLabPanel.getUserName().setText(this.name);
-        this.setTitle("\"" + this.name + "\" - " + this.room);
-        clientPanel.getLbRoom().setText(this.room);
-        chatLabPanel.getLbRoom().setText(this.room);
-    }
-
     private void leaveRoom() {
         this.sendToServer("CMD_LEAVE_ROOM|" + this.room);
         try {
@@ -393,12 +263,9 @@ public class ClientFrame extends JFrame implements Runnable {
         } catch (InterruptedException ex) {
             Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.roomPanel.setVisible(true);
-        this.clientPanel.setVisible(false);
         this.chatLabPanel.setVisible(false);
 
         //todo: the chat gets emptied when leaving !!
-        clientPanel.getTpMessage().setText("");
         this.setTitle("\"" + this.name + "\"");
     }
 
@@ -418,8 +285,6 @@ public class ClientFrame extends JFrame implements Runnable {
         }
         if (!isConnectToServer) {
             isConnectToServer = true;
-
-
             this.connectToServer(hostname);
         }
         this.sendToServer("CMD_CHECK_NAME|" + this.name + "|" + pass);
@@ -431,22 +296,16 @@ public class ClientFrame extends JFrame implements Runnable {
                 JOptionPane.showMessageDialog(this, response, "Error", JOptionPane.ERROR_MESSAGE);
 
             } else {
-
                 loginPanel.setVisible(false);
-                roomPanel.setVisible(false);
-                clientPanel.setVisible(false);
                 chatLabPanel.setVisible(true);
+                chatLabPanel.setUserName(name);
                 this.setTitle("\"" + name + "\"");
-
-                menuBar.setVisible(true);
 
                 clientThread = new Thread(this);
                 clientThread.start();
                 this.sendToServer("CMD_ROOM|" + this.room);
 
                 System.out.println("this is \"" + name + "\"");
-
-                labelRoomEvent();
             }
         } else System.out.println("[btOkEvent()] Server is not open yet, or already closed!");
     }
@@ -481,9 +340,7 @@ public class ClientFrame extends JFrame implements Runnable {
                     signUpPanel.clearTf();
                     signUpPanel.setVisible(false);
                     loginPanel.setVisible(true);
-                    clientPanel.setVisible(false);
                     chatLabPanel.setVisible(false);
-                    roomPanel.setVisible(false);
                 }
             }
         }
@@ -498,7 +355,6 @@ public class ClientFrame extends JFrame implements Runnable {
     }
 
     private void btClearEvent() {
-        clientPanel.getTaInput().setText("");
         chatLabPanel.getTaInput().setText("");
     }
 
@@ -510,8 +366,6 @@ public class ClientFrame extends JFrame implements Runnable {
             chatLabPanel.setVisible(false);
             signUpPanel.setVisible(false);
             loginPanel.setVisible(true);
-            roomPanel.setVisible(false);
-            clientPanel.setVisible(false);
             disconnect();
             //todo: fix the Logout
 
@@ -648,9 +502,9 @@ public class ClientFrame extends JFrame implements Runnable {
                     }
                     for (String userName : AllUsersList) {
                         if (OnlineUsersList.contains(userName) || userName.equals(this.name)) {
-                            this.chatLabPanel.appendMessage_OnlineUsers(userName, Color.GREEN, this);
+                            this.chatLabPanel.appendMessage_OnlineUsers(userName, new Color(173, 231, 115), this);
                         } else {
-                            this.chatLabPanel.appendMessage_OnlineUsers(userName, Color.RED, this);
+                            this.chatLabPanel.appendMessage_OnlineUsers(userName, new Color(231, 115, 115), this);
                         }
                     }
                     break;
@@ -661,7 +515,6 @@ public class ClientFrame extends JFrame implements Runnable {
                         cmd = tokenizer.nextToken();
                         listModelThisRoom.addElement(cmd);
                     }
-                    clientPanel.getOnlineListThisRoom().setModel(listModelThisRoom);
                     break;
 
 
@@ -695,10 +548,8 @@ public class ClientFrame extends JFrame implements Runnable {
 
                     if (cmd.equals(this.name)) {
                         this.chatLabPanel.appendMessage(cmd + ": ", "\n  ", Color.BLACK, Color.BLACK);
-                        this.clientPanel.appendMessage(cmd + ": ", "\n  ", Color.BLACK, Color.BLACK);
                     } else {
                         this.chatLabPanel.appendMessage(cmd + ": ", "\n   ", Color.MAGENTA, Color.MAGENTA);
-                        this.clientPanel.appendMessage(cmd + ": ", "\n   ", Color.MAGENTA, Color.MAGENTA);
                     }
 
                     switch (icon) {

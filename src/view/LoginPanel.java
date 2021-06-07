@@ -56,7 +56,7 @@ public class LoginPanel extends javax.swing.JPanel {
         btOK = new javax.swing.JButton();
         signUpButton = new javax.swing.JButton();
 
-        setPreferredSize(new java.awt.Dimension(900, 500));
+        setPreferredSize(new java.awt.Dimension(900, 490));
 
         jPanel1.setEnabled(false);
 
@@ -91,7 +91,6 @@ public class LoginPanel extends javax.swing.JPanel {
                 .addComponent(appName, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(160, 160, 160))
         );
-
         inputPanel.setBackground(new java.awt.Color(154, 140, 152));
         inputPanel.setPreferredSize(new java.awt.Dimension(450, 500));
         inputPanel.addMouseListener(new java.awt.event.MouseAdapter() {

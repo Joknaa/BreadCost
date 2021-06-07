@@ -78,7 +78,8 @@ public class SignUpPanel extends javax.swing.JPanel {
         lbBack_signup = new javax.swing.JButton();
 
         jPanel1.setEnabled(false);
-        jPanel1.setPreferredSize(new java.awt.Dimension(900, 500));
+        jPanel1.setPreferredSize(new java.awt.Dimension(900, 490));
+
 
         logoPanel.setBackground(new java.awt.Color(74, 78, 105));
         logoPanel.setPreferredSize(new java.awt.Dimension(450, 500));

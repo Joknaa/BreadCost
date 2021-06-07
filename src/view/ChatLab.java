@@ -42,6 +42,7 @@ public class ChatLab extends javax.swing.JPanel {
     }
     public JButton getBtSend() { return sendButton; }
     public JLabel getUserName() { return userName; }
+    public void setUserName(String username) {  this.userName.setText(username); }
 
     /**
      * Creates new form testLoginPanel
@@ -185,7 +186,7 @@ public class ChatLab extends javax.swing.JPanel {
 
         userName.setFont(new java.awt.Font("Source Code Pro", 0, 36)); // NOI18N
         userName.setForeground(new java.awt.Color(244, 252, 231));
-        userName.setText("Oknaa");
+        userName.setText("PlaceHolder");
 
         logoutButton.setBackground(new java.awt.Color(76, 96, 133));
         logoutButton.setForeground(new java.awt.Color(244, 252, 231));
@@ -478,12 +479,11 @@ public class ChatLab extends javax.swing.JPanel {
         SimpleAttributeSet sas = new SimpleAttributeSet();
         StyleConstants.setFontFamily(sas, "Comic Sans MS");
         StyleConstants.setBold(sas, true);
-        StyleConstants.setFontSize(sas, 14);
+        StyleConstants.setFontSize(sas, 23);
         StyleConstants.setForeground(sas, color);
 
         JLabel userNameLabel = new JLabel(userName);
-
-        userNameLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
+        userNameLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
         userNameLabel.setForeground(color);
         userNameLabel.addMouseListener(new MouseListener() {
             @Override
