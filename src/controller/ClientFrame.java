@@ -102,7 +102,7 @@ public class ClientFrame extends JFrame implements Runnable {
 
         addEventsForSignUpPanel();
         addEventsForLoginPanel();
-        addEventsForClientPanel();
+        addEventsForChatLabPanel();
 
         add(mainPanel);
         setResizable(true);
@@ -111,6 +111,9 @@ public class ClientFrame extends JFrame implements Runnable {
         setLocation(400, 100);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("BreadCost - " + name);
+
+        chatLabPanel.appendMessage_ConversationsList("Group Chat", "/Resources/ChatApp/group_chat_45px.png", this);
+
     }
 
     public static void main(String[] args) {
@@ -163,7 +166,7 @@ public class ClientFrame extends JFrame implements Runnable {
 
     }
 
-    private void addEventsForClientPanel() {
+    private void addEventsForChatLabPanel() {
         chatLabPanel.getBtSend().addActionListener(ae -> btSendEvent());
         chatLabPanel.getBtExit().addActionListener(ae -> btExitEvent());
         chatLabPanel.getTaInput().addKeyListener(new KeyAdapter() {
@@ -239,6 +242,8 @@ public class ClientFrame extends JFrame implements Runnable {
             JOptionPane.showMessageDialog(ClientFrame.this, "Can't send a message to yourself!", "Info", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
+
+        chatLabPanel.appendMessage_ConversationsList(clickedUserName, "/Resources/ChatApp/direct_chat_45px.png", this);
 
         if (!listReceiver.containsKey(clickedUserName)) {
             PrivateChat pc = new PrivateChat(name, clickedUserName, serverHost, bw, br);
@@ -490,7 +495,7 @@ public class ClientFrame extends JFrame implements Runnable {
                     while (tokenizer.hasMoreTokens()) {
                         cmd = tokenizer.nextToken();
                         AllUsersList.add(cmd);
-                        this.chatLabPanel.appendMessage_OnlineUsers(cmd, cmd.equals(this.name) ? Color.GREEN : Color.red, this);
+                        this.chatLabPanel.appendMessage_OnlineUsersList(cmd, cmd.equals(this.name) ? Color.GREEN : Color.red, this);
                     }
                     break;
 
@@ -502,9 +507,9 @@ public class ClientFrame extends JFrame implements Runnable {
                     }
                     for (String userName : AllUsersList) {
                         if (OnlineUsersList.contains(userName) || userName.equals(this.name)) {
-                            this.chatLabPanel.appendMessage_OnlineUsers(userName, new Color(173, 231, 115), this);
+                            this.chatLabPanel.appendMessage_OnlineUsersList(userName, new Color(173, 231, 115), this);
                         } else {
-                            this.chatLabPanel.appendMessage_OnlineUsers(userName, new Color(231, 115, 115), this);
+                            this.chatLabPanel.appendMessage_OnlineUsersList(userName, new Color(231, 115, 115), this);
                         }
                     }
                     break;
@@ -565,9 +570,9 @@ public class ClientFrame extends JFrame implements Runnable {
                 default:
                     if (!response.startsWith("CMD_")) {
                         if (response.equals("Warnning: Server has been closed!")) {
-                            this.chatLabPanel.appendAlertMessage(response, Color.RED);
+                            this.chatLabPanel.appendMessage_Alert(response, Color.RED);
                         } else if (response.contains("has just entered!")) {
-                            this.chatLabPanel.appendAlertMessage(response, Color.CYAN);
+                            this.chatLabPanel.appendMessage_Alert(response, Color.CYAN);
                         } else { System.out.println(response); }
                     }
             }

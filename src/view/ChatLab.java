@@ -9,6 +9,7 @@ package view;
 import controller.ClientFrame;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.text.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -25,6 +26,7 @@ import java.util.logging.Logger;
 public class ChatLab extends javax.swing.JPanel {
 
     private final HashMap<String, JLabel> UsernamesJLabelsList = new HashMap<>();
+    private final HashMap<String, JLabel> ConversationsJLabelsList = new HashMap<>();
     StyledDocument doc = new DefaultStyledDocument();
 
 
@@ -36,6 +38,7 @@ public class ChatLab extends javax.swing.JPanel {
     }
     public JTextPane getOnlineList() { return usersListTP; }
     public HashMap<String, JLabel> GetUsernamesJLabelsList() { return UsernamesJLabelsList; }
+    public HashMap<String, JLabel> GetConversationsJLabelsList() { return ConversationsJLabelsList; }
     public JLabel getLbRoom() { return chatSectionLabel; }
     public JButton getBtExit() {
         return logoutButton;
@@ -186,7 +189,7 @@ public class ChatLab extends javax.swing.JPanel {
 
         userName.setFont(new java.awt.Font("Source Code Pro", 0, 36)); // NOI18N
         userName.setForeground(new java.awt.Color(244, 252, 231));
-        userName.setText("PlaceHolder");
+        userName.setText("Oknaa");
 
         logoutButton.setBackground(new java.awt.Color(76, 96, 133));
         logoutButton.setForeground(new java.awt.Color(244, 252, 231));
@@ -451,7 +454,7 @@ public class ChatLab extends javax.swing.JPanel {
         chatTP.setDocument(doc);
         chatTP.setCaretPosition(len+msg2.length());
     }
-    public void appendAlertMessage(String message, Color color) {
+    public void appendMessage_Alert(String message, Color color) {
         //int len = chatTP.getDocument().getLength();
         //StyledDocument doc = (StyledDocument) chatTP.getDocument();
         int len = doc.getLength();
@@ -471,8 +474,7 @@ public class ChatLab extends javax.swing.JPanel {
         chatTP.setDocument(doc);
         chatTP.setCaretPosition(len+message.length());
     }
-
-    public void appendMessage_OnlineUsers(String userName, Color color, ClientFrame clientFrameInstance) {
+    public void appendMessage_OnlineUsersList(String userName, Color color, ClientFrame clientFrameInstance) {
         int len = usersListTP.getDocument().getLength();
         StyledDocument doc = usersListTP.getStyledDocument();
 
@@ -509,6 +511,52 @@ public class ChatLab extends javax.swing.JPanel {
         }
         len = usersListTP.getDocument().getLength();
         usersListTP.setCaretPosition(len);
+    }
+    public void appendMessage_ConversationsList(String ConversationName, String iconPath, ClientFrame clientFrameInstance) {
+        if (!ConversationsJLabelsList.containsKey(ConversationName)) {
+            int len = pastConversationsTP.getDocument().getLength();
+            StyledDocument doc = pastConversationsTP.getStyledDocument();
+
+            SimpleAttributeSet sas = new SimpleAttributeSet();
+            StyleConstants.setFontFamily(sas, "Comic Sans MS");
+            StyleConstants.setBold(sas, true);
+            StyleConstants.setFontSize(sas, 23);
+
+            JLabel conversationLabel = new JLabel(ConversationName);
+            conversationLabel.setFont(new Font("Source Code Pro", Font.BOLD, 20)); // NOI18N
+            conversationLabel.setHorizontalAlignment(SwingConstants.CENTER);
+            conversationLabel.setIcon(new ImageIcon(getClass().getResource(iconPath))); // NOI18N
+            conversationLabel.setBorder(BorderFactory.createLineBorder(new Color(74,78,105)));
+            conversationLabel.setSize(new Dimension(183, 50));
+
+            conversationLabel.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    clientFrameInstance.openPrivateChatInsideRoom(ConversationName);
+                }
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    conversationLabel.setBackground(Color.lightGray);
+                }
+                @Override
+                public void mouseReleased(MouseEvent e) { }
+                @Override
+                public void mouseEntered(MouseEvent e) { conversationLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); }
+                @Override
+                public void mouseExited(MouseEvent e) { conversationLabel.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR)); }
+            });
+            try {
+                StyleConstants.setComponent(sas, conversationLabel);
+                doc.insertString(len, "Ignored\n\n", sas);
+            } catch (BadLocationException ex) {
+                Logger.getLogger(ClientPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            len = usersListTP.getDocument().getLength();
+            usersListTP.setCaretPosition(len);
+            ConversationsJLabelsList.put(ConversationName, conversationLabel);
+        } else {
+            System.out.println("Dont show the conversation name more than one time !!");
+        }
     }
 
 
