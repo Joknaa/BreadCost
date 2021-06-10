@@ -101,7 +101,6 @@ public class LoginPanel extends javax.swing.JPanel {
 
         loginField2.setBackground(new java.awt.Color(154, 140, 152));
         loginField2.setForeground(new java.awt.Color(244, 252, 231));
-        loginField2.setText("username");
         loginField2.setBorder(null);
         loginField2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -120,7 +119,6 @@ public class LoginPanel extends javax.swing.JPanel {
 
         tfPass.setBackground(new java.awt.Color(154, 140, 152));
         tfPass.setForeground(new java.awt.Color(244, 252, 231));
-        tfPass.setText("password");
         tfPass.setBorder(null);
         tfPass.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -249,14 +247,12 @@ public class LoginPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginField2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_loginField2FocusGained
-        loginField2.setText("");
     }//GEN-LAST:event_loginField2FocusGained
 
     private void loginField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginField2ActionPerformed
     }//GEN-LAST:event_loginField2ActionPerformed
 
     private void tfPassFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfPassFocusGained
-        tfPass.setText("");
     }//GEN-LAST:event_tfPassFocusGained
 
     private void signUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpButtonActionPerformed

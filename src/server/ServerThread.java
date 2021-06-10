@@ -12,11 +12,8 @@ import javax.crypto.SecretKey;
 import javax.swing.*;
 import java.io.*;
 import java.net.Socket;
-import java.sql.DriverManager;
-import java.sql.Statement;
+import java.net.SocketException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,18 +29,14 @@ public class ServerThread extends Thread {
     public static final String NICKNAME_INVALID = "Nickname or password is incorrect";
     public static final String SIGNUP_SUCCESS = "Sign up successful!";
     public static final String ACCOUNT_EXIST = "This nickname has been used! Please use another nickname!";
-
-    public String base64publicRSA;
-    public String encryptedKeyBlowfish;
-
+    private static final HashMap<String, SecretKey> BlowfishKeys = new HashMap<String, SecretKey>();
     public static Hashtable<String, ServerThread> listUser = new Hashtable<>();
     static Socket senderSocket, receiverSocket;
     static boolean isBusy = false;
     private final int BUFFER_SIZE = 1024;
+    public String base64publicRSA;
+    public String encryptedKeyBlowfish;
     public JTextArea taServer;
-
-    private static final HashMap<String, SecretKey> BlowfishKeys = new HashMap<String, SecretKey>();
-
     Socket socketOfServer;
     BufferedWriter bw;
     BufferedReader br;
@@ -85,7 +78,7 @@ public class ServerThread extends Thread {
 
     public String recieveFromClient() {
         try {
-            return br.readLine();
+           return br.readLine();
         } catch (IOException ex) {
             System.out.println(clientName + " is disconnected!");
         }
@@ -205,6 +198,7 @@ public class ServerThread extends Thread {
 
         return CMD;
     }
+
     public String getOnlineUsers() {
         StringBuffer kq = new StringBuffer();
         String temp = null;
@@ -256,14 +250,31 @@ public class ServerThread extends Thread {
     }
 
     public void clientQuit() {
+        try {
+            String str;
+            while ((str = br.readLine()) != null) {
+                System.out.println(str);
+            }
+        } catch (IOException e) {
+            if (clientName != null) {
+
+                this.appendMessage("\n[" + sdf.format(new Date()) + "] Client \"" + clientName + "\" is disconnected!");
+                listUser.remove(clientName);
+                if (listUser.isEmpty())
+                    this.appendMessage("\n[" + sdf.format(new Date()) + "] Now there's no one is connecting to server\n");
+                notifyToAllUsers("CMD_ONLINE_USERS|" + getOnlineUsers());
+                notifyToUsersInRoom("CMD_ONLINE_THIS_ROOM" + getUsersThisRoom());
+                notifyToUsersInRoom(clientName + " has quitted");
+            }        }
         if (clientName != null) {
+
             this.appendMessage("\n[" + sdf.format(new Date()) + "] Client \"" + clientName + "\" is disconnected!");
             listUser.remove(clientName);
-            if (listUser.isEmpty())
-                this.appendMessage("\n[" + sdf.format(new Date()) + "] Now there's no one is connecting to server\n");
+            if (listUser.isEmpty())  this.appendMessage("\n[" + sdf.format(new Date()) + "] Now there's no one is connecting to server\n");
             notifyToAllUsers("CMD_ONLINE_USERS|" + getOnlineUsers());
             notifyToUsersInRoom("CMD_ONLINE_THIS_ROOM" + getUsersThisRoom());
             notifyToUsersInRoom(clientName + " has quitted");
+            System.out.println("quite finished");
         }
     }
 
@@ -310,18 +321,18 @@ public class ServerThread extends Thread {
                         case "CMD_PUBLICRSAKEY":
                             base64publicRSA = tokenizer.nextToken();
                             senderr = tokenizer.nextToken();
-                            System.out.println("(SERVER) RECUPERAT PUBLIC KEY : "+ base64publicRSA);
+                            System.out.println("(SERVER) RECUPERAT PUBLIC KEY : " + base64publicRSA);
                             //BLOWFISH ENCRYPTION
                             Blowfish encryption = new Blowfish();
                             SecretKey blowfishKey = encryption.getBlowfishKey();
-                            System.out.println("(SERVER) BLOWFISH KEY CREATION : "+  blowfishKey);
+                            System.out.println("(SERVER) BLOWFISH KEY CREATION : " + blowfishKey);
                             BlowfishKeys.put(senderr, blowfishKey);
-                            System.out.println("(SERVER) SENDERRR : "+senderr+" KEY : "+BlowfishKeys.get(senderr));
+                            System.out.println("(SERVER) SENDERRR : " + senderr + " KEY : " + BlowfishKeys.get(senderr));
                             //ENCRYPT KEY RSA
                             String encoded64Blowfish = Base64.getEncoder().encodeToString(blowfishKey.getEncoded());
                             encryptedKeyBlowfish = Base64.getEncoder().encodeToString(RSA.encryptRSA(encoded64Blowfish, base64publicRSA));
                             System.out.println("(SERVER) ENCRYPT BLOWFISH KEY WITH RSA PUBLIC KEY ");
-                            sendToClient("CMD_BLOWFISHKEYTOCLIENT|"+ encryptedKeyBlowfish);
+                            sendToClient("CMD_BLOWFISHKEYTOCLIENT|" + encryptedKeyBlowfish);
                             System.out.println("(SERVER) SEND TO CLIENT ENCRYPTED BLOWFISH KEY");
                             break;
 
@@ -337,13 +348,13 @@ public class ServerThread extends Thread {
                             ServerThread st_receiver = listUser.get(privateReceiver);
 
                             System.out.println("****************PRIVATE RECEIVER - PRIVATE SENDER****************");
-                            System.out.println("(SERVER) BLOWFISH RECEIVER : "+privateReceiver+" KEY : "+BlowfishKeys.get(privateReceiver));
-                            System.out.println("(SERVER) BLOWFISH SENDER : "+privateSender+" KEY : "+BlowfishKeys.get(privateSender));
+                            System.out.println("(SERVER) BLOWFISH RECEIVER : " + privateReceiver + " KEY : " + BlowfishKeys.get(privateReceiver));
+                            System.out.println("(SERVER) BLOWFISH SENDER : " + privateSender + " KEY : " + BlowfishKeys.get(privateSender));
                             System.out.println("********************************");
 
                             SecretKey keyy = BlowfishKeys.get(privateSender);
-                            String decreptedSenderMsg = Blowfish.decryption(messageContent,keyy);
-                            System.out.println("(SERVER)MSG DECRYPTED : "+ decreptedSenderMsg);
+                            String decreptedSenderMsg = Blowfish.decryption(messageContent, keyy);
+                            System.out.println("(SERVER)MSG DECRYPTED : " + decreptedSenderMsg);
 
                             try {
                                 userDB.StoreMessage(privateSender, privateReceiver, 0, decreptedSenderMsg, "");
@@ -352,9 +363,9 @@ public class ServerThread extends Thread {
                             }
 
                             SecretKey keyy2 = BlowfishKeys.get(privateReceiver);
-                            String encreptedMsgBlowfish = Blowfish.encryption(decreptedSenderMsg,keyy2);
-                            System.out.println("(SERVER) LAST ENCRYPTION : "+keyy2);
-                            System.out.println("(SERVER) SEND MSG TO RECEIVER : "+privateReceiver + " FROM : "+ privateSender);
+                            String encreptedMsgBlowfish = Blowfish.encryption(decreptedSenderMsg, keyy2);
+                            System.out.println("(SERVER) LAST ENCRYPTION : " + keyy2);
+                            System.out.println("(SERVER) SEND MSG TO RECEIVER : " + privateReceiver + " FROM : " + privateSender);
                             System.out.println(st_receiver);
                             System.out.println("CMD_PRIVATECHAT|" + privateSender + "|" + encreptedMsgBlowfish);
 
@@ -443,7 +454,7 @@ public class ServerThread extends Thread {
                             ServerThread stSender = listUser.get(sender);
                             sendToSpecificClient(stSender, "CMD_FILEAVAILABLE|" + fileName + "|" + receiver + "|" + sender);
 
-                            if (receiver.equals("Group Chat")){
+                            if (receiver.equals("Group Chat")) {
                                 for (String user : listUser.keySet()) {
                                     if (!user.equals(sender))
                                         sendToSpecificClient(listUser.get(user), "CMD_FILEAVAILABLE|" + fileName + "|" + sender + "|" + sender);
@@ -491,18 +502,22 @@ public class ServerThread extends Thread {
                             notifyToAllUsers(message);
                             break;
                     }
-
-                } catch(NoSuchElementException x) {
+                } catch (SocketException se) {
+                    clientQuit();
+                } catch (NoSuchElementException x) {
                     System.out.println("HNA KAYN MOCHKIIL");
-                } catch (NullPointerException ex){
+                    System.out.println(x.toString());
+                } catch (NullPointerException ex) {
                     System.out.println("Null Pointer Exception");
+                    clientQuit();
+                    System.out.println(ex.toString());
                     break;
-                }catch (Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                     System.out.println("(SERVER) USER DISCONNECTED");
                     System.out.println(e);
                     clientQuit();
-                    //break;
+                    break;
                 }
             }
         } catch (IOException ex) {

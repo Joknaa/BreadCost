@@ -2,36 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f8faf640-903c-48de-ba04-1d2a61c6c08c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/commons_net_3_8_0.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatSocket4.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ChatSocket4.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$9.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/server/ServerThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/server/ServerThread.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/server/UserDatabase.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/server/UserDatabase.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/LoginPanel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/LoginPanel$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/LoginPanel$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/LoginPanel$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/LoginPanel$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/LoginPanel$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/LoginPanel$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/LoginPanel$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/LoginPanel$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/LoginPanel$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/LoginPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/LoginPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EX/ClientFrame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EX/RoomPanel.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/ClientFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ClientFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/ServerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ServerThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/UserDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/UserDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/ChatLab.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ChatLab.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/LoginPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,17 +124,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="ClientSide" type="Multirun" singleton="false" separateTabs="false" reuseTabsWithFailures="false" startOneByOne="true" markFailedProcess="true" hideSuccessProcess="false" delayTime="1.0">
       <runConfiguration name="ClientFrame" type="Application" />
       <method v="2">
@@ -207,7 +179,8 @@
       <workItem from="1623313356022" duration="11390000" />
       <workItem from="1623324889519" duration="931000" />
       <workItem from="1623326526167" duration="10000" />
-      <workItem from="1623334852385" duration="9241000" />
+      <workItem from="1623334852385" duration="10016000" />
+      <workItem from="1623348777596" duration="3789000" />
     </task>
     <servers />
   </component>

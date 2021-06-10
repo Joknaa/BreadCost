@@ -372,7 +372,11 @@ public class ClientFrame extends JFrame implements Runnable {
         if (response != null) {
             if (response.equals(NICKNAME_EXIST) || response.equals(NICKNAME_INVALID)) {
                 JOptionPane.showMessageDialog(this, response, "Error", JOptionPane.ERROR_MESSAGE);
-
+                try {
+                    socketOfClient.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             } else {
                 loginPanel.setVisible(false);
                 chatLabPanel.setVisible(true);
@@ -465,10 +469,8 @@ public class ClientFrame extends JFrame implements Runnable {
             chatLabPanel.setVisible(false);
             signUpPanel.setVisible(false);
             loginPanel.setVisible(true);
-            disconnect();
+            //disconnect();
             //todo: fix the Logout
-
-
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -658,6 +660,7 @@ public class ClientFrame extends JFrame implements Runnable {
                             if (OnlineUsersList.contains(userName) || userName.equals(this.name)) {
                                 this.chatLabPanel.appendMessage_OnlineUsersList(userName, new Color(173, 231, 115), this);
                             } else {
+                                System.out.println("Making someone offlineee");
                                 this.chatLabPanel.appendMessage_OnlineUsersList(userName, new Color(231, 115, 115), this);
                             }
                         }
