@@ -649,7 +649,6 @@ public class ChatLab extends javax.swing.JPanel {
         conversationLabel.setFont(new Font("Source Code Pro", Font.BOLD, 20)); // NOI18N
         conversationLabel.setHorizontalAlignment(SwingConstants.CENTER);
         conversationLabel.setIcon(new ImageIcon(getClass().getResource(iconPath))); // NOI18N
-        conversationLabel.setBorder(BorderFactory.createLineBorder(new Color(74, 78, 105)));
         conversationLabel.setSize(new Dimension(183, 50));
 
         //todo: highlight the pressed chat
@@ -729,10 +728,10 @@ public class ChatLab extends javax.swing.JPanel {
 
         if (sender.equals(this.userName.getText())) {
             StyleConstants.setAlignment(sas, StyleConstants.ALIGN_RIGHT);
-            appendMessage_Sent(sender, " sends a file ", Color.BLACK, new Color(0, 102, 204));
+            appendMessage_Sent(sender, " sends a file ", new Color(33, 72, 127), Color.black);
         } else {
             StyleConstants.setAlignment(sas, StyleConstants.ALIGN_LEFT);
-            appendMessage_Received(sender, " sends a file ", Color.BLACK, new Color(0, 102, 204));
+            appendMessage_Received(sender, " sends a file ", new Color(33, 72, 127), Color.black);
         }
 
         try {

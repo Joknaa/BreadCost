@@ -263,16 +263,6 @@ public class ClientFrame extends JFrame implements Runnable {
             chatLabPanel.SetCurrentConversationDoc(chatLabPanel.GetConversationsDoc(clickedUserName));
             return;
         }
-
-        //<editor-fold desc="old stuff">
-        PrivateChat pc = new PrivateChat(name, clickedUserName, serverHost, bw, br);
-        pc.getLbReceiver().setText("Private chat with \"" + pc.receiver + "\"");
-        pc.setTitle(pc.receiver);
-        pc.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        pc.setVisible(true);
-        listReceiver.put(clickedUserName, pc);
-        //</editor-fold>
-
         SetupEncryptionKeys();
 
         StyledDocument document = new DefaultStyledDocument();
@@ -305,15 +295,15 @@ public class ClientFrame extends JFrame implements Runnable {
 
                 if (!path.equals("")) {
                     if (reciever.equals(sender)) {
-                        chatLabPanel.insertButton(sender, path);
+                        chatLabPanel.insertButton(senderr, path);
                     } else {
-                        chatLabPanel.insertButton(receiver, path);
+                        chatLabPanel.insertButton(senderr, path);
                     }
                 } else if (!msgtxt.equals("")) {
                     if (reciever.equals(sender)) {
-                        chatLabPanel.appendMessage_Received(sender + ": ", msgtxt, Color.MAGENTA, new Color(56, 224, 0));
+                        chatLabPanel.appendMessage_Received(senderr + ": ", msgtxt, new Color(33, 72, 127), new Color(0, 0, 0));
                     } else {
-                        chatLabPanel.appendMessage_Received(receiver + ": ", msgtxt, Color.MAGENTA, new Color(56, 224, 0));
+                        chatLabPanel.appendMessage_Sent(senderr + ": ", msgtxt, new Color(33, 72, 127), new Color(0, 0, 0));
                     }
                 }
             }
@@ -567,9 +557,9 @@ public class ClientFrame extends JFrame implements Runnable {
                                     System.out.println("INSERED TO CHATPANEL : " + msgtxt);
 
                                     if (senderr.equals(this.name))
-                                        this.chatLabPanel.appendMessage_Sent(senderr + ": ", msgtxt, Color.BLACK, new Color(0, 102, 204));
+                                        this.chatLabPanel.appendMessage_Sent(senderr + ": ", msgtxt, new Color(33, 72, 127), new Color(0, 0, 0));
                                     else
-                                        this.chatLabPanel.appendMessage_Received(senderr + ": ", msgtxt, Color.MAGENTA, new Color(56, 224, 0));
+                                        this.chatLabPanel.appendMessage_Received(senderr + ": ", msgtxt, new Color(33, 72, 127), new Color(0, 0, 0));
                                 }
                             } catch (Exception e1) {
                                 e1.printStackTrace();
@@ -579,9 +569,9 @@ public class ClientFrame extends JFrame implements Runnable {
 
 
                         if (sender.equals(this.name)) {
-                            this.chatLabPanel.appendMessage_Sent(sender + ": ", msg, Color.BLACK, new Color(0, 102, 204));
+                            this.chatLabPanel.appendMessage_Sent(sender + ": ", msg, new Color(33, 72, 127), new Color(0, 0, 0));
                         } else {
-                            this.chatLabPanel.appendMessage_Received(sender + ": ", msg, Color.MAGENTA, new Color(56, 224, 0));
+                            this.chatLabPanel.appendMessage_Received(sender + ": ", msg, new Color(33, 72, 127), new Color(0, 0, 0));
                         }
                         break;
 
@@ -604,7 +594,6 @@ public class ClientFrame extends JFrame implements Runnable {
                     case "CMD_PRIVATECHAT":
                         sender = tokenizer.nextToken();
                         msg = response.substring(cmd.length() + sender.length() + 2);
-                        pc = listReceiver.get(sender);
                         String decreptedBlowfishMsg = "";
                         try {
                             decreptedBlowfishMsg = Blowfish.decryption(msg, originalBlowfishKey);
@@ -612,32 +601,11 @@ public class ClientFrame extends JFrame implements Runnable {
                             e.printStackTrace();
                         }
 
-                        //<editor-fold desc="Old Stuff">
-                        if (pc == null) {
-                            pc = new PrivateChat(name, sender, serverHost, bw, br);
-                            pc.sender = name;
-                            pc.receiver = sender;
-                            pc.serverHost = this.serverHost;
-                            pc.bw = ClientFrame.this.bw;
-                            pc.br = ClientFrame.this.br;
-
-                            pc.getLbReceiver().setText("Private chat with \"" + pc.receiver + "\"");
-                            pc.setTitle(pc.receiver);
-                            pc.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                            pc.setVisible(true);
-
-                            listReceiver.put(sender, pc);
-                        } else {
-                            pc.setVisible(true);
-                        }
-                        //</editor-fold>
-
                         if (sender.equals(this.name)) {
-                            this.chatLabPanel.appendMessage_Sent(sender + ": ", decreptedBlowfishMsg, Color.BLACK, new Color(0, 102, 204));
+                            this.chatLabPanel.appendMessage_Sent(sender + ": ", decreptedBlowfishMsg, new Color(33, 72, 127), new Color(0, 0, 0));
                         } else {
-                            this.chatLabPanel.appendMessage_Received(sender + ": ", decreptedBlowfishMsg, Color.MAGENTA, new Color(56, 224, 0));
+                            this.chatLabPanel.appendMessage_Received(sender + ": ", decreptedBlowfishMsg, new Color(33, 72, 127), new Color(0, 0, 0));
                         }
-                        pc.appendMessage(sender + ": ", decreptedBlowfishMsg, Color.MAGENTA, new Color(56, 224, 0));
                         break;
 
                     case "CMD_USERS":
@@ -708,7 +676,7 @@ public class ClientFrame extends JFrame implements Runnable {
                         if (cmd.equals(this.name)) {
                             this.chatLabPanel.appendMessage_Sent(cmd + ": ", "\n  ", Color.BLACK, Color.BLACK);
                         } else {
-                            this.chatLabPanel.appendMessage_Received(cmd + ": ", "\n   ", Color.MAGENTA, Color.MAGENTA);
+                            this.chatLabPanel.appendMessage_Received(cmd + ": ", "\n   ", Color.gray, Color.gray);
                         }
 
                         switch (icon) {

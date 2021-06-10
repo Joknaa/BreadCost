@@ -5,8 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/ClientFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ClientFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/ServerFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ServerFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/ServerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ServerThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/ChatLab.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ChatLab.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
