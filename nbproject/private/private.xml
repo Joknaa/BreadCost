@@ -7,8 +7,10 @@
         <group>
             <file>file:/O:/MyStuff/Files/mySpace/Projects/ENSA/JAVA/BreadCost/src/controller/SendFileFrame.java</file>
             <file>file:/O:/MyStuff/Files/mySpace/Projects/ENSA/JAVA/BreadCost/src/view/ChatLab.java</file>
+            <file>file:/O:/MyStuff/Files/mySpace/Projects/ENSA/JAVA/BreadCost/src/server/ServerThread.java</file>
             <file>file:/O:/MyStuff/Files/mySpace/Projects/ENSA/JAVA/BreadCost/src/view/LoginPanel.java</file>
             <file>file:/O:/MyStuff/Files/mySpace/Projects/ENSA/JAVA/BreadCost/src/view/PrivateChat.java</file>
+            <file>file:/O:/MyStuff/Files/mySpace/Projects/ENSA/JAVA/BreadCost/src/server/ServerFrame.java</file>
         </group>
     </open-files>
 </project-private>

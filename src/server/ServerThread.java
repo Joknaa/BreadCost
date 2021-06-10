@@ -41,23 +41,10 @@ public class ServerThread extends Thread {
     BufferedWriter bw;
     BufferedReader br;
     String clientName, clientPass, clientRoom;
-    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
     StringTokenizer tokenizer;
-    /*
-    Chú ý: có 3 loại socket của server:
-    - 1 loại đc tạo ra khi có 1 client tới kết nối bình thường, lúc này thuộc tính socketOfServer của class này đc khởi tạo, còn 2 thuộc tính senderSocket = receiverSocket = null
-    - 1 loại đc tạo ra khi client sender tạo 1 socket mới tới server, lúc này thuộc tính socketOfServer của class này cũng đc khởi tạo. nhưng thuộc tính senderSocket cũng đc khởi tạo và receiverSocket = null
-    - 1 loại đc tạo ra khi client receiver tạo 1 socket mới tới server, lúc này thuộc tính socketOfServer của class này cũng đc khởi tạo. nhưng thuộc tính receiverSocket cũng đc khởi tạo và senderSocket = null
-    
-    do đó 2 thuộc tính senderSocket và receiverSocket phải static để với mọi đối tượng đc tạo ra 2 thằng này ko đổi
-    Nếu chúng ko phải static, giả sử socket của sender tới, 1 đối tượng của lớp này tạo ra và có senderSocket = socket của thằng gửi, nhưng receiverSocket=null, nghĩa là socket của thằng nhận ko có, do đó file chả ko đc đi đâu cả
-    Tương tự, bên receiver có receiverSocket !=null, do đó nó ko biết nguồn gừi là ai
-    */
-    String senderName, receiverName;
     UserDatabase userDB;
-
     String senderr;
-
+    int UserCount = 0;
     public ServerThread(Socket socketOfServer) {
         this.socketOfServer = socketOfServer;
         this.bw = null;
@@ -252,9 +239,9 @@ public class ServerThread extends Thread {
     public void clientQuit() {
         if (clientName != null) {
 
-            this.appendMessage("\n[" + sdf.format(new Date()) + "] Client \"" + clientName + "\" is disconnected!");
+            this.appendMessage("\nClient \"" + clientName + "\" is disconnected!");
             listUser.remove(clientName);
-            if (listUser.isEmpty())  this.appendMessage("\n[" + sdf.format(new Date()) + "] Now there's no one is connecting to server\n");
+            UserCount--;
             notifyToAllUsers("CMD_ONLINE_USERS|" + getOnlineUsers());
             notifyToUsersInRoom("CMD_ONLINE_THIS_ROOM" + getUsersThisRoom());
             notifyToUsersInRoom(clientName + " has quited");
@@ -391,8 +378,7 @@ public class ServerThread extends Thread {
                                 int kq = userDB.checkUser(clientName, clientPass);
                                 if (kq == 1) {
                                     sendToClient(NICKNAME_VALID);
-
-                                    this.appendMessage("\n[" + sdf.format(new Date()) + "] Client \"" + clientName + "\" is connecting to server");
+                                    this.appendMessage("\nClient \"" + clientName + "\" is connecting to server");
                                     listUser.put(clientName, this);
                                 } else sendToClient(NICKNAME_INVALID);
                             }
