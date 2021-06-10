@@ -5,10 +5,18 @@
  */
 package server;
 
+import EncDec.Blowfish;
+import EncDec.RSA;
+
+import javax.crypto.SecretKey;
 import javax.swing.*;
 import java.io.*;
 import java.net.Socket;
+import java.sql.DriverManager;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,6 +33,8 @@ public class ServerThread extends Thread {
     public static final String SIGNUP_SUCCESS = "Sign up successful!";
     public static final String ACCOUNT_EXIST = "This nickname has been used! Please use another nickname!";
 
+    public String base64publicRSA;
+    public String encryptedKeyBlowfish;
 
     public static Hashtable<String, ServerThread> listUser = new Hashtable<>();
     static Socket senderSocket, receiverSocket;
@@ -32,6 +42,7 @@ public class ServerThread extends Thread {
     private final int BUFFER_SIZE = 1024;
     public JTextArea taServer;
 
+    private static final HashMap<String, SecretKey> BlowfishKeys = new HashMap<String, SecretKey>();
 
     Socket socketOfServer;
     BufferedWriter bw;
@@ -51,6 +62,8 @@ public class ServerThread extends Thread {
     */
     String senderName, receiverName;
     UserDatabase userDB;
+
+    String senderr;
 
     public ServerThread(Socket socketOfServer) {
         this.socketOfServer = socketOfServer;
@@ -269,7 +282,6 @@ public class ServerThread extends Thread {
     @Override
     public void run() {
         try {
-
             bw = new BufferedWriter(new OutputStreamWriter(socketOfServer.getOutputStream()));
             br = new BufferedReader(new InputStreamReader(socketOfServer.getInputStream()));
 
@@ -288,6 +300,29 @@ public class ServerThread extends Thread {
                             str = new StringBuffer(message);
                             str = str.delete(0, 9);
                             notifyToUsersInRoom("CMD_CHAT|" + this.clientName + "|" + str.toString());
+                            try {
+                                userDB.StoreMessage(clientName, "GRP1", 1, str.toString(), "");
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            break;
+
+                        case "CMD_PUBLICRSAKEY":
+                            base64publicRSA = tokenizer.nextToken();
+                            senderr = tokenizer.nextToken();
+                            System.out.println("(SERVER) RECUPERAT PUBLIC KEY : "+ base64publicRSA);
+                            //BLOWFISH ENCRYPTION
+                            Blowfish encryption = new Blowfish();
+                            SecretKey blowfishKey = encryption.getBlowfishKey();
+                            System.out.println("(SERVER) BLOWFISH KEY CREATION : "+  blowfishKey);
+                            BlowfishKeys.put(senderr, blowfishKey);
+                            System.out.println("(SERVER) SENDERRR : "+senderr+" KEY : "+BlowfishKeys.get(senderr));
+                            //ENCRYPT KEY RSA
+                            String encoded64Blowfish = Base64.getEncoder().encodeToString(blowfishKey.getEncoded());
+                            encryptedKeyBlowfish = Base64.getEncoder().encodeToString(RSA.encryptRSA(encoded64Blowfish, base64publicRSA));
+                            System.out.println("(SERVER) ENCRYPT BLOWFISH KEY WITH RSA PUBLIC KEY ");
+                            sendToClient("CMD_BLOWFISHKEYTOCLIENT|"+ encryptedKeyBlowfish);
+                            System.out.println("(SERVER) SEND TO CLIENT ENCRYPTED BLOWFISH KEY");
                             break;
 
                         case "CMD_PRIVATECHAT":
@@ -295,11 +330,37 @@ public class ServerThread extends Thread {
                             String privateReceiver = tokenizer.nextToken();
                             String messageContent = message.substring(cmd.length() + privateSender.length() + privateReceiver.length() + 3);
 
+
+                            boolean x = listUser.containsKey(privateReceiver);
+                            System.out.println(x);
+                            System.out.println("(SERVER) GET MSG FROM SENDER : " + messageContent);
                             ServerThread st_receiver = listUser.get(privateReceiver);
 
-                            sendToSpecificClient(st_receiver, "CMD_PRIVATECHAT|" + privateSender + "|" + messageContent);
+                            System.out.println("****************PRIVATE RECEIVER - PRIVATE SENDER****************");
+                            System.out.println("(SERVER) BLOWFISH RECEIVER : "+privateReceiver+" KEY : "+BlowfishKeys.get(privateReceiver));
+                            System.out.println("(SERVER) BLOWFISH SENDER : "+privateSender+" KEY : "+BlowfishKeys.get(privateSender));
+                            System.out.println("********************************");
 
-                            System.out.println("[ServerThread] message = " + messageContent);
+                            SecretKey keyy = BlowfishKeys.get(privateSender);
+                            String decreptedSenderMsg = Blowfish.decryption(messageContent,keyy);
+                            System.out.println("(SERVER)MSG DECRYPTED : "+ decreptedSenderMsg);
+
+                            try {
+                                userDB.StoreMessage(privateSender, privateReceiver, 0, decreptedSenderMsg, "");
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                            SecretKey keyy2 = BlowfishKeys.get(privateReceiver);
+                            String encreptedMsgBlowfish = Blowfish.encryption(decreptedSenderMsg,keyy2);
+                            System.out.println("(SERVER) LAST ENCRYPTION : "+keyy2);
+                            System.out.println("(SERVER) SEND MSG TO RECEIVER : "+privateReceiver + " FROM : "+ privateSender);
+                            System.out.println(st_receiver);
+                            System.out.println("CMD_PRIVATECHAT|" + privateSender + "|" + encreptedMsgBlowfish);
+
+                            sendToSpecificClient(st_receiver, "CMD_PRIVATECHAT|" + privateSender + "|" + encreptedMsgBlowfish);
+                            System.out.println("(SERVER) MSG SENT");
+                            System.out.println("[ServerThread] message = " + encreptedMsgBlowfish);
                             break;
 
                         case "CMD_ROOM":
@@ -392,6 +453,13 @@ public class ServerThread extends Thread {
                                 sendToSpecificClient(stReceiver, "CMD_FILEAVAILABLE|" + fileName + "|" + sender + "|" + sender);
                             }
 
+                            try {
+                                userDB.StoreMessage(sender, receiver, 0, "", fileName);
+                            } catch (Exception e) {
+                                System.out.println("hehe");
+                                //e.printStackTrace();
+                            }
+
                             isBusy = false;
                             break;
 
@@ -424,10 +492,17 @@ public class ServerThread extends Thread {
                             break;
                     }
 
-                } catch (Exception e) {
-                    //todo: Dont disconnect the user when sending a private message to an offline user
-                    clientQuit();
+                } catch(NoSuchElementException x) {
+                    System.out.println("HNA KAYN MOCHKIIL");
+                } catch (NullPointerException ex){
+                    System.out.println("Null Pointer Exception");
                     break;
+                }catch (Exception e) {
+                    e.printStackTrace();
+                    System.out.println("(SERVER) USER DISCONNECTED");
+                    System.out.println(e);
+                    clientQuit();
+                    //break;
                 }
             }
         } catch (IOException ex) {

@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -116,5 +117,15 @@ public class UserDatabase {
             Logger.getLogger(UserDatabase.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("[UserDatabase.java] Lỗi close connection");
         }
+    }
+
+    public void StoreMessage(String sender, String receiver, int idGroup, String message, String fileName) throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        java.sql.Connection conn =  DriverManager.getConnection(URL_MYSQL,USERNAME,PASSWORD);
+        Statement addh =  conn.createStatement();
+        LocalDateTime now = LocalDateTime.now();
+        String stadd = "INSERT INTO chat_db.messages(`ID_MESSAGE`, `ID_SENDER`, `ID_RECIEVER`, `ID_GRP`, `MSG_TEXT`, `DATETIME`, `NAME`, `PATH`, `DATA`) " +
+                "VALUES (NULL,'"+sender+"', '"+ receiver +"', "+ idGroup +",'"+ message+"' ,'"+now+"', '', '"+ fileName +"', '')";
+        addh.executeUpdate(stadd);
     }
 }

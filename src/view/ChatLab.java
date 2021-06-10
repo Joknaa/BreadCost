@@ -5,7 +5,6 @@
  */
 package view;
 
-
 import controller.ClientFrame;
 import controller.ReceivingFileThread;
 import controller.SendFileFrame;

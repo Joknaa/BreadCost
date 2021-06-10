@@ -5,8 +5,12 @@
  */
 package controller;
 
+import EncDec.Blowfish;
+import EncDec.RSA;
 import view.*;
 
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import javax.swing.*;
 import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.StyledDocument;
@@ -17,6 +21,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.*;
 import java.net.Socket;
+import java.security.NoSuchAlgorithmException;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.List;
 import java.util.*;
 import java.util.logging.Level;
@@ -33,10 +41,14 @@ public class ClientFrame extends JFrame implements Runnable {
     public static final String NICKNAME_INVALID = "Nickname or password is incorrect";
     public static final String SIGNUP_SUCCESS = "Sign up successful!";
     public static final String ACCOUNT_EXIST = "This nickname has been used! Please use another nickname!";
+    public static final String RELOAD_OLD_GROUP_CHAT = "$charge_old_msgs$";
+    private static String Base64Private;
+    private static SecretKey originalBlowfishKey;
+    private static String decryptedString;
     int Count = 0;
     List<String> AllUsersList = new ArrayList<>();
     List<String> OnlineUsersList = new ArrayList<>();
-
+    HashMap<String, String> Base64Public = new HashMap<>();
     String serverHost;
     String name;
     String room = "Room1";
@@ -130,6 +142,14 @@ public class ClientFrame extends JFrame implements Runnable {
         client.setVisible(true);
     }
 
+    public static String getPrivateKeyRSA() {
+        return Base64Private;
+    }
+
+    public static SecretKey getBlowfishKey() {
+        return originalBlowfishKey;
+    }
+
     private void addEventsForSignUpPanel() {
         signUpPanel.getLbBack_signup().addMouseListener(new MouseAdapter() {
             @Override
@@ -171,7 +191,7 @@ public class ClientFrame extends JFrame implements Runnable {
 
     private void addEventsForChatLabPanel() {
         chatLabPanel.getBtSend().addActionListener(ae -> btSendEvent());
-        chatLabPanel.getBtExit().addActionListener(ae -> btExitEvent());
+        chatLabPanel.getBtExit().addActionListener(ae -> btLogoutEvent());
         chatLabPanel.getTaInput().addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent ke) {
@@ -230,7 +250,6 @@ public class ClientFrame extends JFrame implements Runnable {
         }
     }
 
-
     public void openPrivateChatInsideRoom(String clickedUserName) {
         if (clickedUserName.equals(ClientFrame.this.name)) {
             JOptionPane.showMessageDialog(ClientFrame.this, "Can't send a message to yourself!", "Info", JOptionPane.INFORMATION_MESSAGE);
@@ -245,18 +264,75 @@ public class ClientFrame extends JFrame implements Runnable {
             return;
         }
 
+        //<editor-fold desc="old stuff">
         PrivateChat pc = new PrivateChat(name, clickedUserName, serverHost, bw, br);
         pc.getLbReceiver().setText("Private chat with \"" + pc.receiver + "\"");
         pc.setTitle(pc.receiver);
         pc.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         pc.setVisible(true);
         listReceiver.put(clickedUserName, pc);
+        //</editor-fold>
+
+        SetupEncryptionKeys();
 
         StyledDocument document = new DefaultStyledDocument();
         chatLabPanel.AddToConversationsDocList(clickedUserName, document);
         chatLabPanel.SetCurrentConversationDoc(chatLabPanel.GetConversationsDoc(clickedUserName));
+
+        LoadOldPrivateMessages(name, clickedUserName, 0);
+
+
         chatLabPanel.appendMessage_ConversationsList(clickedUserName, "/Resources/ChatApp/direct_chat_45px.png", this);
 
+    }
+
+    private void LoadOldPrivateMessages(String sender, String receiver, int idGroup) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            java.sql.Connection conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/chat_db", "root", "oknaa");
+            Statement st1 = conn1.createStatement();
+            String fil1 = "select `MSG_TEXT`,`ID_SENDER`, `ID_RECIEVER`,`ID_MESSAGE`, `PATH` from chat_db.messages " +
+                    "where ((ID_SENDER = '" + sender + "' AND ID_RECIEVER='" + receiver + "') OR (ID_SENDER = '" + receiver + "' AND ID_RECIEVER='" + sender + "')) " +
+                    "AND `ID_GRP`=" + idGroup + " ORDER BY `DATETIME`";
+            ResultSet rs1 = st1.executeQuery(fil1);
+
+
+            while (rs1.next()) {
+                String msgtxt = rs1.getString("MSG_TEXT");
+                String senderr = rs1.getString("ID_SENDER");
+                String reciever = rs1.getString("ID_RECIEVER");
+                String path = rs1.getString("PATH");
+
+                if (!path.equals("")) {
+                    if (reciever.equals(sender)) {
+                        chatLabPanel.insertButton(sender, path);
+                    } else {
+                        chatLabPanel.insertButton(receiver, path);
+                    }
+                } else if (!msgtxt.equals("")) {
+                    if (reciever.equals(sender)) {
+                        chatLabPanel.appendMessage_Received(sender + ": ", msgtxt, Color.MAGENTA, new Color(56, 224, 0));
+                    } else {
+                        chatLabPanel.appendMessage_Received(receiver + ": ", msgtxt, Color.MAGENTA, new Color(56, 224, 0));
+                    }
+                }
+            }
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    private void SetupEncryptionKeys() {
+        try {
+            RSA keyPairGenerator = new RSA();
+            Base64Public.put(this.name, Base64.getEncoder().encodeToString(keyPairGenerator.getPublicKey().getEncoded()));
+            Base64Private = Base64.getEncoder().encodeToString(keyPairGenerator.getPrivateKey().getEncoded());
+            System.out.println("(CONSTRUCTOR)PUBLIC AND PRIVATE KEYS CREATED, PUBLIC KEY : " + Base64Public.get(name));
+            sendToServer("CMD_PUBLICRSAKEY|" + Base64Public.get(name) + "|" + name);
+            System.out.println("(CONSTRUCTOR)PUBLIC AND PRIVATE KEYS SENT \n");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
     }
 
     private void leaveRoom() {
@@ -271,7 +347,6 @@ public class ClientFrame extends JFrame implements Runnable {
         //todo: the chat gets emptied when leaving !!
         this.setTitle("\"" + this.name + "\"");
     }
-
 
     private void btOkEvent() {
         //String hostname = loginPanel.getTfHost().getText().trim();
@@ -367,8 +442,16 @@ public class ClientFrame extends JFrame implements Runnable {
         if (userName.equals("Group Chat")) {
             this.sendToServer("CMD_CHAT|" + message);
         } else {
-            chatLabPanel.appendMessage_Sent(this.name + ": ", message, Color.BLACK, new Color(0, 102, 204));
-            this.sendToServer("CMD_PRIVATECHAT|" + this.name + "|" + userName + "|" + message);
+            try {
+                SecretKey blk = ClientFrame.getBlowfishKey();
+                System.out.println("(SENDER) GETTED KEY : " + blk);
+                String encryptedMsgBlowfish = Blowfish.encryption(message, blk);
+                System.out.println("(SENDER) SEND ENCRYPTED MSG : " + encryptedMsgBlowfish);
+                chatLabPanel.appendMessage_Sent(this.name + ": ", message, Color.BLACK, new Color(0, 102, 204));
+                this.sendToServer("CMD_PRIVATECHAT|" + this.name + "|" + userName + "|" + encryptedMsgBlowfish);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         this.btClearEvent();
     }
@@ -377,11 +460,8 @@ public class ClientFrame extends JFrame implements Runnable {
         chatLabPanel.getTaInput().setText("");
     }
 
-
-    private void btExitEvent() {
+    private void btLogoutEvent() {
         try {
-            //isRunning = false;
-            //System.exit(0);
             chatLabPanel.setVisible(false);
             signUpPanel.setVisible(false);
             loginPanel.setVisible(true);
@@ -443,7 +523,6 @@ public class ClientFrame extends JFrame implements Runnable {
             if (br != null) this.br.close();
             if (bw != null) this.bw.close();
             if (socketOfClient != null) this.socketOfClient.close();
-            System.out.println("trong khoi try catch");
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
             Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -457,146 +536,201 @@ public class ClientFrame extends JFrame implements Runnable {
         String msg;
         String cmd, icon;
         PrivateChat pc;
+        boolean isin = true;
 
         while (isRunning) {
-            boolean Erase;
-            response = this.recieveFromServer();
-            tokenizer = new StringTokenizer(response, "|");
-            cmd = tokenizer.nextToken();
-            switch (cmd) {
-                case "CMD_CHAT":
-                    sender = tokenizer.nextToken();
-                    msg = response.substring(cmd.length() + sender.length() + 2);
+            try {
 
-                    if (sender.equals(this.name)) {
-                        this.chatLabPanel.appendMessage_Sent(sender + ": ", msg, Color.BLACK, new Color(0, 102, 204));
-                    } else {
-                        this.chatLabPanel.appendMessage_Received(sender + ": ", msg, Color.MAGENTA, new Color(56, 224, 0));
-                    }
-                    break;
+                boolean Erase;
+                response = this.recieveFromServer();
+                tokenizer = new StringTokenizer(response, "|");
+                cmd = tokenizer.nextToken();
+                switch (cmd) {
+                    case "CMD_CHAT":
+                        sender = tokenizer.nextToken();
+                        msg = response.substring(cmd.length() + sender.length() + 2);
 
-                case "CMD_PRIVATECHAT":
-                    sender = tokenizer.nextToken();
-                    msg = response.substring(cmd.length() + sender.length() + 2);
+                        if (isin && msg.equals(RELOAD_OLD_GROUP_CHAT)) {
+                            try {
+                                Class.forName("com.mysql.cj.jdbc.Driver");
+                                java.sql.Connection conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306?chat_db", "root", "oknaa");
+                                Statement st1 = conn1.createStatement();
+                                String fil1 = "select `MSG_TEXT`,`ID_SENDER` from chat_db.messages where `ID_GRP`=1 ORDER BY `DATETIME` ASC";
+                                ResultSet rs1 = st1.executeQuery(fil1);
 
-                    pc = listReceiver.get(sender);
+                                while (rs1.next()) {
+                                    String msgtxt = rs1.getString("MSG_TEXT");
+                                    String senderr = rs1.getString("ID_SENDER");
 
-                    if (pc == null) {
-                        pc = new PrivateChat(name, sender, serverHost, bw, br);
-                        pc.sender = name;
-                        pc.receiver = sender;
-                        pc.serverHost = this.serverHost;
-                        pc.bw = ClientFrame.this.bw;
-                        pc.br = ClientFrame.this.br;
+                                    System.out.println("INSERED TO CHATPANEL : " + msgtxt);
 
-                        pc.getLbReceiver().setText("Private chat with \"" + pc.receiver + "\"");
-                        pc.setTitle(pc.receiver);
-                        pc.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                        pc.setVisible(true);
-
-                        listReceiver.put(sender, pc);
-                    } else {
-                        pc.setVisible(true);
-                    }
-
-                    //pc.appendMessage_Left(sender + ": ", msg);
-                    if (sender.equals(this.name)) {
-                        this.chatLabPanel.appendMessage_Sent(sender + ": ", msg, Color.BLACK, new Color(0, 102, 204));
-                    } else {
-                        this.chatLabPanel.appendMessage_Received(sender + ": ", msg, Color.MAGENTA, new Color(56, 224, 0));
-                    }
-                    pc.appendMessage(sender + ": ", msg, Color.MAGENTA, new Color(56, 224, 0));
-                    break;
-
-                case "CMD_USERS":
-                    this.chatLabPanel.getOnlineList().setText("");
-                    AllUsersList.clear();
-                    while (tokenizer.hasMoreTokens()) {
-                        cmd = tokenizer.nextToken();
-                        AllUsersList.add(cmd);
-                        this.chatLabPanel.appendMessage_OnlineUsersList(cmd, cmd.equals(this.name) ? Color.GREEN : Color.red, this);
-                    }
-                    break;
-
-                case "CMD_ONLINE_USERS":
-                    this.chatLabPanel.getOnlineList().setText("");
-                    while (tokenizer.hasMoreTokens()) {
-                        cmd = tokenizer.nextToken();
-                        OnlineUsersList.add(cmd);
-                    }
-                    for (String userName : AllUsersList) {
-                        if (OnlineUsersList.contains(userName) || userName.equals(this.name)) {
-                            this.chatLabPanel.appendMessage_OnlineUsersList(userName, new Color(173, 231, 115), this);
-                        } else {
-                            this.chatLabPanel.appendMessage_OnlineUsersList(userName, new Color(231, 115, 115), this);
+                                    if (senderr.equals(this.name))
+                                        this.chatLabPanel.appendMessage_Sent(senderr + ": ", msgtxt, Color.BLACK, new Color(0, 102, 204));
+                                    else
+                                        this.chatLabPanel.appendMessage_Received(senderr + ": ", msgtxt, Color.MAGENTA, new Color(56, 224, 0));
+                                }
+                            } catch (Exception e1) {
+                                e1.printStackTrace();
+                            }
+                            isin = false;
                         }
-                    }
-                    break;
 
-                case "CMD_ONLINE_THIS_ROOM":
-                    listModelThisRoom.clear();
-                    while (tokenizer.hasMoreTokens()) {
-                        cmd = tokenizer.nextToken();
-                        listModelThisRoom.addElement(cmd);
-                    }
-                    break;
 
-                case "CMD_FILEAVAILABLE":
-                    System.out.println("file available");
-                    fileName = tokenizer.nextToken();
-                    thePersonIamChattingWith = tokenizer.nextToken();
-                    thePersonSendFile = tokenizer.nextToken();
-                    pc = listReceiver.get(thePersonIamChattingWith);
-                    if (pc == null) {
-                        sender = this.name;
-                        receiver = thePersonIamChattingWith;
-                        pc = new PrivateChat(sender, receiver, serverHost, bw, br);
-
-                        pc.getLbReceiver().setText("Private chat with \"" + pc.receiver + "\"");
-                        pc.setTitle(pc.receiver);
-                        pc.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-
-                        listReceiver.put(receiver, pc);
-                    }
-
-                    pc.setVisible(true);
-                    pc.insertButton(thePersonSendFile, fileName);
-
-                    chatLabPanel.insertButton(thePersonSendFile, fileName);
-                    break;
-
-                case "CMD_ICON":
-                    icon = tokenizer.nextToken();
-                    cmd = tokenizer.nextToken();
-
-                    if (cmd.equals(this.name)) {
-                        this.chatLabPanel.appendMessage_Sent(cmd + ": ", "\n  ", Color.BLACK, Color.BLACK);
-                    } else {
-                        this.chatLabPanel.appendMessage_Received(cmd + ": ", "\n   ", Color.MAGENTA, Color.MAGENTA);
-                    }
-
-                    switch (icon) {
-                        case "LIKE" -> this.clientPanel.getTpMessage().insertIcon(new ImageIcon(getClass().getResource("/images/like2.png")));
-                        case "DISLIKE" -> this.clientPanel.getTpMessage().insertIcon(new ImageIcon(getClass().getResource("/images/dislike.png")));
-                        case "PAC_MAN" -> this.clientPanel.getTpMessage().insertIcon(new ImageIcon(getClass().getResource("/images/pacman.png")));
-                        case "SMILE" -> this.clientPanel.getTpMessage().insertIcon(new ImageIcon(getClass().getResource("/images/smile.png")));
-                        case "GRIN" -> this.clientPanel.getTpMessage().insertIcon(new ImageIcon(getClass().getResource("/images/grin.png")));
-                        case "CRY" -> this.clientPanel.getTpMessage().insertIcon(new ImageIcon(getClass().getResource("/images/cry.png")));
-                        default -> throw new AssertionError("The icon is invalid, or can't find icon!");
-                    }
-                    break;
-                default:
-                    if (!response.startsWith("CMD_")) {
-                        if (response.equals("Warnning: Server has been closed!")) {
-                            this.chatLabPanel.appendMessage_Alert(response, Color.RED);
-                        } else if (response.contains("has just entered!")) {
-                            this.chatLabPanel.appendMessage_Alert(response, Color.CYAN);
+                        if (sender.equals(this.name)) {
+                            this.chatLabPanel.appendMessage_Sent(sender + ": ", msg, Color.BLACK, new Color(0, 102, 204));
                         } else {
-                            System.out.println(response);
+                            this.chatLabPanel.appendMessage_Received(sender + ": ", msg, Color.MAGENTA, new Color(56, 224, 0));
                         }
-                    }
+                        break;
+
+                    case "CMD_BLOWFISHKEYTOCLIENT":
+                        String blowfishkey = response.substring(cmd.length() + 1, response.length());
+                        System.out.println("(CLIENT) GETTING BLOWFISH ENCRYPTEDKEY : " + blowfishkey);
+                        String base64private = getPrivateKeyRSA();
+                        System.out.println("(CLIENT) GETTING RSA PRIVATE KEY : " + base64private);
+                        try {
+                            decryptedString = RSA.decryptRSA(blowfishkey, base64private);
+                            System.out.println("(CLIENT) DECRYPT BLOWFISH KEY WITH RSA PRIVATEKEY" + decryptedString);
+                            byte[] decodedKey = Base64.getDecoder().decode(decryptedString);
+                            originalBlowfishKey = new SecretKeySpec(decodedKey, 0, decodedKey.length, "Blowfish");
+                            System.out.println("(CLIENT) GETTING ORIGINAL FIRST BLOWFISH KEY : " + originalBlowfishKey);
+                        } catch (Exception e1) {
+                            e1.printStackTrace();
+                        }
+                        break;
+
+                    case "CMD_PRIVATECHAT":
+                        sender = tokenizer.nextToken();
+                        msg = response.substring(cmd.length() + sender.length() + 2);
+                        pc = listReceiver.get(sender);
+                        String decreptedBlowfishMsg = "";
+                        try {
+                            decreptedBlowfishMsg = Blowfish.decryption(msg, originalBlowfishKey);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        //<editor-fold desc="Old Stuff">
+                        if (pc == null) {
+                            pc = new PrivateChat(name, sender, serverHost, bw, br);
+                            pc.sender = name;
+                            pc.receiver = sender;
+                            pc.serverHost = this.serverHost;
+                            pc.bw = ClientFrame.this.bw;
+                            pc.br = ClientFrame.this.br;
+
+                            pc.getLbReceiver().setText("Private chat with \"" + pc.receiver + "\"");
+                            pc.setTitle(pc.receiver);
+                            pc.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                            pc.setVisible(true);
+
+                            listReceiver.put(sender, pc);
+                        } else {
+                            pc.setVisible(true);
+                        }
+                        //</editor-fold>
+
+                        if (sender.equals(this.name)) {
+                            this.chatLabPanel.appendMessage_Sent(sender + ": ", decreptedBlowfishMsg, Color.BLACK, new Color(0, 102, 204));
+                        } else {
+                            this.chatLabPanel.appendMessage_Received(sender + ": ", decreptedBlowfishMsg, Color.MAGENTA, new Color(56, 224, 0));
+                        }
+                        pc.appendMessage(sender + ": ", decreptedBlowfishMsg, Color.MAGENTA, new Color(56, 224, 0));
+                        break;
+
+                    case "CMD_USERS":
+                        this.chatLabPanel.getOnlineList().setText("");
+                        AllUsersList.clear();
+                        while (tokenizer.hasMoreTokens()) {
+                            cmd = tokenizer.nextToken();
+                            AllUsersList.add(cmd);
+                            this.chatLabPanel.appendMessage_OnlineUsersList(cmd, cmd.equals(this.name) ? Color.GREEN : Color.red, this);
+                        }
+                        break;
+
+                    case "CMD_ONLINE_USERS":
+                        this.chatLabPanel.getOnlineList().setText("");
+                        while (tokenizer.hasMoreTokens()) {
+                            cmd = tokenizer.nextToken();
+                            OnlineUsersList.add(cmd);
+                        }
+                        for (String userName : AllUsersList) {
+                            if (OnlineUsersList.contains(userName) || userName.equals(this.name)) {
+                                this.chatLabPanel.appendMessage_OnlineUsersList(userName, new Color(173, 231, 115), this);
+                            } else {
+                                this.chatLabPanel.appendMessage_OnlineUsersList(userName, new Color(231, 115, 115), this);
+                            }
+                        }
+                        break;
+
+                    case "CMD_ONLINE_THIS_ROOM":
+                        listModelThisRoom.clear();
+                        while (tokenizer.hasMoreTokens()) {
+                            cmd = tokenizer.nextToken();
+                            listModelThisRoom.addElement(cmd);
+                        }
+                        break;
+
+                    case "CMD_FILEAVAILABLE":
+                        System.out.println("file available");
+                        fileName = tokenizer.nextToken();
+                        thePersonIamChattingWith = tokenizer.nextToken();
+                        thePersonSendFile = tokenizer.nextToken();
+                        pc = listReceiver.get(thePersonIamChattingWith);
+                        if (pc == null) {
+                            sender = this.name;
+                            receiver = thePersonIamChattingWith;
+                            pc = new PrivateChat(sender, receiver, serverHost, bw, br);
+
+                            pc.getLbReceiver().setText("Private chat with \"" + pc.receiver + "\"");
+                            pc.setTitle(pc.receiver);
+                            pc.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+
+                            listReceiver.put(receiver, pc);
+                        }
+
+                        pc.setVisible(true);
+                        pc.insertButton(thePersonSendFile, fileName);
+
+                        chatLabPanel.insertButton(thePersonSendFile, fileName);
+                        break;
+
+                    case "CMD_ICON":
+                        icon = tokenizer.nextToken();
+                        cmd = tokenizer.nextToken();
+
+                        if (cmd.equals(this.name)) {
+                            this.chatLabPanel.appendMessage_Sent(cmd + ": ", "\n  ", Color.BLACK, Color.BLACK);
+                        } else {
+                            this.chatLabPanel.appendMessage_Received(cmd + ": ", "\n   ", Color.MAGENTA, Color.MAGENTA);
+                        }
+
+                        switch (icon) {
+                            case "LIKE" -> this.clientPanel.getTpMessage().insertIcon(new ImageIcon(getClass().getResource("/images/like2.png")));
+                            case "DISLIKE" -> this.clientPanel.getTpMessage().insertIcon(new ImageIcon(getClass().getResource("/images/dislike.png")));
+                            case "PAC_MAN" -> this.clientPanel.getTpMessage().insertIcon(new ImageIcon(getClass().getResource("/images/pacman.png")));
+                            case "SMILE" -> this.clientPanel.getTpMessage().insertIcon(new ImageIcon(getClass().getResource("/images/smile.png")));
+                            case "GRIN" -> this.clientPanel.getTpMessage().insertIcon(new ImageIcon(getClass().getResource("/images/grin.png")));
+                            case "CRY" -> this.clientPanel.getTpMessage().insertIcon(new ImageIcon(getClass().getResource("/images/cry.png")));
+                            default -> throw new AssertionError("The icon is invalid, or can't find icon!");
+                        }
+                        break;
+                    default:
+                        if (!response.startsWith("CMD_")) {
+                            if (response.equals("Warnning: Server has been closed!")) {
+                                this.chatLabPanel.appendMessage_Alert(response, Color.RED);
+                            } else if (response.contains("has just entered!")) {
+                                this.chatLabPanel.appendMessage_Alert(response, Color.CYAN);
+                            } else {
+                                System.out.println(response);
+                            }
+                        }
+                }
+            } catch (NoSuchElementException xx) {
+                System.out.println("hna mochkil");
             }
         }
         System.out.println("Disconnected to server!");
     }
+
 }
