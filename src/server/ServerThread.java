@@ -380,9 +380,17 @@ public class ServerThread extends Thread {
                             socketOfServer.close();
 
                             ServerThread stSender = listUser.get(sender);
-                            ServerThread stReceiver = listUser.get(receiver);
                             sendToSpecificClient(stSender, "CMD_FILEAVAILABLE|" + fileName + "|" + receiver + "|" + sender);
-                            sendToSpecificClient(stReceiver, "CMD_FILEAVAILABLE|" + fileName + "|" + sender + "|" + sender);
+
+                            if (receiver.equals("Group Chat")){
+                                for (String user : listUser.keySet()) {
+                                    if (!user.equals(sender))
+                                        sendToSpecificClient(listUser.get(user), "CMD_FILEAVAILABLE|" + fileName + "|" + sender + "|" + sender);
+                                }
+                            } else {
+                                ServerThread stReceiver = listUser.get(receiver);
+                                sendToSpecificClient(stReceiver, "CMD_FILEAVAILABLE|" + fileName + "|" + sender + "|" + sender);
+                            }
 
                             isBusy = false;
                             break;

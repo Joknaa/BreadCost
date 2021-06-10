@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f8faf640-903c-48de-ba04-1d2a61c6c08c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b96639ca-693c-413e-86ea-26aca0a80d11.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b96639ca-693c-413e-86ea-26aca0a80d11.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/controller/ClientFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controller/ClientFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/server/ServerThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/server/ServerThread.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/view/ChatLab$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/ChatLab$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/view/ChatLab$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/ChatLab$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/view/ChatLab$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/ChatLab$3.class" afterDir="false" />
@@ -11,14 +12,8 @@
       <change beforePath="$PROJECT_DIR$/build/classes/view/ChatLab$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/ChatLab$5.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/view/ChatLab$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/ChatLab$6.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/view/ChatLab$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/ChatLab$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/view/ChatLab$8.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/view/ChatLab.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/ChatLab.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/view/ChatLab.form" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/ChatLab.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/view/PrivateChat$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/view/PrivateChat$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/view/PrivateChat.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/view/PrivateChat.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/server/ServerThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/server/ServerThread.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$3.class" afterDir="false" />
@@ -26,13 +21,10 @@
       <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$5.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$6.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$8.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sendfile/Dataset.txt" beforeDir="false" afterPath="$PROJECT_DIR$/sendfile/Dataset.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/ClientFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ClientFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/ChatLab.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ChatLab.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sendfile/Dataset2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/sendfile/Dataset2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/ServerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ServerThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/ChatLab.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ChatLab.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/PrivateChat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/PrivateChat.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +73,7 @@
     <property name="project.structure.side.proportion" value="0.22541967" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.general" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -193,7 +185,10 @@
       <workItem from="1623101943872" duration="1204000" />
       <workItem from="1623275805022" duration="1036000" />
       <workItem from="1623312854939" duration="140000" />
-      <workItem from="1623313356022" duration="8302000" />
+      <workItem from="1623313356022" duration="11390000" />
+      <workItem from="1623324889519" duration="931000" />
+      <workItem from="1623326526167" duration="10000" />
+      <workItem from="1623334852385" duration="1124000" />
     </task>
     <servers />
   </component>
