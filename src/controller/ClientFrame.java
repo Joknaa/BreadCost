@@ -8,6 +8,8 @@ package controller;
 import view.*;
 
 import javax.swing.*;
+import javax.swing.text.DefaultStyledDocument;
+import javax.swing.text.StyledDocument;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -65,6 +67,7 @@ public class ClientFrame extends JFrame implements Runnable {
     int timeClicked = 0;
 
     Hashtable<String, PrivateChat> listReceiver;
+    Hashtable<String, StyledDocument> conversationsList;
     Runnable counting = () -> {
         try {
             Thread.sleep(500);
@@ -112,8 +115,8 @@ public class ClientFrame extends JFrame implements Runnable {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("BreadCost - " + name);
 
+        chatLabPanel.AddToConversationsDocList("Group Chat", new DefaultStyledDocument());
         chatLabPanel.appendMessage_ConversationsList("Group Chat", "/Resources/ChatApp/group_chat_45px.png", this);
-
     }
 
     public static void main(String[] args) {
@@ -229,36 +232,31 @@ public class ClientFrame extends JFrame implements Runnable {
 
 
     public void openPrivateChatInsideRoom(String clickedUserName) {
-        /*timeClicked++;
-        if (timeClicked == 1) {
-            Thread countingTo500ms = new Thread(counting);
-            countingTo500ms.start();
-        }
-
-        if (timeClicked == 2) {
-        String nameClicked = clientPanel.getOnlineList().getSelectedValue();*/
-
         if (clickedUserName.equals(ClientFrame.this.name)) {
             JOptionPane.showMessageDialog(ClientFrame.this, "Can't send a message to yourself!", "Info", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
+        chatLabPanel.EnableInput();
+        chatLabPanel.SetRoomName(clickedUserName);
 
+        HashMap<String, StyledDocument> ConversationsDocList = chatLabPanel.GetConversationsDocList();
+        if (ConversationsDocList.containsKey(clickedUserName)) {
+            chatLabPanel.SetCurrentConversationDoc(chatLabPanel.GetConversationsDoc(clickedUserName));
+            return;
+        }
+
+        PrivateChat pc = new PrivateChat(name, clickedUserName, serverHost, bw, br);
+        pc.getLbReceiver().setText("Private chat with \"" + pc.receiver + "\"");
+        pc.setTitle(pc.receiver);
+        pc.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        pc.setVisible(true);
+        listReceiver.put(clickedUserName, pc);
+
+        StyledDocument document = new DefaultStyledDocument();
+        chatLabPanel.AddToConversationsDocList(clickedUserName, document);
+        chatLabPanel.SetCurrentConversationDoc(chatLabPanel.GetConversationsDoc(clickedUserName));
         chatLabPanel.appendMessage_ConversationsList(clickedUserName, "/Resources/ChatApp/direct_chat_45px.png", this);
 
-        if (!listReceiver.containsKey(clickedUserName)) {
-            PrivateChat pc = new PrivateChat(name, clickedUserName, serverHost, bw, br);
-
-            pc.getLbReceiver().setText("Private chat with \"" + pc.receiver + "\"");
-            pc.setTitle(pc.receiver);
-            pc.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-            pc.setVisible(true);
-
-            listReceiver.put(clickedUserName, pc);
-        } else {
-            PrivateChat pc = listReceiver.get(clickedUserName);
-            pc.setVisible(true);
-        }
-        //}
     }
 
     private void leaveRoom() {
@@ -353,9 +351,25 @@ public class ClientFrame extends JFrame implements Runnable {
     }
 
     private void btSendEvent() {
+        String userName = "Group Chat";
         String message = chatLabPanel.getTaInput().getText().trim();
         if (message.equals("")) return;
-        this.sendToServer("CMD_CHAT|" + message);
+
+        HashMap<String, StyledDocument> ConversationsDocList = chatLabPanel.GetConversationsDocList();
+        StyledDocument CurrentDoc = chatLabPanel.GetCurrentConversationDoc();
+        for (String name : ConversationsDocList.keySet()) {
+            if (ConversationsDocList.get(name).equals(CurrentDoc)) {
+                userName = name;
+                break;
+            }
+        }
+
+        if (userName.equals("Group Chat")) {
+            this.sendToServer("CMD_CHAT|" + message);
+        } else {
+            chatLabPanel.appendMessage(this.name + ": ", message, Color.BLACK, new Color(0, 102, 204));
+            this.sendToServer("CMD_PRIVATECHAT|" + this.name + "|" + userName + "|" + message);
+        }
         this.btClearEvent();
     }
 
@@ -486,6 +500,7 @@ public class ClientFrame extends JFrame implements Runnable {
                     }
 
                     //pc.appendMessage_Left(sender + ": ", msg);
+                    chatLabPanel.appendMessage(sender + ": ", msg, Color.MAGENTA, new Color(56, 224, 0));
                     pc.appendMessage(sender + ": ", msg, Color.MAGENTA, new Color(56, 224, 0));
                     break;
 
@@ -573,7 +588,9 @@ public class ClientFrame extends JFrame implements Runnable {
                             this.chatLabPanel.appendMessage_Alert(response, Color.RED);
                         } else if (response.contains("has just entered!")) {
                             this.chatLabPanel.appendMessage_Alert(response, Color.CYAN);
-                        } else { System.out.println(response); }
+                        } else {
+                            System.out.println(response);
+                        }
                     }
             }
         }
