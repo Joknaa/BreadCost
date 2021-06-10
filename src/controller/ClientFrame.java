@@ -652,10 +652,13 @@ public class ClientFrame extends JFrame implements Runnable {
 
                     case "CMD_ONLINE_USERS":
                         this.chatLabPanel.getOnlineList().setText("");
+                        OnlineUsersList.clear();
                         while (tokenizer.hasMoreTokens()) {
                             cmd = tokenizer.nextToken();
                             OnlineUsersList.add(cmd);
+                            //todo; clear the users list ?
                         }
+                        System.out.println(OnlineUsersList.toString());
                         for (String userName : AllUsersList) {
                             if (OnlineUsersList.contains(userName) || userName.equals(this.name)) {
                                 this.chatLabPanel.appendMessage_OnlineUsersList(userName, new Color(173, 231, 115), this);
@@ -723,6 +726,8 @@ public class ClientFrame extends JFrame implements Runnable {
                             if (response.equals("Warnning: Server has been closed!")) {
                                 this.chatLabPanel.appendMessage_Alert(response, Color.RED);
                             } else if (response.contains("has just entered!")) {
+                                this.chatLabPanel.appendMessage_Alert(response, Color.CYAN);
+                            } else if (response.contains("has quited")) {
                                 this.chatLabPanel.appendMessage_Alert(response, Color.CYAN);
                             } else {
                                 System.out.println(response);

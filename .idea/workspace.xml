@@ -4,17 +4,9 @@
     <list default="true" id="f8faf640-903c-48de-ba04-1d2a61c6c08c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/LoginPanel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/LoginPanel$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/LoginPanel$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/LoginPanel$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/LoginPanel$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/LoginPanel$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/LoginPanel$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/LoginPanel$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/LoginPanel$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/LoginPanel$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/LoginPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/LoginPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EX/ClientFrame.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EX/RoomPanel.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/ClientFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ClientFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/ServerFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ServerFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/ServerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ServerThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/LoginPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,6 +116,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ClientSide" type="Multirun" singleton="false" separateTabs="false" reuseTabsWithFailures="false" startOneByOne="true" markFailedProcess="true" hideSuccessProcess="false" delayTime="1.0">
       <runConfiguration name="ClientFrame" type="Application" />
       <method v="2">
@@ -180,7 +185,7 @@
       <workItem from="1623324889519" duration="931000" />
       <workItem from="1623326526167" duration="10000" />
       <workItem from="1623334852385" duration="10016000" />
-      <workItem from="1623348777596" duration="3789000" />
+      <workItem from="1623348777596" duration="6436000" />
     </task>
     <servers />
   </component>

@@ -250,22 +250,6 @@ public class ServerThread extends Thread {
     }
 
     public void clientQuit() {
-        try {
-            String str;
-            while ((str = br.readLine()) != null) {
-                System.out.println(str);
-            }
-        } catch (IOException e) {
-            if (clientName != null) {
-
-                this.appendMessage("\n[" + sdf.format(new Date()) + "] Client \"" + clientName + "\" is disconnected!");
-                listUser.remove(clientName);
-                if (listUser.isEmpty())
-                    this.appendMessage("\n[" + sdf.format(new Date()) + "] Now there's no one is connecting to server\n");
-                notifyToAllUsers("CMD_ONLINE_USERS|" + getOnlineUsers());
-                notifyToUsersInRoom("CMD_ONLINE_THIS_ROOM" + getUsersThisRoom());
-                notifyToUsersInRoom(clientName + " has quitted");
-            }        }
         if (clientName != null) {
 
             this.appendMessage("\n[" + sdf.format(new Date()) + "] Client \"" + clientName + "\" is disconnected!");
@@ -273,7 +257,7 @@ public class ServerThread extends Thread {
             if (listUser.isEmpty())  this.appendMessage("\n[" + sdf.format(new Date()) + "] Now there's no one is connecting to server\n");
             notifyToAllUsers("CMD_ONLINE_USERS|" + getOnlineUsers());
             notifyToUsersInRoom("CMD_ONLINE_THIS_ROOM" + getUsersThisRoom());
-            notifyToUsersInRoom(clientName + " has quitted");
+            notifyToUsersInRoom(clientName + " has quited");
             System.out.println("quite finished");
         }
     }
@@ -302,7 +286,11 @@ public class ServerThread extends Thread {
             String cmd, icon;
             while (true) {
                 try {
-                    message = recieveFromClient();
+                    //message = recieveFromClient();
+
+
+                    message = br.readLine();
+
                     tokenizer = new StringTokenizer(message, "|");
                     cmd = tokenizer.nextToken();
 
@@ -504,9 +492,11 @@ public class ServerThread extends Thread {
                     }
                 } catch (SocketException se) {
                     clientQuit();
+                    break;
                 } catch (NoSuchElementException x) {
                     System.out.println("HNA KAYN MOCHKIIL");
                     System.out.println(x.toString());
+                    break;
                 } catch (NullPointerException ex) {
                     System.out.println("Null Pointer Exception");
                     clientQuit();

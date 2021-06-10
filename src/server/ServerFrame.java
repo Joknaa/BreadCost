@@ -106,7 +106,7 @@ public class ServerFrame extends JFrame implements Runnable {    //nếu ko cầ
             appendMessage("\n["+sdf.format(new Date())+"] Now there's no one is connecting to server\n");
             
             while(true) {
-                Socket socketOfServer = serverSocket.accept();      //cứ có 1 client kết nối thì lệnh này mới đc thực hiện, sau đó 1 thread mới đc tạo ra để xử lý client đó, nghĩa là có 1 socket mới bên server để nối với socket của client
+                Socket socketOfServer = serverSocket.accept();
                 //ServerThread serverThread = new ServerThread(socketOfServer);
                 serverThread = new ServerThread(socketOfServer);
                 serverThread.taServer = this.taInfo;
@@ -165,7 +165,7 @@ public class ServerFrame extends JFrame implements Runnable {    //nếu ko cầ
         }
         ServerFrame serverFrame = new ServerFrame();
         serverFrame.setVisible(true);
-        //serverFrame.startServer();
+        serverFrame.startServer();
         
     }
 
