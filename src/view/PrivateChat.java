@@ -242,20 +242,12 @@ public class PrivateChat extends javax.swing.JFrame {
         btSend_pc.setFont(new java.awt.Font("Comic Sans MS", 0, 14));
         btSend_pc.setText("Send");
         btSend_pc.setToolTipText("send a message");
-        btSend_pc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btSend_pcActionPerformed(evt);
-            }
-        });
+        btSend_pc.addActionListener(this::btSend_pcActionPerformed);
 
         btFile_pc.setFont(new java.awt.Font("Comic Sans MS", 0, 14));
         btFile_pc.setText("File");
         btFile_pc.setToolTipText("send a file");
-        btFile_pc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btFile_pcActionPerformed(evt);
-            }
-        });
+        btFile_pc.addActionListener(this::btFile_pcActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

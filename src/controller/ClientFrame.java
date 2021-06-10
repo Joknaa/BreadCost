@@ -367,7 +367,7 @@ public class ClientFrame extends JFrame implements Runnable {
         if (userName.equals("Group Chat")) {
             this.sendToServer("CMD_CHAT|" + message);
         } else {
-            chatLabPanel.appendMessage(this.name + ": ", message, Color.BLACK, new Color(0, 102, 204));
+            chatLabPanel.appendMessage_Sent(this.name + ": ", message, Color.BLACK, new Color(0, 102, 204));
             this.sendToServer("CMD_PRIVATECHAT|" + this.name + "|" + userName + "|" + message);
         }
         this.btClearEvent();
@@ -469,9 +469,9 @@ public class ClientFrame extends JFrame implements Runnable {
                     msg = response.substring(cmd.length() + sender.length() + 2);
 
                     if (sender.equals(this.name)) {
-                        this.chatLabPanel.appendMessage(sender + ": ", msg, Color.BLACK, new Color(0, 102, 204));
+                        this.chatLabPanel.appendMessage_Sent(sender + ": ", msg, Color.BLACK, new Color(0, 102, 204));
                     } else {
-                        this.chatLabPanel.appendMessage(sender + ": ", msg, Color.MAGENTA, new Color(56, 224, 0));
+                        this.chatLabPanel.appendMessage_Received(sender + ": ", msg, Color.MAGENTA, new Color(56, 224, 0));
                     }
                     break;
 
@@ -500,7 +500,11 @@ public class ClientFrame extends JFrame implements Runnable {
                     }
 
                     //pc.appendMessage_Left(sender + ": ", msg);
-                    chatLabPanel.appendMessage(sender + ": ", msg, Color.MAGENTA, new Color(56, 224, 0));
+                    if (sender.equals(this.name)) {
+                        this.chatLabPanel.appendMessage_Sent(sender + ": ", msg, Color.BLACK, new Color(0, 102, 204));
+                    } else {
+                        this.chatLabPanel.appendMessage_Received(sender + ": ", msg, Color.MAGENTA, new Color(56, 224, 0));
+                    }
                     pc.appendMessage(sender + ": ", msg, Color.MAGENTA, new Color(56, 224, 0));
                     break;
 
@@ -537,15 +541,12 @@ public class ClientFrame extends JFrame implements Runnable {
                     }
                     break;
 
-
                 case "CMD_FILEAVAILABLE":
                     System.out.println("file available");
                     fileName = tokenizer.nextToken();
                     thePersonIamChattingWith = tokenizer.nextToken();
                     thePersonSendFile = tokenizer.nextToken();
-
                     pc = listReceiver.get(thePersonIamChattingWith);
-
                     if (pc == null) {
                         sender = this.name;
                         receiver = thePersonIamChattingWith;
@@ -560,6 +561,8 @@ public class ClientFrame extends JFrame implements Runnable {
 
                     pc.setVisible(true);
                     pc.insertButton(thePersonSendFile, fileName);
+
+                    chatLabPanel.insertButton(thePersonSendFile, fileName);
                     break;
 
                 case "CMD_ICON":
@@ -567,9 +570,9 @@ public class ClientFrame extends JFrame implements Runnable {
                     cmd = tokenizer.nextToken();
 
                     if (cmd.equals(this.name)) {
-                        this.chatLabPanel.appendMessage(cmd + ": ", "\n  ", Color.BLACK, Color.BLACK);
+                        this.chatLabPanel.appendMessage_Sent(cmd + ": ", "\n  ", Color.BLACK, Color.BLACK);
                     } else {
-                        this.chatLabPanel.appendMessage(cmd + ": ", "\n   ", Color.MAGENTA, Color.MAGENTA);
+                        this.chatLabPanel.appendMessage_Received(cmd + ": ", "\n   ", Color.MAGENTA, Color.MAGENTA);
                     }
 
                     switch (icon) {

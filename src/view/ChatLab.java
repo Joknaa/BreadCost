@@ -7,12 +7,17 @@ package view;
 
 
 import controller.ClientFrame;
+import controller.ReceivingFileThread;
+import controller.SendFileFrame;
+import controller.SendingFileThread;
 
 import javax.swing.*;
 import javax.swing.text.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
+import java.net.Socket;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,6 +33,8 @@ public class ChatLab extends javax.swing.JPanel {
     private final HashMap<String, StyledDocument> ConversationsDocList = new HashMap<>();
     StyledDocument CurrentDoc;
     String FocusedChat = "Group Chat";
+    private final String serverHost = "localhost";
+    String AttachedFilePath;
 
 
     public JTextPane getTpMessage() { return chatTP; }
@@ -92,7 +99,6 @@ public class ChatLab extends javax.swing.JPanel {
         conversationsSectionLabel = new javax.swing.JLabel();
         pastConversationsScroller = new javax.swing.JScrollPane();
         pastConversationsTP = new javax.swing.JTextPane();
-        addGroupButton = new javax.swing.JButton();
         profilePanel = new javax.swing.JPanel();
         userName = new javax.swing.JLabel();
         logoutButton = new javax.swing.JButton();
@@ -104,8 +110,8 @@ public class ChatLab extends javax.swing.JPanel {
         attachButton = new javax.swing.JButton();
         chatTPScroller = new javax.swing.JScrollPane();
         chatTP = new javax.swing.JTextPane();
-        chatSectionLabel = new javax.swing.JLabel();
         emojiButton = new javax.swing.JButton();
+        chatSectionLabel = new javax.swing.JLabel();
         usersPanel = new javax.swing.JPanel();
         usersListScroller = new javax.swing.JScrollPane();
         usersListTP = new javax.swing.JTextPane();
@@ -156,23 +162,6 @@ public class ChatLab extends javax.swing.JPanel {
         pastConversationsTP.setForeground(new java.awt.Color(242, 233, 228));
         pastConversationsScroller.setViewportView(pastConversationsTP);
 
-        addGroupButton.setBackground(new java.awt.Color(76, 96, 133));
-        addGroupButton.setForeground(new java.awt.Color(244, 252, 231));
-        addGroupButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/ChatApp/add_80px.png"))); // NOI18N
-        addGroupButton.setToolTipText("Add an item to the list");
-        addGroupButton.setBorder(null);
-        addGroupButton.setContentAreaFilled(false);
-        addGroupButton.setFocusPainted(false);
-        addGroupButton.setFocusable(false);
-        addGroupButton.setMaximumSize(new java.awt.Dimension(100, 38));
-        addGroupButton.setMinimumSize(new java.awt.Dimension(100, 38));
-        addGroupButton.setPreferredSize(new java.awt.Dimension(100, 38));
-        addGroupButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addGroupButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout pastConversationsPanelLayout = new javax.swing.GroupLayout(pastConversationsPanel);
         pastConversationsPanel.setLayout(pastConversationsPanelLayout);
         pastConversationsPanelLayout.setHorizontalGroup(
@@ -180,14 +169,9 @@ public class ChatLab extends javax.swing.JPanel {
             .addGroup(pastConversationsPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pastConversationsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pastConversationsPanelLayout.createSequentialGroup()
-                        .addGroup(pastConversationsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(conversationsSectionLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pastConversationsScroller, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pastConversationsPanelLayout.createSequentialGroup()
-                        .addComponent(addGroupButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(78, 78, 78))))
+                    .addComponent(conversationsSectionLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pastConversationsScroller, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         pastConversationsPanelLayout.setVerticalGroup(
             pastConversationsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,10 +179,8 @@ public class ChatLab extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(conversationsSectionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pastConversationsScroller, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(addGroupButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addComponent(pastConversationsScroller, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         profilePanel.setBackground(new java.awt.Color(74, 78, 105));
@@ -262,7 +244,6 @@ public class ChatLab extends javax.swing.JPanel {
         chatPanel.setPreferredSize(new java.awt.Dimension(450, 500));
 
         inputArea.setBackground(new java.awt.Color(74, 78, 105));
-        inputArea.setEditable(false);
         inputArea.setColumns(20);
         inputArea.setFont(new java.awt.Font("Source Code Pro", 0, 18)); // NOI18N
         inputArea.setForeground(new java.awt.Color(244, 252, 231));
@@ -279,7 +260,6 @@ public class ChatLab extends javax.swing.JPanel {
         sendButton.setContentAreaFilled(false);
         sendButton.setFocusPainted(false);
         sendButton.setFocusable(false);
-        sendButton.setEnabled(false);
         sendButton.setMaximumSize(new java.awt.Dimension(100, 38));
         sendButton.setMinimumSize(new java.awt.Dimension(100, 38));
         sendButton.setPreferredSize(new java.awt.Dimension(100, 38));
@@ -308,15 +288,7 @@ public class ChatLab extends javax.swing.JPanel {
 
         chatTP.setBackground(new java.awt.Color(154, 140, 152));
         chatTP.setForeground(new java.awt.Color(242, 233, 228));
-        chatTP.setDocument(CurrentDoc);
-        chatTP.setEditable(false);
         chatTPScroller.setViewportView(chatTP);
-
-        chatSectionLabel.setBackground(new java.awt.Color(154, 140, 152));
-        chatSectionLabel.setFont(new java.awt.Font("Source Code Pro", 0, 24)); // NOI18N
-        chatSectionLabel.setForeground(new java.awt.Color(242, 233, 228));
-        chatSectionLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        chatSectionLabel.setText("Room 1");
 
         emojiButton.setBackground(new java.awt.Color(76, 96, 133));
         emojiButton.setForeground(new java.awt.Color(244, 252, 231));
@@ -331,9 +303,15 @@ public class ChatLab extends javax.swing.JPanel {
         emojiButton.setPreferredSize(new java.awt.Dimension(100, 38));
         emojiButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                attachButton1ActionPerformed(evt);
+                emojiButtonActionPerformed(evt);
             }
         });
+
+        chatSectionLabel.setBackground(new java.awt.Color(154, 140, 152));
+        chatSectionLabel.setFont(new java.awt.Font("Source Code Pro", 0, 24)); // NOI18N
+        chatSectionLabel.setForeground(new java.awt.Color(242, 233, 228));
+        chatSectionLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        chatSectionLabel.setText("Room 1");
 
         javax.swing.GroupLayout chatPanelLayout = new javax.swing.GroupLayout(chatPanel);
         chatPanel.setLayout(chatPanelLayout);
@@ -406,7 +384,7 @@ public class ChatLab extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(usersSectionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(usersListScroller, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(usersListScroller, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -447,9 +425,8 @@ public class ChatLab extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
 
-    public void appendMessage(String msg1, String msg2, Color c1, Color c2) {
+    public void appendMessage_Received(String msg1, String msg2, Color c1, Color c2) {
         //int len = chatTP.getDocument().getLength();
-        //todo :: set current doc
         int len = GetCurrentConversationDoc().getLength();
 
         SimpleAttributeSet sas = new SimpleAttributeSet();
@@ -457,9 +434,41 @@ public class ChatLab extends javax.swing.JPanel {
         StyleConstants.setBold(sas, true);
         StyleConstants.setFontSize(sas, 14);
         StyleConstants.setForeground(sas, c1);
+        StyleConstants.setAlignment(sas, StyleConstants.ALIGN_LEFT);
 
         try {
             GetCurrentConversationDoc().insertString(len, msg1, sas);
+            GetCurrentConversationDoc().setParagraphAttributes(len, msg1.length() , sas, false);
+        } catch (BadLocationException ex) {
+            Logger.getLogger(ClientPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        len = len + msg1.length();
+        sas = new SimpleAttributeSet();
+        StyleConstants.setFontFamily(sas, "Arial");
+        StyleConstants.setFontSize(sas, 14);
+        StyleConstants.setForeground(sas, c2);
+
+        try {
+            GetCurrentConversationDoc().insertString(len, msg2+"\n", sas);
+        } catch (BadLocationException ex) {
+            Logger.getLogger(ClientPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void appendMessage_Sent(String msg1, String msg2, Color c1, Color c2) {
+        //int len = chatTP.getDocument().getLength();
+        int len = GetCurrentConversationDoc().getLength();
+
+        SimpleAttributeSet sas = new SimpleAttributeSet();
+        StyleConstants.setFontFamily(sas, "Serif");
+        StyleConstants.setBold(sas, true);
+        StyleConstants.setFontSize(sas, 14);
+        StyleConstants.setForeground(sas, c1);
+        StyleConstants.setAlignment(sas, StyleConstants.ALIGN_RIGHT);
+
+        try {
+            GetCurrentConversationDoc().insertString(len, msg1, sas);
+            GetCurrentConversationDoc().setParagraphAttributes(len, msg1.length() , sas, false);
         } catch (BadLocationException ex) {
             Logger.getLogger(ClientPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -477,8 +486,6 @@ public class ChatLab extends javax.swing.JPanel {
         }
     }
     public void appendMessage_Alert(String message, Color color) {
-        //int len = chatTP.getDocument().getLength();
-        //StyledDocument doc = (StyledDocument) chatTP.getDocument();
         int len = GetConversationsDoc("Group Chat").getLength();
 
         SimpleAttributeSet sas = new SimpleAttributeSet();
@@ -486,9 +493,11 @@ public class ChatLab extends javax.swing.JPanel {
         StyleConstants.setItalic(sas, true);
         StyleConstants.setFontSize(sas, 14);
         StyleConstants.setForeground(sas, color);
+        StyleConstants.setAlignment(sas, StyleConstants.ALIGN_CENTER);
 
         try {
             GetConversationsDoc("Group Chat").insertString(len, message+"\n", sas);
+            GetConversationsDoc("Group Chat").setParagraphAttributes(len, message.length() , sas, false);
         } catch (BadLocationException ex) {
             Logger.getLogger(ClientPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -540,6 +549,7 @@ public class ChatLab extends javax.swing.JPanel {
         StyleConstants.setFontFamily(sas, "Comic Sans MS");
         StyleConstants.setBold(sas, true);
         StyleConstants.setFontSize(sas, 23);
+        StyleConstants.setAlignment(sas, 10);
 
         JLabel conversationLabel = new JLabel(ConversationName);
         conversationLabel.setFont(new Font("Source Code Pro", Font.BOLD, 20)); // NOI18N
@@ -548,6 +558,7 @@ public class ChatLab extends javax.swing.JPanel {
         conversationLabel.setBorder(BorderFactory.createLineBorder(new Color(74,78,105)));
         conversationLabel.setSize(new Dimension(183, 50));
 
+        //todo: highlight the pressed chat
         conversationLabel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -560,9 +571,15 @@ public class ChatLab extends javax.swing.JPanel {
             @Override
             public void mouseReleased(MouseEvent e) { }
             @Override
-            public void mouseEntered(MouseEvent e) { conversationLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); }
+            public void mouseEntered(MouseEvent e) {
+                conversationLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                conversationLabel.setBackground(new Color(150, 153, 172));
+            }
             @Override
-            public void mouseExited(MouseEvent e) { conversationLabel.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR)); }
+            public void mouseExited(MouseEvent e) {
+                conversationLabel.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+                conversationLabel.setBackground(null);
+            }
         });
         try {
             StyleConstants.setComponent(sas, conversationLabel);
@@ -574,6 +591,71 @@ public class ChatLab extends javax.swing.JPanel {
         usersListTP.setCaretPosition(len);
     }
 
+    private void openSendFileFrame() {
+        SendFileFrame sendFileFrame = new SendFileFrame(serverHost, userName.getText());
+
+        sendFileFrame.thePersonIamChattingWith = FocusedChat;
+        sendFileFrame.getTfReceiver().setText(FocusedChat);
+        sendFileFrame.setVisible(true);
+        sendFileFrame.setLocation(450, 250);
+        sendFileFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+    }
+
+    private void displayOpenDialog() {
+        JFileChooser chooser = new JFileChooser();
+        int kq = chooser.showOpenDialog(this);
+        if (kq == JFileChooser.APPROVE_OPTION) {
+            AttachedFilePath = chooser.getSelectedFile().getAbsolutePath();
+            SendSelectedFile();
+        } else AttachedFilePath = "";
+    }
+
+    private void SendSelectedFile() {
+        try {
+            Socket socketOfSender = new Socket(serverHost, 9999);
+            new SendingFileThread(userName.getText(), FocusedChat, AttachedFilePath, socketOfSender, null, null).start();
+        } catch (IOException ex) {
+            Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void insertButton(String sender, String fileName) {
+        JButton bt = new JButton(fileName);
+        bt.setName(fileName);
+        bt.addActionListener(ae -> downloadFile(fileName));
+
+        if (sender.equals(this.userName.getText())){
+            appendMessage_Sent(sender, " sends a file ", Color.BLACK, new Color(0, 102, 204));
+            chatTP.setCaretPosition(GetCurrentConversationDoc().getLength() - 1);
+            chatTP.insertComponent(bt);
+        } else {
+            appendMessage_Received(sender, " sends a file ", Color.BLACK, new Color(0, 102, 204));
+            chatTP.setCaretPosition(GetCurrentConversationDoc().getLength() - 1);
+            chatTP.insertComponent(bt);
+        }
+
+    }
+
+    private void downloadFile(String buttonName) {
+        String myDownloadFolder;
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int kq = chooser.showSaveDialog(this);
+        if (kq == JFileChooser.APPROVE_OPTION) {
+            myDownloadFolder = chooser.getSelectedFile().getAbsolutePath();
+        } else {
+            myDownloadFolder = "D:";
+            JOptionPane.showMessageDialog(this, "The default folder to save file is in D:\\", "Notice", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        try {
+            Socket socketOfReceiver = new Socket(serverHost, 9999);
+            new ReceivingFileThread(socketOfReceiver, myDownloadFolder, buttonName, null).start();
+            System.out.println("start receiving file");
+        } catch (IOException ex) {
+            Logger.getLogger(PrivateChat.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     //<editor-fold desc="Events">
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
@@ -586,28 +668,25 @@ public class ChatLab extends javax.swing.JPanel {
     }//GEN-LAST:event_sendButtonActionPerformed
 
     private void attachButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attachButtonActionPerformed
+        displayOpenDialog();
     }//GEN-LAST:event_attachButtonActionPerformed
 
-    private void addGroupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addGroupButtonActionPerformed
-    }//GEN-LAST:event_addGroupButtonActionPerformed
-
-    private void attachButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attachButton1ActionPerformed
-    }//GEN-LAST:event_attachButton1ActionPerformed
+    private void emojiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emojiButtonActionPerformed
+    }//GEN-LAST:event_emojiButtonActionPerformed
     //</editor-fold>
 
 
     //<editor-fold desc="Vars">
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addGroupButton;
     private javax.swing.JLabel appLogo;
     private javax.swing.JLabel appName;
     private javax.swing.JButton attachButton;
-    private javax.swing.JButton emojiButton;
     private javax.swing.JPanel chatPanel;
     private javax.swing.JLabel chatSectionLabel;
     private javax.swing.JTextPane chatTP = new JTextPane();
     private javax.swing.JScrollPane chatTPScroller;
     private javax.swing.JLabel conversationsSectionLabel;
+    private javax.swing.JButton emojiButton;
     private javax.swing.JPanel headerPanel;
     private javax.swing.JTextArea inputArea;
     private javax.swing.JScrollPane inputScroller;
