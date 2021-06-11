@@ -32,14 +32,12 @@ public class ReceivingFileThread extends Thread {
     Socket socketOfReceiver;
     String myDownloadFolder;
     String fileName;
-    PrivateChat frameToDisplayDialog;
 
     public ReceivingFileThread(Socket socketOfReceiver, String myDownloadFolder, String fileName, PrivateChat pc) {
         this.socketOfReceiver = socketOfReceiver;
         this.myDownloadFolder = myDownloadFolder;
         this.fileName = fileName;
-        this.frameToDisplayDialog = pc;
-        
+
         try {
             br = new BufferedReader(new InputStreamReader(socketOfReceiver.getInputStream()));
             bw = new BufferedWriter(new OutputStreamWriter(socketOfReceiver.getOutputStream()));
@@ -75,7 +73,7 @@ public class ReceivingFileThread extends Thread {
                 fos.write(buffer, 0, count);
             }
 
-            JOptionPane.showMessageDialog(frameToDisplayDialog, "File downloaded to\n"+myDownloadFolder + "\\" + fileName, "Info", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "File downloaded to\n"+myDownloadFolder + "\\" + fileName, "Info", JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException ex) {
             Logger.getLogger(ReceivingFileThread.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("This socket for receiving file has benn close, so you don't need to worry about that!");

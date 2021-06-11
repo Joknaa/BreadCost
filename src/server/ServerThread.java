@@ -31,6 +31,7 @@ public class ServerThread extends Thread {
     public static final String ACCOUNT_EXIST = "This nickname has been used! Please use another nickname!";
     private static final HashMap<String, SecretKey> BlowfishKeys = new HashMap<String, SecretKey>();
     public static Hashtable<String, ServerThread> listUser = new Hashtable<>();
+    public static Hashtable<String, ServerThread> AlllistUser = new Hashtable<>();
     static Socket senderSocket, receiverSocket;
     static boolean isBusy = false;
     private final int BUFFER_SIZE = 1024;
@@ -322,6 +323,7 @@ public class ServerThread extends Thread {
                             System.out.println("(SERVER) GET MSG FROM SENDER : " + messageContent);
                             ServerThread st_receiver = listUser.get(privateReceiver);
 
+
                             System.out.println("****************PRIVATE RECEIVER - PRIVATE SENDER****************");
                             System.out.println("(SERVER) BLOWFISH RECEIVER : " + privateReceiver + " KEY : " + BlowfishKeys.get(privateReceiver));
                             System.out.println("(SERVER) BLOWFISH SENDER : " + privateSender + " KEY : " + BlowfishKeys.get(privateSender));
@@ -343,8 +345,9 @@ public class ServerThread extends Thread {
                             System.out.println("(SERVER) SEND MSG TO RECEIVER : " + privateReceiver + " FROM : " + privateSender);
                             System.out.println(st_receiver);
                             System.out.println("CMD_PRIVATECHAT|" + privateSender + "|" + encreptedMsgBlowfish);
-
-                            sendToSpecificClient(st_receiver, "CMD_PRIVATECHAT|" + privateSender + "|" + encreptedMsgBlowfish);
+                            if (st_receiver != null){
+                                sendToSpecificClient(st_receiver, "CMD_PRIVATECHAT|" + privateSender + "|" + encreptedMsgBlowfish);
+                            }
                             System.out.println("(SERVER) MSG SENT");
                             System.out.println("[ServerThread] message = " + encreptedMsgBlowfish);
                             break;

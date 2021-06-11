@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import EncDec.Blowfish;
@@ -29,11 +24,6 @@ import java.util.List;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-/**
- * @author AnhTu
- */
-
 
 public class ClientFrame extends JFrame implements Runnable {
     public static final String NICKNAME_EXIST = "This nickname is already login in another place! Please using another nickname";
@@ -64,13 +54,7 @@ public class ClientFrame extends JFrame implements Runnable {
 
     Thread clientThread;
     boolean isRunning;
-
-    SendFileFrame sendFileFrame;
-
     StringTokenizer tokenizer;
-    String myDownloadFolder;
-
-    Socket socketOfSender, socketOfReceiver;
 
     DefaultListModel<String> listModel, listModelThisRoom, listModel_rp;
 
@@ -191,7 +175,6 @@ public class ClientFrame extends JFrame implements Runnable {
 
     private void addEventsForChatLabPanel() {
         chatLabPanel.getBtSend().addActionListener(ae -> btSendEvent());
-        chatLabPanel.getBtExit().addActionListener(ae -> btLogoutEvent());
         chatLabPanel.getTaInput().addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent ke) {
@@ -263,7 +246,6 @@ public class ClientFrame extends JFrame implements Runnable {
             chatLabPanel.SetCurrentConversationDoc(chatLabPanel.GetConversationsDoc(clickedUserName));
             return;
         }
-        SetupEncryptionKeys();
 
         StyledDocument document = new DefaultStyledDocument();
         chatLabPanel.AddToConversationsDocList(clickedUserName, document);
@@ -372,7 +354,7 @@ public class ClientFrame extends JFrame implements Runnable {
                 chatLabPanel.setVisible(true);
                 chatLabPanel.setUserName(name);
                 this.setTitle("\"" + name + "\"");
-
+                SetupEncryptionKeys();
                 clientThread = new Thread(this);
                 clientThread.start();
                 this.sendToServer("CMD_ROOM|" + this.room);
@@ -441,7 +423,7 @@ public class ClientFrame extends JFrame implements Runnable {
                 System.out.println("(SENDER) GETTED KEY : " + blk);
                 String encryptedMsgBlowfish = Blowfish.encryption(message, blk);
                 System.out.println("(SENDER) SEND ENCRYPTED MSG : " + encryptedMsgBlowfish);
-                chatLabPanel.appendMessage_Sent(this.name + ": ", message, Color.BLACK, new Color(0, 102, 204));
+                chatLabPanel.appendMessage_Sent(this.name + ": ", message, new Color(33, 72, 127), Color.black);
                 this.sendToServer("CMD_PRIVATECHAT|" + this.name + "|" + userName + "|" + encryptedMsgBlowfish);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -452,18 +434,6 @@ public class ClientFrame extends JFrame implements Runnable {
 
     private void btClearEvent() {
         chatLabPanel.getTaInput().setText("");
-    }
-
-    private void btLogoutEvent() {
-        try {
-            chatLabPanel.setVisible(false);
-            signUpPanel.setVisible(false);
-            loginPanel.setVisible(true);
-            //disconnect();
-            //todo: fix the Logout
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
     }
 
     public void connectToServer(String hostAddress) {
@@ -631,40 +601,15 @@ public class ClientFrame extends JFrame implements Runnable {
                             if (OnlineUsersList.contains(userName) || userName.equals(this.name)) {
                                 this.chatLabPanel.appendMessage_OnlineUsersList(userName, new Color(173, 231, 115), this);
                             } else {
-                                System.out.println("Making someone offlineee");
                                 this.chatLabPanel.appendMessage_OnlineUsersList(userName, new Color(231, 115, 115), this);
                             }
-                        }
-                        break;
-
-                    case "CMD_ONLINE_THIS_ROOM":
-                        listModelThisRoom.clear();
-                        while (tokenizer.hasMoreTokens()) {
-                            cmd = tokenizer.nextToken();
-                            listModelThisRoom.addElement(cmd);
                         }
                         break;
 
                     case "CMD_FILEAVAILABLE":
                         System.out.println("file available");
                         fileName = tokenizer.nextToken();
-                        thePersonIamChattingWith = tokenizer.nextToken();
                         thePersonSendFile = tokenizer.nextToken();
-                        pc = listReceiver.get(thePersonIamChattingWith);
-                        if (pc == null) {
-                            sender = this.name;
-                            receiver = thePersonIamChattingWith;
-                            pc = new PrivateChat(sender, receiver, serverHost, bw, br);
-
-                            pc.getLbReceiver().setText("Private chat with \"" + pc.receiver + "\"");
-                            pc.setTitle(pc.receiver);
-                            pc.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-
-                            listReceiver.put(receiver, pc);
-                        }
-
-                        pc.setVisible(true);
-                        pc.insertButton(thePersonSendFile, fileName);
 
                         chatLabPanel.insertButton(thePersonSendFile, fileName);
                         break;

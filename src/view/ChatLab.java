@@ -47,7 +47,6 @@ public class ChatLab extends javax.swing.JPanel {
     private javax.swing.JPanel headerPanel;
     private javax.swing.JTextArea inputArea;
     private javax.swing.JScrollPane inputScroller;
-    private javax.swing.JButton logoutButton;
     private javax.swing.JPanel pastConversationsPanel;
     private javax.swing.JScrollPane pastConversationsScroller;
     private javax.swing.JTextPane pastConversationsTP;
@@ -90,10 +89,6 @@ public class ChatLab extends javax.swing.JPanel {
 
     public JLabel getLbRoom() {
         return chatSectionLabel;
-    }
-
-    public JButton getBtExit() {
-        return logoutButton;
     }
 
     public JButton getBtSend() {
@@ -178,7 +173,6 @@ public class ChatLab extends javax.swing.JPanel {
         pastConversationsTP = new javax.swing.JTextPane();
         profilePanel = new javax.swing.JPanel();
         userName = new javax.swing.JLabel();
-        logoutButton = new javax.swing.JButton();
         userIcon = new javax.swing.JLabel();
         chatPanel = new javax.swing.JPanel();
         inputScroller = new javax.swing.JScrollPane();
@@ -273,23 +267,6 @@ public class ChatLab extends javax.swing.JPanel {
         userName.setForeground(new java.awt.Color(244, 252, 231));
         userName.setText("Oknaa");
 
-        logoutButton.setBackground(new java.awt.Color(76, 96, 133));
-        logoutButton.setForeground(new java.awt.Color(244, 252, 231));
-        logoutButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/ChatApp/sign_out_70px.png"))); // NOI18N
-        logoutButton.setToolTipText("Logout");
-        logoutButton.setBorder(null);
-        logoutButton.setContentAreaFilled(false);
-        logoutButton.setFocusPainted(false);
-        logoutButton.setFocusable(false);
-        logoutButton.setMaximumSize(new java.awt.Dimension(100, 38));
-        logoutButton.setMinimumSize(new java.awt.Dimension(100, 38));
-        logoutButton.setPreferredSize(new java.awt.Dimension(100, 38));
-        logoutButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logoutButtonActionPerformed(evt);
-            }
-        });
-
         userIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/ChatApp/male_user_100px.png"))); // NOI18N
 
         javax.swing.GroupLayout profilePanelLayout = new javax.swing.GroupLayout(profilePanel);
@@ -301,7 +278,7 @@ public class ChatLab extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(userName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                                .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(70, 70, 70)
                                 .addContainerGap())
         );
         profilePanelLayout.setVerticalGroup(
@@ -312,8 +289,7 @@ public class ChatLab extends javax.swing.JPanel {
                         .addGroup(profilePanelLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(profilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(userName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(logoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(userName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addContainerGap())
         );
 
