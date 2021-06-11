@@ -435,8 +435,7 @@ public class ServerThread extends Thread {
                     clientQuit();
                     break;
                 } catch (NoSuchElementException x) {
-                    System.out.println("HNA KAYN MOCHKIIL");
-                    x.printStackTrace();
+                    System.out.println("Blowfish");
                     break;
                 } catch (NullPointerException ex) {
                     clientQuit();

@@ -21,9 +21,6 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * @author Oknaa
- */
 public class ChatLab extends javax.swing.JPanel {
 
     private final HashMap<String, JLabel> UsernamesJLabelsList = new HashMap<>();
@@ -59,20 +56,36 @@ public class ChatLab extends javax.swing.JPanel {
     private javax.swing.JPanel usersPanel;
     private javax.swing.JLabel usersSectionLabel;
 
-    /**
-     * Creates new form testLoginPanel
-     */
     public ChatLab() {
+
+
+        initComponents();
+        SetupWelcomePage();
+
+    }
+
+    private void SetupWelcomePage() {
         AddToConversationsDocList("Welcome", new DefaultStyledDocument());
+        StyledDocument doc = new DefaultStyledDocument();
+        int len = doc.getLength();
+
+        SimpleAttributeSet sas = new SimpleAttributeSet();
+        StyleConstants.setFontFamily(sas, "Comic Sans MS");
+        StyleConstants.setItalic(sas, true);
+        StyleConstants.setFontSize(sas, 14);
+        StyleConstants.setForeground(sas, Color.CYAN);
+        StyleConstants.setAlignment(sas, StyleConstants.ALIGN_CENTER);
 
         try {
-            ConversationsDocList.get("Welcome").insertString(0, "Welcome !!", null);
-        } catch (BadLocationException e) {
-            e.printStackTrace();
+            doc.insertString(len, "Welcome !!" + "\n", sas);
+            doc.setParagraphAttributes(len, "Welcome !!".length(), sas, false);
+        } catch (BadLocationException ex) {
+            Logger.getLogger(ClientPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+
+        AddToConversationsDocList("Welcome", doc);
         SetCurrentConversationDoc(ConversationsDocList.get("Welcome"));
-        initComponents();
     }
 
     public JTextPane getTpMessage() {
@@ -132,8 +145,6 @@ public class ChatLab extends javax.swing.JPanel {
         this.CurrentDoc = currentDoc;
         this.chatTP.setDocument(this.CurrentDoc);
         chatTP.setCaretPosition(this.CurrentDoc.getLength());
-
-        System.out.println("Current doc is:" + this.CurrentDoc.getLength());
     }
 
     public void SetFocusedChat(String username) {
@@ -733,7 +744,6 @@ public class ChatLab extends javax.swing.JPanel {
         try {
             Socket socketOfReceiver = new Socket(serverHost, 9999);
             new ReceivingFileThread(socketOfReceiver, myDownloadFolder, buttonName, null).start();
-            System.out.println("start receiving file");
         } catch (IOException ex) {
             Logger.getLogger(PrivateChat.class.getName()).log(Level.SEVERE, null, ex);
         }

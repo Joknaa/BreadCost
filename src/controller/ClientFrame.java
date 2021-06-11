@@ -314,11 +314,7 @@ public class ClientFrame extends JFrame implements Runnable {
         if (response != null) {
             if (response.equals(NICKNAME_LOGGED_IN) || response.equals(NICKNAME_INVALID)) {
                 JOptionPane.showMessageDialog(this, response, "Error", JOptionPane.ERROR_MESSAGE);
-                try {
-                    socketOfClient.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+
             } else {
                 loginPanel.setVisible(false);
                 chatLabPanel.setVisible(true);
