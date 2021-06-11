@@ -2,14 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f8faf640-903c-48de-ba04-1d2a61c6c08c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/controller/PasswordValidator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$10.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$11.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$12.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$9.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sendfile/Dataset.txt" beforeDir="false" afterPath="$PROJECT_DIR$/sendfile/Dataset.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/ClientFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ClientFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/ReceivingFileThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ReceivingFileThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/ServerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ServerThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/ChatLab.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ChatLab.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/WelcomePanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/SignUpPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/SignUpPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,6 +108,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="PasswordValidator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="controller.PasswordValidator" />
+      <module name="ChatSocket4" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ServerFrame" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="server.ServerFrame" />
       <module name="ChatSocket4" />
@@ -145,9 +167,11 @@
       <item itemvalue="Application.AppendingTextPane" />
       <item itemvalue="Application.AppendingTextPane2" />
       <item itemvalue="Multirun.ClientSide" />
+      <item itemvalue="Application.PasswordValidator" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.PasswordValidator" />
         <item itemvalue="Application.AppendingTextPane2" />
         <item itemvalue="Application.AppendingTextPane" />
         <item itemvalue="Application.test" />
@@ -207,7 +231,7 @@
       <workItem from="1623334852385" duration="10016000" />
       <workItem from="1623348777596" duration="6436000" />
       <workItem from="1623362653619" duration="2361000" />
-      <workItem from="1623405761076" duration="2549000" />
+      <workItem from="1623405761076" duration="3383000" />
     </task>
     <servers />
   </component>

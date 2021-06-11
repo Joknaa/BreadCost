@@ -35,43 +35,26 @@ public class ClientFrame extends JFrame implements Runnable {
     private static String Base64Private;
     private static SecretKey originalBlowfishKey;
     private static String decryptedString;
-    int Count = 0;
     List<String> AllUsersList = new ArrayList<>();
     List<String> OnlineUsersList = new ArrayList<>();
     HashMap<String, String> Base64Public = new HashMap<>();
+    Hashtable<String, PrivateChat> listReceiver;
     String serverHost;
     String name;
     String room = "Room1";
     Socket socketOfClient;
     BufferedWriter bw;
     BufferedReader br;
-
     JPanel mainPanel;
     LoginPanel loginPanel;
     SignUpPanel signUpPanel;
     ChatLab chatLabPanel;
     ClientPanel clientPanel = new ClientPanel();
-
     Thread clientThread;
     boolean isRunning;
     StringTokenizer tokenizer;
-
     DefaultListModel<String> listModel, listModelThisRoom, listModel_rp;
-
     boolean isConnectToServer;
-
-    int timeClicked = 0;
-
-    Hashtable<String, PrivateChat> listReceiver;
-    Hashtable<String, StyledDocument> conversationsList;
-    Runnable counting = () -> {
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        timeClicked = 0;
-    };
 
 
     public ClientFrame(String name) {
@@ -99,9 +82,9 @@ public class ClientFrame extends JFrame implements Runnable {
         mainPanel.add(signUpPanel);
         mainPanel.add(loginPanel);
 
-        addEventsForSignUpPanel();
-        addEventsForLoginPanel();
-        addEventsForChatLabPanel();
+        SetupSignupEvents();
+        SetupLoginEvents();
+        SetupChatLabEvents();
 
         add(mainPanel);
         setResizable(true);
@@ -109,7 +92,7 @@ public class ClientFrame extends JFrame implements Runnable {
         mainPanel.setBackground(new java.awt.Color(74, 78, 105));
         setLocation(400, 100);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setTitle("BreadCost - " + name);
+        setTitle("BreadCost");
 
         chatLabPanel.AddToConversationsDocList("Group Chat", new DefaultStyledDocument());
         chatLabPanel.appendMessage_ConversationsList("Group Chat", "/Resources/ChatApp/group_chat_45px.png", this);
@@ -134,7 +117,7 @@ public class ClientFrame extends JFrame implements Runnable {
         return originalBlowfishKey;
     }
 
-    private void addEventsForSignUpPanel() {
+    private void SetupSignupEvents() {
         signUpPanel.getLbBack_signup().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent me) {
@@ -146,7 +129,7 @@ public class ClientFrame extends JFrame implements Runnable {
         signUpPanel.getBtSignUp().addActionListener(ae -> btSignUpEvent());
     }
 
-    private void addEventsForLoginPanel() {
+    private void SetupLoginEvents() {
         loginPanel.getTfNickname().addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent ke) {
@@ -173,7 +156,7 @@ public class ClientFrame extends JFrame implements Runnable {
 
     }
 
-    private void addEventsForChatLabPanel() {
+    private void SetupChatLabEvents() {
         chatLabPanel.getBtSend().addActionListener(ae -> btSendEvent());
         chatLabPanel.getTaInput().addKeyListener(new KeyAdapter() {
             @Override
@@ -365,15 +348,24 @@ public class ClientFrame extends JFrame implements Runnable {
     }
 
     private void btSignUpEvent() {
-        String pass = this.signUpPanel.getTfPass().getText();
-        String pass2 = this.signUpPanel.getTfPass2().getText();
-        if (!pass.equals(pass2)) {
+        String password = this.signUpPanel.GetPassword().getText();
+        String passwordRepeat = this.signUpPanel.GetPasswrdRepeat().getText();
+        if (!password.equals(passwordRepeat)) {
             JOptionPane.showMessageDialog(this, "Passwords don't match", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
+        } if(!PasswordValidator.isValid(password)){
+            String passwordReq = """
+                    Password must contain at least one digit [0-9].
+                    Password must contain at least one lowercase Latin character [a-z].
+                    Password must contain at least one uppercase Latin character [A-Z].
+                    Password must contain at least one special character like ! @ # & ( ).
+                    Password must contain a length of at least 8 characters and a maximum of 20 characters.""";
+            JOptionPane.showMessageDialog(this, "Password Invalid !\n\n" + passwordReq, "Error", JOptionPane.ERROR_MESSAGE);
+
+        }else {
             String nickname = signUpPanel.getTfID().getText().trim();
             //String hostName = signUpPanel.getTfHost().getText().trim();
             String hostName = "localhost";
-            if (hostName.equals("") || nickname.equals("") || pass.equals("") || pass2.equals("")) {
+            if (hostName.equals("") || nickname.equals("") || password.equals("") || passwordRepeat.equals("")) {
                 JOptionPane.showMessageDialog(this, "Please fill up all fields", "Notice!", JOptionPane.WARNING_MESSAGE);
                 return;
             }
@@ -383,7 +375,7 @@ public class ClientFrame extends JFrame implements Runnable {
 
                 this.connectToServer(hostName);
             }
-            this.sendToServer("CMD_SIGN_UP|" + nickname + "|" + pass);
+            this.sendToServer("CMD_SIGN_UP|" + nickname + "|" + password);
 
             String response = this.recieveFromServer();
             if (response != null) {

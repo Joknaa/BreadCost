@@ -35,11 +35,11 @@ public class SignUpPanel extends javax.swing.JPanel {
         return tfID;
     }
 
-    public JPasswordField getTfPass() {
+    public JPasswordField GetPassword() {
         return tfPass;
     }
 
-    public JPasswordField getTfPass2() {
+    public JPasswordField GetPasswrdRepeat() {
         return tfPass2;
     }
     
@@ -124,7 +124,6 @@ public class SignUpPanel extends javax.swing.JPanel {
 
         tfID.setBackground(new java.awt.Color(154, 140, 152));
         tfID.setForeground(new java.awt.Color(244, 252, 231));
-        tfID.setText("username");
         tfID.setBorder(null);
         tfID.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -143,7 +142,6 @@ public class SignUpPanel extends javax.swing.JPanel {
 
         tfPass.setBackground(new java.awt.Color(154, 140, 152));
         tfPass.setForeground(new java.awt.Color(244, 252, 231));
-        tfPass.setText("password");
         tfPass.setBorder(null);
         tfPass.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -159,7 +157,6 @@ public class SignUpPanel extends javax.swing.JPanel {
 
         tfPass2.setBackground(new java.awt.Color(154, 140, 152));
         tfPass2.setForeground(new java.awt.Color(244, 252, 231));
-        tfPass2.setText("password");
         tfPass2.setBorder(null);
         tfPass2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
