@@ -26,11 +26,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ClientFrame extends JFrame implements Runnable {
-    public static final String NICKNAME_EXIST = "This nickname is already login in another place! Please using another nickname";
-    public static final String NICKNAME_VALID = "This nickname is OK";
+    public static final String NICKNAME_LOGGED_IN = "This nickname is already login in another place! Please using another nickname";
     public static final String NICKNAME_INVALID = "Nickname or password is incorrect";
-    public static final String SIGNUP_SUCCESS = "Sign up successful!";
     public static final String ACCOUNT_EXIST = "This nickname has been used! Please use another nickname!";
+    public static final String PASSWORD_MISMATCH = "Passwords don't match!";
+    public static final String PASSWORD_INSECURE = """
+                                                Password Invalid !!
+                                                
+                                                Password must contain at least one digit [0-9].
+                                                Password must contain at least one lowercase Latin character [a-z].
+                                                Password must contain at least one uppercase Latin character [A-Z].
+                                                Password must contain at least one special character like ! @ # & ( ).
+                                                Password must contain a length of at least 8 characters and a maximum of 20 characters.
+                                                """;
     public static final String RELOAD_OLD_GROUP_CHAT = "$charge_old_msgs$";
     private static String Base64Private;
     private static SecretKey originalBlowfishKey;
@@ -53,7 +61,6 @@ public class ClientFrame extends JFrame implements Runnable {
     Thread clientThread;
     boolean isRunning;
     StringTokenizer tokenizer;
-    DefaultListModel<String> listModel, listModelThisRoom, listModel_rp;
     boolean isConnectToServer;
 
 
@@ -63,12 +70,19 @@ public class ClientFrame extends JFrame implements Runnable {
         bw = null;
         br = null;
         isRunning = true;
-        listModel = new DefaultListModel<>();
-        listModelThisRoom = new DefaultListModel<>();
-        listModel_rp = new DefaultListModel<>();
         isConnectToServer = false;
         listReceiver = new Hashtable<>();
 
+        SetupPanels();
+        SetupSignupEvents();
+        SetupLoginEvents();
+        SetupChatLabEvents();
+
+        chatLabPanel.AddToConversationsDocList("Group Chat", new DefaultStyledDocument());
+        chatLabPanel.appendMessage_ConversationsList("Group Chat", "/Resources/ChatApp/group_chat_45px.png", this);
+    }
+
+    private void SetupPanels() {
         mainPanel = new JPanel();
         loginPanel = new LoginPanel();
         signUpPanel = new SignUpPanel();
@@ -82,10 +96,6 @@ public class ClientFrame extends JFrame implements Runnable {
         mainPanel.add(signUpPanel);
         mainPanel.add(loginPanel);
 
-        SetupSignupEvents();
-        SetupLoginEvents();
-        SetupChatLabEvents();
-
         add(mainPanel);
         setResizable(true);
         setSize(new Dimension(900, 540));
@@ -93,13 +103,9 @@ public class ClientFrame extends JFrame implements Runnable {
         setLocation(400, 100);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("BreadCost");
-
-        chatLabPanel.AddToConversationsDocList("Group Chat", new DefaultStyledDocument());
-        chatLabPanel.appendMessage_ConversationsList("Group Chat", "/Resources/ChatApp/group_chat_45px.png", this);
     }
 
     public static void main(String[] args) {
-
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
@@ -128,23 +134,22 @@ public class ClientFrame extends JFrame implements Runnable {
         });
         signUpPanel.getBtSignUp().addActionListener(ae -> btSignUpEvent());
     }
-
     private void SetupLoginEvents() {
         loginPanel.getTfNickname().addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent ke) {
-                if (ke.getKeyCode() == KeyEvent.VK_ENTER) btOkEvent();
+                if (ke.getKeyCode() == KeyEvent.VK_ENTER) SetupLoginButtonEvent();
             }
 
         });
         loginPanel.getTfPass().addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent ke) {
-                if (ke.getKeyCode() == KeyEvent.VK_ENTER) btOkEvent();
+                if (ke.getKeyCode() == KeyEvent.VK_ENTER) SetupLoginButtonEvent();
             }
 
         });
-        loginPanel.getBtOK().addActionListener(ae -> btOkEvent());
+        loginPanel.getBtOK().addActionListener(ae -> SetupLoginButtonEvent());
         loginPanel.GetSignUpButton().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent me) {
@@ -155,7 +160,6 @@ public class ClientFrame extends JFrame implements Runnable {
         });
 
     }
-
     private void SetupChatLabEvents() {
         chatLabPanel.getBtSend().addActionListener(ae -> btSendEvent());
         chatLabPanel.getTaInput().addKeyListener(new KeyAdapter() {
@@ -218,7 +222,7 @@ public class ClientFrame extends JFrame implements Runnable {
 
     public void openPrivateChatInsideRoom(String clickedUserName) {
         if (clickedUserName.equals(ClientFrame.this.name)) {
-            JOptionPane.showMessageDialog(ClientFrame.this, "Can't send a message to yourself!", "Info", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(ClientFrame.this, "Sending messages to yourself is not supported yet. \nLook for it in the next releases !", "Info", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         chatLabPanel.EnableInput();
@@ -233,12 +237,8 @@ public class ClientFrame extends JFrame implements Runnable {
         StyledDocument document = new DefaultStyledDocument();
         chatLabPanel.AddToConversationsDocList(clickedUserName, document);
         chatLabPanel.SetCurrentConversationDoc(chatLabPanel.GetConversationsDoc(clickedUserName));
-
         LoadOldPrivateMessages(name, clickedUserName, 0);
-
-
         chatLabPanel.appendMessage_ConversationsList(clickedUserName, "/Resources/ChatApp/direct_chat_45px.png", this);
-
     }
 
     private void LoadOldPrivateMessages(String sender, String receiver, int idGroup) {
@@ -290,29 +290,16 @@ public class ClientFrame extends JFrame implements Runnable {
         }
     }
 
-    private void leaveRoom() {
-        this.sendToServer("CMD_LEAVE_ROOM|" + this.room);
-        try {
-            Thread.sleep(200);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        this.chatLabPanel.setVisible(false);
-
-        //todo: the chat gets emptied when leaving !!
-        this.setTitle("\"" + this.name + "\"");
-    }
-
-    private void btOkEvent() {
+    private void SetupLoginButtonEvent() {
         //String hostname = loginPanel.getTfHost().getText().trim();
         String hostname = "localhost";
-        String nickname = loginPanel.getTfNickname().getText().trim();
-        String pass = loginPanel.getTfPass().getText().trim();
+        String username = loginPanel.getTfNickname().getText().trim();
+        String password = loginPanel.getTfPass().getText().trim();
 
         this.serverHost = hostname;
-        this.name = nickname;
+        this.name = username;
 
-        if (hostname.equals("") || nickname.equals("") || pass.equals("")) {
+        if (hostname.equals("") || username.equals("") || password.equals("")) {
             JOptionPane.showMessageDialog(this, "Please fill up all fields", "Notice!", JOptionPane.WARNING_MESSAGE);
             return;
         }
@@ -320,12 +307,12 @@ public class ClientFrame extends JFrame implements Runnable {
             isConnectToServer = true;
             this.connectToServer(hostname);
         }
-        this.sendToServer("CMD_CHECK_NAME|" + this.name + "|" + pass);
+        this.sendToServer("CMD_CHECK_NAME|" + this.name + "|" + password);
 
 
         String response = this.recieveFromServer();
         if (response != null) {
-            if (response.equals(NICKNAME_EXIST) || response.equals(NICKNAME_INVALID)) {
+            if (response.equals(NICKNAME_LOGGED_IN) || response.equals(NICKNAME_INVALID)) {
                 JOptionPane.showMessageDialog(this, response, "Error", JOptionPane.ERROR_MESSAGE);
                 try {
                     socketOfClient.close();
@@ -341,25 +328,18 @@ public class ClientFrame extends JFrame implements Runnable {
                 clientThread = new Thread(this);
                 clientThread.start();
                 this.sendToServer("CMD_ROOM|" + this.room);
-
-                System.out.println("this is \"" + name + "\"");
             }
-        } else System.out.println("[btOkEvent()] Server is not open yet, or already closed!");
+        }
     }
 
     private void btSignUpEvent() {
         String password = this.signUpPanel.GetPassword().getText();
         String passwordRepeat = this.signUpPanel.GetPasswrdRepeat().getText();
         if (!password.equals(passwordRepeat)) {
-            JOptionPane.showMessageDialog(this, "Passwords don't match", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, PASSWORD_MISMATCH, "Error", JOptionPane.ERROR_MESSAGE);
         } if(!PasswordValidator.isValid(password)){
-            String passwordReq = """
-                    Password must contain at least one digit [0-9].
-                    Password must contain at least one lowercase Latin character [a-z].
-                    Password must contain at least one uppercase Latin character [A-Z].
-                    Password must contain at least one special character like ! @ # & ( ).
-                    Password must contain a length of at least 8 characters and a maximum of 20 characters.""";
-            JOptionPane.showMessageDialog(this, "Password Invalid !\n\n" + passwordReq, "Error", JOptionPane.ERROR_MESSAGE);
+
+            JOptionPane.showMessageDialog(this, PASSWORD_INSECURE, "Error", JOptionPane.ERROR_MESSAGE);
 
         }else {
             String nickname = signUpPanel.getTfID().getText().trim();
@@ -379,10 +359,10 @@ public class ClientFrame extends JFrame implements Runnable {
 
             String response = this.recieveFromServer();
             if (response != null) {
-                if (response.equals(NICKNAME_EXIST) || response.equals(ACCOUNT_EXIST)) {
+                if (response.equals(NICKNAME_LOGGED_IN) || response.equals(ACCOUNT_EXIST)) {
                     JOptionPane.showMessageDialog(this, response, "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(this, response + "\nYou can now go back and login to join chat room", "Success!", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, response + "\nRedirecting to the Login page ....", "Success!", JOptionPane.INFORMATION_MESSAGE);
                     signUpPanel.clearTf();
                     signUpPanel.setVisible(false);
                     loginPanel.setVisible(true);
@@ -435,9 +415,9 @@ public class ClientFrame extends JFrame implements Runnable {
             br = new BufferedReader(new InputStreamReader(socketOfClient.getInputStream()));
 
         } catch (java.net.UnknownHostException e) {
-            JOptionPane.showMessageDialog(this, "Host IP is not correct.\nPlease try again!", "Failed to connect to server", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Host IP Incorrect !", "Failed to connect to server", JOptionPane.ERROR_MESSAGE);
         } catch (java.net.ConnectException e) {
-            JOptionPane.showMessageDialog(this, "Server is unreachable, maybe server is not open yet, or can't find this host.\nPlease try again!", "Failed to connect to server", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Server is unreachable, Try opening the server first.\nPlease try again!", "Failed to connect to server", JOptionPane.ERROR_MESSAGE);
         } catch (java.net.NoRouteToHostException e) {
             JOptionPane.showMessageDialog(this, "Can't find this host!\nPlease try again!", "Failed to connect to server", JOptionPane.ERROR_MESSAGE);
         } catch (IOException ex) {
@@ -454,7 +434,7 @@ public class ClientFrame extends JFrame implements Runnable {
         } catch (java.net.SocketException e) {
             JOptionPane.showMessageDialog(this, "Server is closed, can't send message!", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (java.lang.NullPointerException e) {
-            System.out.println("[sendToServer()] Server is not open yet, or already closed!");
+            System.out.println("Server is not open yet, or already closed!");
         } catch (IOException ex) {
             Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -464,38 +444,23 @@ public class ClientFrame extends JFrame implements Runnable {
         try {
             return this.br.readLine();
         } catch (java.lang.NullPointerException e) {
-            System.out.println("[recieveFromServer()] Server is not open yet, or already closed!");
+            System.out.println("Server is not open yet, or already closed!");
         } catch (IOException ex) {
             Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 
-    public void disconnect() {
-        System.out.println("disconnect()");
-        try {
-            if (br != null) this.br.close();
-            if (bw != null) this.bw.close();
-            if (socketOfClient != null) this.socketOfClient.close();
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-            Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
     @Override
     public void run() {
         String response;
-        String sender, receiver, fileName, thePersonIamChattingWith, thePersonSendFile;
+        String sender, fileName, thePersonSendFile;
         String msg;
         String cmd, icon;
-        PrivateChat pc;
         boolean isin = true;
 
         while (isRunning) {
             try {
-
-                boolean Erase;
                 response = this.recieveFromServer();
                 tokenizer = new StringTokenizer(response, "|");
                 cmd = tokenizer.nextToken();
@@ -528,7 +493,6 @@ public class ClientFrame extends JFrame implements Runnable {
                             }
                             isin = false;
                         }
-
 
                         if (sender.equals(this.name)) {
                             this.chatLabPanel.appendMessage_Sent(sender + ": ", msg, new Color(33, 72, 127), new Color(0, 0, 0));
@@ -586,9 +550,7 @@ public class ClientFrame extends JFrame implements Runnable {
                         while (tokenizer.hasMoreTokens()) {
                             cmd = tokenizer.nextToken();
                             OnlineUsersList.add(cmd);
-                            //todo; clear the users list ?
                         }
-                        System.out.println(OnlineUsersList.toString());
                         for (String userName : AllUsersList) {
                             if (OnlineUsersList.contains(userName) || userName.equals(this.name)) {
                                 this.chatLabPanel.appendMessage_OnlineUsersList(userName, new Color(173, 231, 115), this);
@@ -640,7 +602,7 @@ public class ClientFrame extends JFrame implements Runnable {
                         }
                 }
             } catch (NoSuchElementException xx) {
-                System.out.println("hna mochkil");
+                System.out.println("ClientF:605");
             }
         }
         System.out.println("Disconnected to server!");

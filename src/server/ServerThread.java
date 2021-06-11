@@ -13,7 +13,6 @@ import javax.swing.*;
 import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,15 +23,13 @@ import java.util.logging.Logger;
 
 
 public class ServerThread extends Thread {
-    public static final String NICKNAME_EXIST = "This nickname is already login in another place! Please using another nickname";
+    public static final String NICKNAME_LOGGED_IN = "This nickname is already login in another place! Please using another nickname";
     public static final String NICKNAME_VALID = "This nickname is OK";
     public static final String NICKNAME_INVALID = "Nickname or password is incorrect";
     public static final String SIGNUP_SUCCESS = "Sign up successful!";
     public static final String ACCOUNT_EXIST = "This nickname has been used! Please use another nickname!";
     private static final HashMap<String, SecretKey> BlowfishKeys = new HashMap<String, SecretKey>();
     public static Hashtable<String, ServerThread> listUser = new Hashtable<>();
-    public static Hashtable<String, ServerThread> AlllistUser = new Hashtable<>();
-    static Socket senderSocket, receiverSocket;
     static boolean isBusy = false;
     private final int BUFFER_SIZE = 1024;
     public String base64publicRSA;
@@ -64,15 +61,6 @@ public class ServerThread extends Thread {
         taServer.setCaretPosition(taServer.getText().length() - 1);
     }
 
-    public String recieveFromClient() {
-        try {
-           return br.readLine();
-        } catch (IOException ex) {
-            System.out.println(clientName + " is disconnected!");
-        }
-        return null;
-    }
-
     public void sendToClient(String response) {
         try {
             bw.write(response);
@@ -86,17 +74,6 @@ public class ServerThread extends Thread {
     public void sendToSpecificClient(ServerThread socketOfClient, String response) {
         try {
             BufferedWriter writer = socketOfClient.bw;
-            writer.write(response);
-            writer.newLine();
-            writer.flush();
-        } catch (IOException ex) {
-            Logger.getLogger(ServerFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public void sendToSpecificClient(Socket socket, String response) {
-        try {
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             writer.write(response);
             writer.newLine();
             writer.flush();
@@ -166,16 +143,6 @@ public class ServerThread extends Thread {
         }
     }
 
-    public void closeServerThread() {
-        try {
-            br.close();
-            bw.close();
-            socketOfServer.close();
-        } catch (IOException ex) {
-            Logger.getLogger(ServerFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
     public String getAllUsers() {
         String CMD = "";
         List<String> usersList = userDB.GetAllUsers();
@@ -242,11 +209,9 @@ public class ServerThread extends Thread {
 
             this.appendMessage("\nClient \"" + clientName + "\" is disconnected!");
             listUser.remove(clientName);
-            UserCount--;
             notifyToAllUsers("CMD_ONLINE_USERS|" + getOnlineUsers());
             notifyToUsersInRoom("CMD_ONLINE_THIS_ROOM" + getUsersThisRoom());
             notifyToUsersInRoom(clientName + " has quited");
-            System.out.println("quite finished");
         }
     }
 
@@ -274,11 +239,7 @@ public class ServerThread extends Thread {
             String cmd, icon;
             while (true) {
                 try {
-                    //message = recieveFromClient();
-
-
                     message = br.readLine();
-
                     tokenizer = new StringTokenizer(message, "|");
                     cmd = tokenizer.nextToken();
 
@@ -319,7 +280,6 @@ public class ServerThread extends Thread {
 
 
                             boolean x = listUser.containsKey(privateReceiver);
-                            System.out.println(x);
                             System.out.println("(SERVER) GET MSG FROM SENDER : " + messageContent);
                             ServerThread st_receiver = listUser.get(privateReceiver);
 
@@ -343,7 +303,6 @@ public class ServerThread extends Thread {
                             String encreptedMsgBlowfish = Blowfish.encryption(decreptedSenderMsg, keyy2);
                             System.out.println("(SERVER) LAST ENCRYPTION : " + keyy2);
                             System.out.println("(SERVER) SEND MSG TO RECEIVER : " + privateReceiver + " FROM : " + privateSender);
-                            System.out.println(st_receiver);
                             System.out.println("CMD_PRIVATECHAT|" + privateSender + "|" + encreptedMsgBlowfish);
                             if (st_receiver != null){
                                 sendToSpecificClient(st_receiver, "CMD_PRIVATECHAT|" + privateSender + "|" + encreptedMsgBlowfish);
@@ -376,7 +335,7 @@ public class ServerThread extends Thread {
                             isUserExist = listUser.containsKey(clientName);
 
                             if (isUserExist) {
-                                sendToClient(NICKNAME_EXIST);
+                                sendToClient(NICKNAME_LOGGED_IN);
                             } else {
                                 int kq = userDB.checkUser(clientName, clientPass);
                                 if (kq == 1) {
@@ -394,7 +353,7 @@ public class ServerThread extends Thread {
                             isUserExist = listUser.containsKey(name);
 
                             if (isUserExist) {
-                                sendToClient(NICKNAME_EXIST);
+                                sendToClient(NICKNAME_LOGGED_IN);
                             } else {
                                 int kq = userDB.insertUser(new User(name, pass));
                                 if (kq > 0) {
@@ -402,12 +361,6 @@ public class ServerThread extends Thread {
                                 } else sendToClient(ACCOUNT_EXIST);
                             }
                             break;
-/*
-                        case "CMD_ONLINE_USERS":
-                            sendToClient("CMD_ONLINE_USERS|" + getOnlineUsers());
-                            notifyToUsersInRoom("CMD_ONLINE_THIS_ROOM" + getUsersThisRoom());
-                            break;
- */
 
                         case "CMD_SENDFILETOSERVER":
                             sender = tokenizer.nextToken();
@@ -444,8 +397,7 @@ public class ServerThread extends Thread {
                             try {
                                 userDB.StoreMessage(sender, receiver, 0, "", fileName);
                             } catch (Exception e) {
-                                System.out.println("hehe");
-                                //e.printStackTrace();
+                                System.out.println("ServerT:400");
                             }
 
                             isBusy = false;
@@ -484,17 +436,15 @@ public class ServerThread extends Thread {
                     break;
                 } catch (NoSuchElementException x) {
                     System.out.println("HNA KAYN MOCHKIIL");
-                    System.out.println(x.toString());
+                    x.printStackTrace();
                     break;
                 } catch (NullPointerException ex) {
-                    System.out.println("Null Pointer Exception");
                     clientQuit();
                     System.out.println(ex.toString());
                     break;
                 } catch (Exception e) {
                     e.printStackTrace();
                     System.out.println("(SERVER) USER DISCONNECTED");
-                    System.out.println(e);
                     clientQuit();
                     break;
                 }

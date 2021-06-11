@@ -97,7 +97,6 @@ public class UserDatabase {
             rs = pst.executeQuery();
             
             if(rs.next()) {
-
                 return 1;
             }
         } catch (SQLException ex) {
