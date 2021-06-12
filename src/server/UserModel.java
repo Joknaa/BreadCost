@@ -5,21 +5,17 @@
  */
 package server;
 
-/**
- *
- * @author AnhTu
- */
-public class User {
+public class UserModel {
     String name;
     String pass;
     private String room;
 
-    public User(String name, String pass) {
+    public UserModel(String name, String pass) {
         this.name = name;
         this.pass = pass;
     }
 
-    public User(String name) {
+    public UserModel(String name) {
         this.name = name;
     }
 

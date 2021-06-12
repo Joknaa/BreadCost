@@ -25,7 +25,7 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ClientFrame extends JFrame implements Runnable {
+public class ClientController extends JFrame implements Runnable {
     public static final String NICKNAME_LOGGED_IN = "This nickname is already login in another place! Please using another nickname";
     public static final String NICKNAME_INVALID = "Nickname or password is incorrect";
     public static final String ACCOUNT_EXIST = "This nickname has been used! Please use another nickname!";
@@ -64,7 +64,7 @@ public class ClientFrame extends JFrame implements Runnable {
     boolean isConnectToServer;
 
 
-    public ClientFrame(String name) {
+    public ClientController(String name) {
         this.name = name;
         socketOfClient = null;
         bw = null;
@@ -109,9 +109,9 @@ public class ClientFrame extends JFrame implements Runnable {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        ClientFrame client = new ClientFrame(null);
+        ClientController client = new ClientController(null);
         client.setVisible(true);
     }
 
@@ -221,8 +221,8 @@ public class ClientFrame extends JFrame implements Runnable {
     }
 
     public void openPrivateChatInsideRoom(String clickedUserName) {
-        if (clickedUserName.equals(ClientFrame.this.name)) {
-            JOptionPane.showMessageDialog(ClientFrame.this, "Sending messages to yourself is not supported yet. \nLook for it in the next releases !", "Info", JOptionPane.INFORMATION_MESSAGE);
+        if (clickedUserName.equals(ClientController.this.name)) {
+            JOptionPane.showMessageDialog(ClientController.this, "Sending messages to yourself is not supported yet. \nLook for it in the next releases !", "Info", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         chatLabPanel.EnableInput();
@@ -387,7 +387,7 @@ public class ClientFrame extends JFrame implements Runnable {
             this.sendToServer("CMD_CHAT|" + message);
         } else {
             try {
-                SecretKey blk = ClientFrame.getBlowfishKey();
+                SecretKey blk = ClientController.getBlowfishKey();
                 System.out.println("(SENDER) GETTED KEY : " + blk);
                 String encryptedMsgBlowfish = Blowfish.encryption(message, blk);
                 System.out.println("(SENDER) SEND ENCRYPTED MSG : " + encryptedMsgBlowfish);
@@ -417,7 +417,7 @@ public class ClientFrame extends JFrame implements Runnable {
         } catch (java.net.NoRouteToHostException e) {
             JOptionPane.showMessageDialog(this, "Can't find this host!\nPlease try again!", "Failed to connect to server", JOptionPane.ERROR_MESSAGE);
         } catch (IOException ex) {
-            Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
 
         }
     }
@@ -432,7 +432,7 @@ public class ClientFrame extends JFrame implements Runnable {
         } catch (java.lang.NullPointerException e) {
             System.out.println("Server is not open yet, or already closed!");
         } catch (IOException ex) {
-            Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -442,7 +442,7 @@ public class ClientFrame extends JFrame implements Runnable {
         } catch (java.lang.NullPointerException e) {
             System.out.println("Server is not open yet, or already closed!");
         } catch (IOException ex) {
-            Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

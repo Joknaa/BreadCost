@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package view;
 
-import controller.ClientFrame;
+import controller.ClientController;
 import controller.ReceivingFileThread;
 import controller.SendFileFrame;
 import controller.SendingFileThread;
@@ -577,7 +573,7 @@ public class ChatLab extends javax.swing.JPanel {
         }
     }
 
-    public void appendMessage_OnlineUsersList(String userName, Color color, ClientFrame clientFrameInstance) {
+    public void appendMessage_OnlineUsersList(String userName, Color color, ClientController clientControllerInstance) {
         int len = usersListTP.getDocument().getLength();
         StyledDocument doc = usersListTP.getStyledDocument();
 
@@ -593,7 +589,7 @@ public class ChatLab extends javax.swing.JPanel {
         userNameLabel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                clientFrameInstance.openPrivateChatInsideRoom(userName);
+                clientControllerInstance.openPrivateChatInsideRoom(userName);
             }
 
             @Override
@@ -625,7 +621,7 @@ public class ChatLab extends javax.swing.JPanel {
         usersListTP.setCaretPosition(len);
     }
 
-    public void appendMessage_ConversationsList(String ConversationName, String iconPath, ClientFrame clientFrameInstance) {
+    public void appendMessage_ConversationsList(String ConversationName, String iconPath, ClientController clientControllerInstance) {
         int len = pastConversationsTP.getDocument().getLength();
         StyledDocument doc = pastConversationsTP.getStyledDocument();
         SetFocusedChat(ConversationName);
@@ -646,7 +642,7 @@ public class ChatLab extends javax.swing.JPanel {
         conversationLabel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                clientFrameInstance.openPrivateChatInsideRoom(ConversationName);
+                clientControllerInstance.openPrivateChatInsideRoom(ConversationName);
             }
 
             @Override
@@ -704,7 +700,7 @@ public class ChatLab extends javax.swing.JPanel {
             Socket socketOfSender = new Socket(serverHost, 9999);
             new SendingFileThread(userName.getText(), FocusedChat, AttachedFilePath, socketOfSender, null, null).start();
         } catch (IOException ex) {
-            Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package server;
 
 import EncDec.Blowfish;
@@ -16,10 +11,6 @@ import java.net.SocketException;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-/**
- * @author AnhTu
- */
 
 
 public class ServerThread extends Thread {
@@ -355,7 +346,7 @@ public class ServerThread extends Thread {
                             if (isUserExist) {
                                 sendToClient(NICKNAME_LOGGED_IN);
                             } else {
-                                int kq = userDB.insertUser(new User(name, pass));
+                                int kq = userDB.insertUser(new UserModel(name, pass));
                                 if (kq > 0) {
                                     sendToClient(SIGNUP_SUCCESS);
                                 } else sendToClient(ACCOUNT_EXIST);

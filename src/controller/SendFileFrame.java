@@ -13,9 +13,7 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * @author AnhTu
- */
+
 public class SendFileFrame extends javax.swing.JFrame {
 
     public String thePersonIamChattingWith;
@@ -157,7 +155,7 @@ public class SendFileFrame extends javax.swing.JFrame {
             socketOfSender = new Socket(serverHost, 9999);
             new SendingFileThread(this.name, receiver, filePath, socketOfSender, this, null).start();
         } catch (IOException ex) {
-            Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -169,12 +167,3 @@ public class SendFileFrame extends javax.swing.JFrame {
         } else tfFilePath.setText("");
     }
 }
-/*
-send file: giả sử client A muốn gửi file cho client B
-khi ấn nút send, client A gửi thông tin file và receiver cho server = command: CMD_SENDFILE_REQUEST
-sau đó server nhận gói tin đó bóc ra và lấy tên người gửi là receiver B, và gửi 1 bản tin tới
-B với command: CMD_SENDFILE_COMFIRM, nếu B đồng ý thì B gửi lại cho server với command:
-CMD_SENDFILE_ACCEPT, sau đó bên A gửi file lên server với command: CMD_SENDFILETOSERVER và server gửi
-lại file cho B với command CMD_SENDFILETOCLIENT; nếu B ko đồng ý nhận thì B gửi command tới server: CMD_SENDFILE_DENY,
-sau đó server thông báo với A rằng B ko muốn nhận
-*/

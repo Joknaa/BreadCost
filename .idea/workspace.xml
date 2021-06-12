@@ -3,7 +3,51 @@
   <component name="ChangeListManager">
     <list default="true" id="f8faf640-903c-48de-ba04-1d2a61c6c08c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$10.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$11.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$12.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$6.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$7.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$8.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame$9.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ClientFrame.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ReceivingFileThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/ReceivingFileThread.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/SendFileFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/SendFileFrame$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/SendFileFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/SendFileFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/controller/SendingFileThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/controller/SendingFileThread.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/server/ServerFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/server/ServerFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/server/ServerThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/server/ServerThread.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/server/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/server/UserDatabase.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/server/UserDatabase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/server/readme.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatSocket4/view/ChatLab.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/RoomPanel$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatSocket4/view/RoomPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sendfile/Dataset.txt" beforeDir="false" afterPath="$PROJECT_DIR$/sendfile/Dataset.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/ClientFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ClientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/ReceivingFileThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ReceivingFileThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/SendFileFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/SendFileFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/SendingFileThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/SendingFileThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/ServerFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ServerFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/ServerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ServerThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/UserModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/UserDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/UserDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/readme.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/ChatLab.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ChatLab.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/RoomPanel.form" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/RoomPanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/WelcomePanel.form" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +97,7 @@
     <property name="project.structure.side.proportion" value="0.22541967" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.general" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Language Defaults" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -65,36 +109,9 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ClientFrame">
-    <configuration name="AppendingTextPane" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="AppendingTextPane" />
-      <module name="ChatSocket4" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AppendingTextPane2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="AppendingTextPane2" />
-      <module name="ChatSocket4" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ClientFrame" type="Application" factoryName="Application" singleton="false" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="controller.ClientFrame" />
-      <module name="ChatSocket4" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PasswordValidator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="controller.PasswordValidator" />
+  <component name="RunManager" selected="Application.ClientController">
+    <configuration name="ClientController" type="Application" factoryName="Application" singleton="false" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="controller.ClientController" />
       <module name="ChatSocket4" />
       <extension name="coverage">
         <pattern>
@@ -119,22 +136,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="test" />
-      <module name="ChatSocket4" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -147,37 +155,25 @@
     </configuration>
     <list>
       <item itemvalue="Application.ServerFrame" />
-      <item itemvalue="Application.ClientFrame" />
-      <item itemvalue="Application.test" />
-      <item itemvalue="Application.AppendingTextPane" />
-      <item itemvalue="Application.AppendingTextPane2" />
+      <item itemvalue="Application.ClientController" />
       <item itemvalue="Multirun.ClientSide" />
-      <item itemvalue="Application.PasswordValidator" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.PasswordValidator" />
-        <item itemvalue="Application.AppendingTextPane2" />
-        <item itemvalue="Application.AppendingTextPane" />
-        <item itemvalue="Application.test" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="StructuralSearchPlugin">
-    <replaceConfiguration name="Unnamed" created="1623364697756" text="// $CommentContent$ " recursive="false" caseInsensitive="false" type="JAVA" pattern_context="default" scope_type="PROJECT" scope_descriptor="" reformatAccordingToStyle="false" shortenFQN="false" replacement="" history="1">
+    <replaceConfiguration name="Unnamed" created="1623429639268" text="// $CommentContent$ " recursive="false" caseInsensitive="false" type="JAVA" pattern_context="default" scope_type="PROJECT" scope_descriptor="" reformatAccordingToStyle="false" shortenFQN="false" replacement="" history="1">
       <constraint name="__context__" within="" contains="" />
       <constraint name="CommentContent" within="" contains="" />
     </replaceConfiguration>
-    <replaceConfiguration name="Unnamed" created="1623364671435" text="/**&#10; $CommentContent$ &#10; */" recursive="false" caseInsensitive="false" type="JAVA" pattern_context="default" scope_type="PROJECT" scope_descriptor="" reformatAccordingToStyle="false" shortenFQN="false" replacement="" history="1">
+    <replaceConfiguration name="Unnamed" created="1623429639268" text="/**&#10; $CommentContent$ &#10; */" recursive="false" caseInsensitive="false" type="JAVA" pattern_context="default" scope_type="PROJECT" scope_descriptor="" reformatAccordingToStyle="false" shortenFQN="false" replacement="" history="1">
       <constraint name="__context__" within="" contains="" />
       <constraint name="CommentContent" within="" contains="" />
     </replaceConfiguration>
-    <replaceConfiguration name="Unnamed" created="1623364504611" text="/*&#10;  $CommentContent$ &#10;*/" recursive="false" caseInsensitive="false" type="JAVA" pattern_context="default" scope_type="PROJECT" scope_descriptor="" reformatAccordingToStyle="false" shortenFQN="false" replacement="" history="1">
+    <replaceConfiguration name="Unnamed" created="1623429639268" text="/*&#10;  $CommentContent$ &#10;*/" recursive="false" caseInsensitive="false" type="JAVA" pattern_context="default" scope_type="PROJECT" scope_descriptor="" reformatAccordingToStyle="false" shortenFQN="false" replacement="" history="1">
       <constraint name="__context__" within="" contains="" />
       <constraint name="CommentContent" within="" contains="" />
     </replaceConfiguration>
-    <replaceConfiguration name="Unnamed" created="1623364437395" text="//" recursive="false" caseInsensitive="false" type="JAVA" pattern_context="default" scope_type="PROJECT" scope_descriptor="" reformatAccordingToStyle="false" shortenFQN="false" replacement="" history="1">
+    <replaceConfiguration name="Unnamed" created="1623429639268" text="//" recursive="false" caseInsensitive="false" type="JAVA" pattern_context="default" scope_type="PROJECT" scope_descriptor="" reformatAccordingToStyle="false" shortenFQN="false" replacement="" history="1">
       <constraint name="__context__" within="" contains="" />
     </replaceConfiguration>
   </component>
@@ -234,5 +230,45 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/controller/ClientController.java</url>
+          <line>279</line>
+          <properties class="controller.ClientController" method="SetupEncryptionKeys">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/controller/ClientController.java</url>
+          <line>243</line>
+          <properties class="controller.ClientController" method="LoadOldPrivateMessages">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/controller/ClientController.java</url>
+          <line>371</line>
+          <properties class="controller.ClientController" method="btSendEvent">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/controller/ClientController.java</url>
+          <line>499</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/server/ServerThread.java</url>
+          <line>248</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

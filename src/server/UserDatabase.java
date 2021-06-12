@@ -63,7 +63,7 @@ public class UserDatabase {
         return usersList;
     }
     
-    public int insertUser(User u) {
+    public int insertUser(UserModel u) {
         System.out.println("Before: name = "+u.name+" - pass = "+u.pass);
         try {
             pst = conn.prepareCall("INSERT INTO "+USER_TABLE+" VALUES ('"+u.name+"', '"+u.pass+"')");
@@ -79,7 +79,7 @@ public class UserDatabase {
         return -1;
     }
     
-    public int createUser(User u) {
+    public int createUser(UserModel u) {
         try {
             pst = conn.prepareStatement("INSERT INTO "+USER_TABLE+" VALUE(?,?);");
             pst.setString(1, u.name);

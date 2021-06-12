@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package server;
 
 import java.awt.*;
@@ -26,11 +22,7 @@ import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-/**
- *
- * @author AnhTu
- */
-public class ServerFrame extends JFrame implements Runnable {    //nếu ko cần giao diện thì ko cần extends jframe, nghĩa là ko cần class này làm j, chỉ cần ServerThread là đủ
+public class ServerFrame extends JFrame implements Runnable {
     
     JTextArea taInfo;
     ServerSocket serverSocket;

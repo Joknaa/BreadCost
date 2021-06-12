@@ -19,11 +19,6 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 
-/**
- *
- * @author AnhTu
- */
-
 public class SendingFileThread extends Thread {
 
     String sender, receiver;
@@ -61,7 +56,7 @@ public class SendingFileThread extends Thread {
         } catch (java.net.SocketException e) {
             JOptionPane.showMessageDialog(null, "Server is close, can't send message!", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (IOException ex) {
-            Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -102,11 +97,3 @@ public class SendingFileThread extends Thread {
     }
     
 }
-
-/*
-giả sử file có kích thước 1000byte
-số lần cần gửi là timeSend = 1000/BUFFER_SIZE = 10 lần
-count là biến đếm số byte mỗi lần gửi, do đó trừ lần cuốn cùng thì count = 100
-sau mỗi lần gửi thì percent = percent + count;
-giả sử tại lần 4, percent = 400 byte
-*/

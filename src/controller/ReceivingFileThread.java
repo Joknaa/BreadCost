@@ -19,10 +19,6 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import view.PrivateChat;
 
-/**
- *
- * @author AnhTu
- */
 public class ReceivingFileThread extends Thread {
 
     private final int BUFFER_SIZE = 1024;
@@ -54,7 +50,7 @@ public class ReceivingFileThread extends Thread {
         } catch (java.net.SocketException e) {
             JOptionPane.showMessageDialog(null, "Server is close, can't send message!", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (IOException ex) {
-            Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
